@@ -123,8 +123,8 @@ export function FlagForm({ flags }: FlagFormProps) {
           </div>
         </SortableContext>
       </DndContext>
-      <div className="inline-flex gap-1 m-2 p-2 border rounded border-green-400 bg-green-900">
-        <div className="select-all">{`${getUrlBase()}${buildShareString(
+      <div className="inline-flex gap-1 m-2 p-2 border rounded border-green-400 bg-green-100">
+        <div className="select-all px-1 rounded bg-green-200">{`${getUrlBase()}${buildShareString(
           selectedFlags
         )}`}</div>
         <button aria-label="Copy share URL" onClick={copyUrlToClipboard}>
