@@ -10,6 +10,9 @@
   },
   "rules": {
     "prettier/prettier": "warn",
+    "import/order": "warn",
+    "import/prefer-default-export": "off",
+    "no-continue": "off",
     "no-restricted-syntax": [
       "error",
       // The following is copied from the airbnb config, but with for...of lops allowed because

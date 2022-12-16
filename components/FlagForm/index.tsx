@@ -1,6 +1,22 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import {
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { DragEndEvent } from "@dnd-kit/core/dist/types";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { useCallback, useMemo, useState } from "react";
 import { FlagMeta } from "../../types/types";
 import { FlagChip } from "../FlagChip";
 
@@ -42,21 +58,56 @@ export function FlagForm({ flags }: FlagFormProps) {
     return { selectedFlags, unselectedFlags };
   }, [flags, selectedFlagIds]);
 
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active.id !== over!.id) {
+      setSelectedFlagIds((ids) => {
+        const oldIndex = ids.indexOf(active.id as string);
+        const newIndex = ids.indexOf(over!.id as string);
+
+        return arrayMove(ids, oldIndex, newIndex);
+      });
+    }
+  }, []);
+
   return (
     <div>
-      <div className="m-2 p-2 border rounded border-neutral-400">
+      <div className="flex gap-1 m-2 p-2 border rounded border-neutral-400">
         {unselectedFlags.map((flag) => (
           <FlagChip key={flag.id} flag={flag} onAdd={() => addFlag(flag.id)} />
         ))}
       </div>
-      <div className="m-2 p-2 border rounded border-green-400">
-        {selectedFlags.map((flag) => (
-          <FlagChip
-            key={flag.id}
-            flag={flag}
-            onRemove={() => removeFlag(flag.id)}
-          />
-        ))}
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+        onDragOver={handleDragEnd}
+        modifiers={[restrictToParentElement]}
+      >
+        <SortableContext
+          items={selectedFlagIds}
+          strategy={verticalListSortingStrategy}
+        >
+          <div className="flex gap-1 m-2 p-2 border rounded border-green-400">
+            {selectedFlags.map((flag) => (
+              <FlagChip
+                key={flag.id}
+                flag={flag}
+                onRemove={() => removeFlag(flag.id)}
+                hasDragHandle
+              />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
       </div>
     </div>
   );

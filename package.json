@@ -10,6 +10,10 @@
     "lint:fix": "next lint --dir app --dir pages --dir components --dir lib --fix"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.6",
+    "@dnd-kit/modifiers": "^6.0.1",
+    "@dnd-kit/sortable": "^7.0.1",
+    "@dnd-kit/utilities": "^3.2.1",
     "@next/font": "13.0.7",
     "@types/node": "18.11.15",
     "@types/react": "18.0.26",
