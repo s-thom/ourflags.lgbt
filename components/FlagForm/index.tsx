@@ -16,7 +16,10 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { ClipboardCopy } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
+import { buildShareString } from "../../lib/shortcodes";
+import { getUrlBase } from "../../lib/urls";
 import { FlagMeta } from "../../types/types";
 import { FlagChip } from "../FlagChip";
 
@@ -78,6 +81,18 @@ export function FlagForm({ flags }: FlagFormProps) {
     }
   }, []);
 
+  const shareUrl = useMemo(
+    () => `${getUrlBase()}${buildShareString(selectedFlags)}`,
+    [selectedFlags]
+  );
+
+  const copyUrlToClipboard = useCallback(() => {
+    navigator.clipboard.writeText(shareUrl).catch(() => {
+      // eslint-disable-next-line no-console
+      console.error("Failed to write to clipboard");
+    });
+  }, [shareUrl]);
+
   return (
     <div>
       <div className="flex gap-1 m-2 p-2 border rounded border-neutral-400">
@@ -108,6 +123,13 @@ export function FlagForm({ flags }: FlagFormProps) {
           </div>
         </SortableContext>
       </DndContext>
+      <div className="inline-flex gap-1 m-2 p-2 border rounded border-green-400 bg-green-900">
+        <div className="select-all">{`${getUrlBase()}${buildShareString(
+          selectedFlags
+        )}`}</div>
+        <button aria-label="Copy share URL" onClick={copyUrlToClipboard}>
+          <ClipboardCopy />
+        </button>
       </div>
     </div>
   );
