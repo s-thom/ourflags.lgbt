@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postinstall": "npm run prepare",
+    "prepare": "npm run prepare:data",
+    "prepare:data": "node --loader ts-node/esm scripts/generate-data.mts",
     "start": "next start",
     "lint": "next lint --dir app --dir pages --dir components --dir lib",
     "lint:fix": "next lint --dir app --dir pages --dir components --dir lib --fix"
@@ -32,9 +35,11 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "gray-matter": "^4.0.3",
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "prettier-plugin-organize-imports": "^3.2.1",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "ts-node": "^10.9.1"
   }
 }

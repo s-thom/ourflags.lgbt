@@ -18,9 +18,9 @@ import {
 } from "@dnd-kit/sortable";
 import { ClipboardCopy } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
-import { buildShareString } from "../../lib/shortcodes";
-import { getUrlBase } from "../../lib/urls";
-import { FlagMeta } from "../../types/types";
+import { buildShareString } from "../../../lib/shortcodes";
+import { getUrlBase } from "../../../lib/urls";
+import { FlagMeta } from "../../../types/types";
 import { FlagChip } from "../FlagChip";
 
 export interface FlagFormProps {
@@ -124,9 +124,7 @@ export function FlagForm({ flags }: FlagFormProps) {
         </SortableContext>
       </DndContext>
       <div className="inline-flex gap-1 m-2 p-2 border rounded border-green-400 bg-green-100">
-        <div className="select-all px-1 rounded bg-green-200">{`${getUrlBase()}${buildShareString(
-          selectedFlags
-        )}`}</div>
+        <div className="select-all px-1 rounded bg-green-200">{shareUrl}</div>
         <button aria-label="Copy share URL" onClick={copyUrlToClipboard}>
           <ClipboardCopy />
         </button>

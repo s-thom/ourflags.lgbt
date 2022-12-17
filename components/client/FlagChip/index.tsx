@@ -3,7 +3,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Plus, Trash2 } from "lucide-react";
-import { FlagMeta } from "../../types/types";
+import { FlagMeta } from "../../../types/types";
 
 export interface FlagChipProps {
   flag: FlagMeta;

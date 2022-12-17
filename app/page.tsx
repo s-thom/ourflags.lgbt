@@ -1,5 +1,5 @@
-import { FlagForm } from "../components/FlagForm";
-import FLAGS from "../data/flags";
+import { FlagForm } from "../components/client/FlagForm";
+import FLAGS from "../data/meta";
 import styles from "./page.module.css";
 
 export default function Home() {
