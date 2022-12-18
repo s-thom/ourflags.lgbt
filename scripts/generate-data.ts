@@ -3,13 +3,19 @@ import matter from "gray-matter";
 import { exec } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { getStripedFlagSvg } from "../lib/flagSvg";
-import { CONTENT_MARKDOWN, DATA, PUBLIC_IMAGES_FLAGS } from "../lib/paths";
+import { getFaviconSvg, getStripedFlagSvg } from "../lib/flagSvg";
+import {
+  CONTENT_MARKDOWN,
+  DATA,
+  PUBLIC_IMAGES_FAVICONS,
+  PUBLIC_IMAGES_FLAGS,
+} from "../lib/paths";
 import { svgToPng } from "../lib/svgToPng";
 import pkg from "../package.json" assert { type: "json" };
 import { FlagData } from "../types/types";
 
 const PNG_SIZES = [128, 840, 1080];
+const FAVICON_SIZES = [32, 128, 192];
 
 // TODO: Logging and error handling in script
 
@@ -62,7 +68,25 @@ async function writeFlagPublicImage(file: FlagData) {
   const promises = PNG_SIZES.map(async (height) => {
     const png = svgToPng(svg, height);
     await writeFile(
-      join(PUBLIC_IMAGES_FLAGS, `${file.meta.id}_h${height}.png`),
+      join(PUBLIC_IMAGES_FLAGS, `${file.meta.id}_${height}.png`),
+      png
+    );
+  });
+
+  await Promise.all(promises);
+}
+
+async function writeFlagFavicon(file: FlagData) {
+  if (!file.meta.flag) {
+    return;
+  }
+
+  const svg = getFaviconSvg([file.meta]);
+
+  const promises = FAVICON_SIZES.map(async (height) => {
+    const png = svgToPng(svg, height);
+    await writeFile(
+      join(PUBLIC_IMAGES_FAVICONS, `${file.meta.id}_${height}.png`),
       png
     );
   });
@@ -89,12 +113,14 @@ async function run() {
   await Promise.all([
     mkdir(DATA, { recursive: true }),
     mkdir(PUBLIC_IMAGES_FLAGS, { recursive: true }),
+    mkdir(PUBLIC_IMAGES_FAVICONS, { recursive: true }),
   ]);
 
   const individualWritePromises = data.map((file) =>
     writeFlagContentFile(file)
   );
   const imagePromises = data.map((file) => writeFlagPublicImage(file));
+  const faviconPromises = data.map((file) => writeFlagFavicon(file));
   const metaWritePromise = writeMetaFile(data);
   const siteWritePromise = writeSiteFile();
 
@@ -103,6 +129,7 @@ async function run() {
     siteWritePromise,
     ...individualWritePromises,
     ...imagePromises,
+    ...faviconPromises,
   ]);
 
   await formatOutput();

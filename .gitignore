@@ -2,6 +2,7 @@
 
 /data/
 /public/images/flags/
+/public/images/favicons/
 
 # dependencies
 /node_modules

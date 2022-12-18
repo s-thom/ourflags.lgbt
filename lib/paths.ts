@@ -10,3 +10,4 @@ export const CONTENT_MARKDOWN = join(CONTENT, "markdown");
 export const PUBLIC = join(BASE_PATH, "public");
 export const PUBLIC_IMAGES = join(PUBLIC, "images");
 export const PUBLIC_IMAGES_FLAGS = join(PUBLIC_IMAGES, "flags");
+export const PUBLIC_IMAGES_FAVICONS = join(PUBLIC_IMAGES, "favicons");
