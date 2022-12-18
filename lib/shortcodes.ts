@@ -7,11 +7,10 @@ export function buildShareString(flags: FlagMeta[]): string {
 }
 
 export function parseShareString(path: string): FlagMeta[] {
-  const parts = path.match(/^.{2}/g);
+  const parts = path.match(/.{2}/g);
   if (!parts) {
     return [];
   }
-  parts.shift();
 
   const flagsByShortcode = new Map<string, FlagMeta>();
   FLAGS.forEach((flag) => {
