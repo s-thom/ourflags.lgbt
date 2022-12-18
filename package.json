@@ -7,10 +7,12 @@
     "build": "next build",
     "postinstall": "npm run prepare",
     "prepare": "npm run prepare:data",
-    "prepare:data": "node --loader ts-node/esm scripts/generate-data.mts",
+    "prepare:data": "tsx scripts/generate-data.ts",
     "start": "next start",
     "lint": "next lint --dir app --dir pages --dir components --dir lib",
-    "lint:fix": "next lint --dir app --dir pages --dir components --dir lib --fix"
+    "lint:fix": "next lint --dir app --dir pages --dir components --dir lib --fix",
+    "test": "jest",
+    "test:dev": "jest --watch"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.6",
@@ -18,6 +20,7 @@
     "@dnd-kit/sortable": "^7.0.1",
     "@dnd-kit/utilities": "^3.2.1",
     "@next/font": "13.0.7",
+    "@resvg/resvg-js": "^2.2.0",
     "@types/node": "18.11.15",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",
@@ -35,16 +38,21 @@
     "unified": "^10.1.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@types/jest": "^29.2.4",
     "autoprefixer": "^10.4.13",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "gray-matter": "^4.0.3",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "prettier-plugin-organize-imports": "^3.2.1",
     "tailwindcss": "^3.2.4",
-    "ts-node": "^10.9.1"
+    "tsx": "^3.12.1"
   }
 }

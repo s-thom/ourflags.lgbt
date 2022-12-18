@@ -3,14 +3,15 @@ import matter from "gray-matter";
 import { exec } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { getStripedFlagSvg } from "../lib/flagSvg";
+import { CONTENT_MARKDOWN, DATA, PUBLIC_IMAGES_FLAGS } from "../lib/paths";
+import { svgToPng } from "../lib/svgToPng";
 import pkg from "../package.json" assert { type: "json" };
 import { FlagData } from "../types/types";
 
-// TODO: Logging and error handling in script
+const PNG_SIZES = [128, 840, 1080];
 
-// TODO: Figure out how to make ts-node happy with importing from lib/paths
-const CONTENT_MARKDOWN = join(process.cwd(), 'content','markdown')
-const DATA = join(process.cwd(), 'data')
+// TODO: Logging and error handling in script
 
 async function getMetaForFile(path: string): Promise<FlagData> {
   const fileContent = await readFile(path);
@@ -48,6 +49,27 @@ async function writeSiteFile() {
   );
 }
 
+async function writeFlagPublicImage(file: FlagData) {
+  if (!file.meta.flag) {
+    return;
+  }
+
+  const svg = getStripedFlagSvg(
+    file.meta.flag.stripes,
+    file.meta.flag.additionalPaths
+  );
+
+  const promises = PNG_SIZES.map(async (height) => {
+    const png = svgToPng(svg, height);
+    await writeFile(
+      join(PUBLIC_IMAGES_FLAGS, `${file.meta.id}_h${height}.png`),
+      png
+    );
+  });
+
+  await Promise.all(promises);
+}
+
 async function formatOutput() {
   return new Promise((res, rej) => {
     const task = exec("npx next lint --dir data --fix");
@@ -64,11 +86,15 @@ async function run() {
   );
   const data = await Promise.all(readPromises);
 
-  await mkdir(DATA, { recursive: true });
+  await Promise.all([
+    mkdir(DATA, { recursive: true }),
+    mkdir(PUBLIC_IMAGES_FLAGS, { recursive: true }),
+  ]);
 
   const individualWritePromises = data.map((file) =>
     writeFlagContentFile(file)
   );
+  const imagePromises = data.map((file) => writeFlagPublicImage(file));
   const metaWritePromise = writeMetaFile(data);
   const siteWritePromise = writeSiteFile();
 
@@ -76,6 +102,7 @@ async function run() {
     metaWritePromise,
     siteWritePromise,
     ...individualWritePromises,
+    ...imagePromises,
   ]);
 
   await formatOutput();

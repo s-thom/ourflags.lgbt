@@ -2,6 +2,8 @@
 id: test3
 name: Test Three
 shortcodes: ["t3"]
+flag:
+  stripes: ["#0000FF","#000088", "#000044", "#000022"]
 colors:
   light: ["#0000FF"]
   dark: ["#000088"]

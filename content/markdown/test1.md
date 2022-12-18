@@ -2,6 +2,8 @@
 id: test1
 name: Test One
 shortcodes: ["t1"]
+flag:
+  stripes: ["#FF0000","#880000", "#440000", "#220000"]
 colors:
   light: ["#FF0000"]
   dark: ["#880000"]
