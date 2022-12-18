@@ -19,8 +19,8 @@ async function getMetaForFile(path: string): Promise<FlagData> {
 
   return {
     meta: parsed.data as any,
-    excerpt: parsed.excerpt,
-    content: parsed.content,
+    excerpt: parsed.excerpt?.trim(),
+    content: parsed.content.trim(),
   };
 }
 
