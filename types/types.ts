@@ -7,3 +7,9 @@ export interface FlagMeta {
     dark: string[];
   };
 }
+
+export interface FlagData {
+  content: string;
+  excerpt?: string;
+  meta: FlagMeta;
+}
