@@ -11,6 +11,7 @@ import {
   PUBLIC_IMAGES_FLAGS,
 } from "../lib/paths";
 import { svgToPng } from "../lib/svgToPng";
+import { pmap } from "../lib/utils";
 import pkg from "../package.json" assert { type: "json" };
 import { FlagData } from "../types/types";
 
@@ -65,15 +66,13 @@ async function writeFlagPublicImage(file: FlagData) {
     file.meta.flag.additionalPaths
   );
 
-  const promises = PNG_SIZES.map(async (height) => {
+  await pmap(PNG_SIZES, async (height) => {
     const png = svgToPng(svg, height);
     await writeFile(
       join(PUBLIC_IMAGES_FLAGS, `${file.meta.id}_${height}.png`),
       png
     );
   });
-
-  await Promise.all(promises);
 }
 
 async function writeFlagFavicon(file: FlagData) {
@@ -83,15 +82,13 @@ async function writeFlagFavicon(file: FlagData) {
 
   const svg = getFaviconSvg([file.meta]);
 
-  const promises = FAVICON_SIZES.map(async (height) => {
+  await pmap(FAVICON_SIZES, async (height) => {
     const png = svgToPng(svg, height);
     await writeFile(
       join(PUBLIC_IMAGES_FAVICONS, `${file.meta.id}_${height}.png`),
       png
     );
   });
-
-  await Promise.all(promises);
 }
 
 async function formatOutput() {
@@ -105,10 +102,9 @@ async function formatOutput() {
 async function run() {
   const filenames = await readdir(CONTENT_MARKDOWN);
 
-  const readPromises = filenames.map((file) =>
+  const data = await pmap(filenames, (file) =>
     getMetaForFile(join(CONTENT_MARKDOWN, file))
   );
-  const data = await Promise.all(readPromises);
 
   await Promise.all([
     mkdir(DATA, { recursive: true }),
@@ -116,11 +112,11 @@ async function run() {
     mkdir(PUBLIC_IMAGES_FAVICONS, { recursive: true }),
   ]);
 
-  const individualWritePromises = data.map((file) =>
+  const individualWritePromises = await pmap(data, (file) =>
     writeFlagContentFile(file)
   );
-  const imagePromises = data.map((file) => writeFlagPublicImage(file));
-  const faviconPromises = data.map((file) => writeFlagFavicon(file));
+  const imagePromises = await pmap(data, (file) => writeFlagPublicImage(file));
+  const faviconPromises = await pmap(data, (file) => writeFlagFavicon(file));
   const metaWritePromise = writeMetaFile(data);
   const siteWritePromise = writeSiteFile();
 

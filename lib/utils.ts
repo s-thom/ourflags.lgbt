@@ -21,3 +21,10 @@ export function template(input: string, values: Record<string, any>): string {
     (substr, key) => values[key] ?? `{{${key}}}`
   );
 }
+
+export function pmap<T, U>(
+  arr: T[],
+  fn: (value: T, index: number, array: T[]) => Promise<U>
+): Promise<U[]> {
+  return Promise.all(arr.map(fn));
+}

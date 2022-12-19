@@ -6,10 +6,7 @@ export interface FlagMeta {
     stripes: string[];
     additionalPaths?: string;
   };
-  colors: {
-    light: string[];
-    dark: string[];
-  };
+  background: string[];
 }
 
 export interface FlagData {

@@ -1,11 +1,11 @@
 import { FlagForm } from "../components/client/FlagForm";
+import { Main } from "../components/layout/Main";
 import FLAGS from "../data/meta";
-import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <Main>
       <FlagForm flags={FLAGS} />
-    </main>
+    </Main>
   );
 }

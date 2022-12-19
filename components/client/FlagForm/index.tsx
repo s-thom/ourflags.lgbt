@@ -84,7 +84,7 @@ export function FlagForm({ flags }: FlagFormProps) {
   const baseUrl = useBaseUrl();
 
   const shareUrl = useMemo(
-    () => `${baseUrl}/s/${buildShareString(selectedFlags)}`,
+    () => `${baseUrl}/${buildShareString(selectedFlags)}`,
     [baseUrl, selectedFlags]
   );
 
