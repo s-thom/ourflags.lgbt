@@ -24,7 +24,7 @@ export function NavigationHeading({
   ...rest
 }: HTMLAttributes<HTMLElement>) {
   return (
-    <h1 className={`${className}`} {...rest}>
+    <h1 className={`font-bold text-2xl ${className}`} {...rest}>
       {children}
     </h1>
   );

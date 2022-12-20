@@ -1,6 +1,6 @@
 import { FlagExcerptSection } from "../../components/both/FlagExcerptSection";
 import { FullWidthSection } from "../../components/layout/FullWidthSection";
-import { Main } from "../../components/layout/Main";
+import { PageHeading } from "../../components/layout/Headings";
 import { Section } from "../../components/layout/Section";
 import { getFlagData } from "../../lib/getFlagData";
 import { renderMarkdownToReact } from "../../lib/remark";
@@ -15,8 +15,10 @@ export default async function FlagsIdPage({
   const flags = parseShareString(params.ids);
 
   return (
-    <Main>
-      <Section>hello world</Section>
+    <>
+      <Section>
+        <PageHeading className="text-center">My flags</PageHeading>
+      </Section>
       {await pmap(flags, async (flag) => {
         const data = await getFlagData(flag.id);
         const excerpt = await renderMarkdownToReact(data.excerpt ?? "");
@@ -28,6 +30,6 @@ export default async function FlagsIdPage({
           </FullWidthSection>
         );
       })}
-    </Main>
+    </>
   );
 }

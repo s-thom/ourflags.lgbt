@@ -28,3 +28,9 @@ export function pmap<T, U>(
 ): Promise<U[]> {
   return Promise.all(arr.map(fn));
 }
+
+export function delay(ms: number) {
+  return new Promise((res) => {
+    setTimeout(res, ms);
+  });
+}

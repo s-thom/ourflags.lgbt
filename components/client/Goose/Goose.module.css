@@ -1,0 +1,48 @@
+.button {
+  position: relative;
+  height: 48px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.goose-heart {
+  position: absolute;
+  top: -4em;
+  padding: 0.2em;
+  border-radius: 0.2em;
+  width: 8em;
+
+  animation-duration: 2s;
+  animation-name: animate-heart-in;
+  animation-delay: 0.1s;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease-out;
+}
+.goose-heart.goose-heart-exit {
+  animation-duration: 0.2s;
+  animation-name: animate-heart-out;
+}
+
+@keyframes animate-heart-in {
+  0% {
+    opacity: 0;
+    top: -1em;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    top: -4em;
+  }
+}
+
+@keyframes animate-heart-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

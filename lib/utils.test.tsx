@@ -1,4 +1,4 @@
-import { range, template } from "./utils";
+import { delay, range, template } from "./utils";
 
 describe("range", () => {
   it.each`
@@ -36,5 +36,28 @@ describe("template", () => {
         name: "unit tests",
       })
     ).toBe("Hey, unit tests!");
+  });
+});
+
+describe("delay", () => {
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
+  it("resolves after the given time", async () => {
+    const cb = jest.fn();
+
+    delay(500).then(cb);
+
+    jest.advanceTimersByTime(499);
+    await Promise.resolve(); // Forcefully flush microtasks queue
+    expect(cb).not.toHaveBeenCalled();
+
+    jest.advanceTimersByTime(1);
+    await Promise.resolve();
+    expect(cb).toHaveBeenCalled();
   });
 });

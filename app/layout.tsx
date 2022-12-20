@@ -1,3 +1,6 @@
+import { Footer } from "../components/layout/Footer";
+import { Header } from "../components/layout/Header";
+import { Main } from "../components/layout/Main";
 import "./globals.css";
 
 export default function RootLayout({
@@ -15,7 +18,11 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/dark.js" type="text/javascript" />
       </head>
-      <body>{children}</body>
+      <body className="min-h-screen flex flex-col">
+        <Header />
+        <Main>{children}</Main>
+        <Footer />
+      </body>
     </html>
   );
 }
