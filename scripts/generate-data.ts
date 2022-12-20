@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies no-console */
+/* eslint-disable import/no-extraneous-dependencies,no-console */
 import matter from "gray-matter";
 import { exec } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
