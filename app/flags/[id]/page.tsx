@@ -1,3 +1,8 @@
+import { FlagExcerptSection } from "../../../components/both/FlagExcerptSection";
+import { FullWidthSection } from "../../../components/layout/FullWidthSection";
+import { PageHeading } from "../../../components/layout/Headings";
+import { Main } from "../../../components/layout/Main";
+import { Section } from "../../../components/layout/Section";
 import FLAGS from "../../../data/meta";
 import { getFlagData } from "../../../lib/getFlagData";
 import { renderMarkdownToReact } from "../../../lib/remark";
@@ -12,15 +17,14 @@ export default async function FlagsIdPage({
   const pageContent = await renderMarkdownToReact(data.content);
 
   return (
-    <main>
-      <div className="flex gap-1">
-        <div className="w-16 h-9 bg-slate-500"></div>
-        <div>
-          <h1>{data.meta.name}</h1>
-        </div>
-      </div>
-      <div>{pageContent}</div>
-    </main>
+    <Main>
+      <FullWidthSection className="pb-2 md:pb-4">
+        <FlagExcerptSection flag={data.meta} showFlag>
+          <PageHeading className="text-center">{data.meta.name}</PageHeading>
+        </FlagExcerptSection>
+      </FullWidthSection>
+      <Section>{pageContent}</Section>
+    </Main>
   );
 }
 

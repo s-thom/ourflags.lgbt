@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { FlagExcerptSection } from "../../components/both/FlagExcerptSection";
 import { FullWidthSection } from "../../components/layout/FullWidthSection";
 import { PageHeading } from "../../components/layout/Headings";
@@ -14,22 +16,46 @@ export default async function FlagsIdPage({
 }) {
   const flags = parseShareString(params.ids);
 
+  if (flags.length === 0) {
+    notFound();
+  }
+
   return (
     <>
-      <Section>
-        <PageHeading className="text-center">My flags</PageHeading>
+      <Section className="pb-2 md:pb-4">
+        <PageHeading className="text-center">My flags are</PageHeading>
       </Section>
-      {await pmap(flags, async (flag) => {
-        const data = await getFlagData(flag.id);
-        const excerpt = await renderMarkdownToReact(data.excerpt ?? "");
-        return (
-          <FullWidthSection key={data.meta.id}>
-            <FlagExcerptSection flag={data.meta} showReadMore>
-              {excerpt}
-            </FlagExcerptSection>
-          </FullWidthSection>
-        );
-      })}
+      <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 pb-2 md:pb-4">
+        {await pmap(flags, async (flag) => {
+          const data = await getFlagData(flag.id);
+          const excerpt = await renderMarkdownToReact(data.excerpt ?? "");
+          return (
+            <FullWidthSection key={data.meta.id}>
+              <FlagExcerptSection
+                flag={data.meta}
+                showFlag
+                showName
+                showReadMore
+              >
+                {excerpt}
+              </FlagExcerptSection>
+            </FullWidthSection>
+          );
+        })}
+      </div>
+
+      <Section>
+        <p>
+          Like what you see?{" "}
+          <Link
+            href="/"
+            className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+          >
+            Create your own page
+          </Link>
+          .
+        </p>
+      </Section>
     </>
   );
 }

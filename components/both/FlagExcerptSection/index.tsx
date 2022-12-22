@@ -9,35 +9,45 @@ import { Section } from "../../layout/Section";
 
 export interface FlagExcerptSectionProps extends PropsWithChildren {
   flag: FlagMeta;
+  showName?: boolean;
+  showFlag?: boolean;
   showReadMore?: boolean;
 }
 
 export function FlagExcerptSection({
   flag,
   children,
+  showFlag,
+  showName,
   showReadMore,
 }: FlagExcerptSectionProps) {
-  const { style } = useGradientStops(flag);
+  const { style } = useGradientStops(flag.background);
 
   return (
     <div
-      className={`p-4 bg-gradient-to-br from-blue-50 to-red-50 text-white [--tw-gradient-stops:var(--gradient-light)] dark:[--tw-gradient-stops:var(--gradient-dark)]`}
+      className={`p-4 bg-gradient-to-br text-white gradient-light dark:gradient-dark`}
       style={style}
     >
-      <Section className="flex gap-1 flex-col lg:flex-row">
-        <div className="shrink-0">
-          <Image
-            src={`/images/flags/${flag.id}_128.png`}
-            alt={flag.name}
-            height={128}
-            width={128 * COMMON_ASPECT_RATIO}
-          />
-        </div>
+      <Section className="flex gap-8 flex-col lg:flex-row items-center lg:items-start">
+        {showFlag && (
+          <div className="shrink-0">
+            <Image
+              src={`/images/flags/${flag.id}_128.png`}
+              alt={flag.name}
+              height={128}
+              width={128 * COMMON_ASPECT_RATIO}
+              className="rounded-xl"
+            />
+          </div>
+        )}
         <div className="flex flex-col gap-1">
-          <MajorHeading>{flag.name}</MajorHeading>
+          {showName && <MajorHeading>{flag.name}</MajorHeading>}
           {children}
           {showReadMore && (
-            <Link href={`/flags/${flag.id}`} className="underline">
+            <Link
+              href={`/flags/${flag.id}`}
+              className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+            >
               Read more…
             </Link>
           )}

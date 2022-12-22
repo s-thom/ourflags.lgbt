@@ -1,6 +1,5 @@
 import { formatHex, Oklch, oklch } from "culori";
 import { CSSProperties, useMemo } from "react";
-import { FlagMeta } from "../types/types";
 
 const MAX_ANGLE_PER_STOP = 30;
 
@@ -87,17 +86,24 @@ function getGradientStops(colors: string[]): string {
   return moreColors.join(", ");
 }
 
-export function useGradientStops(flag: FlagMeta) {
+export function getThemedGradients(themes: {
+  light: string[];
+  dark?: string[];
+}) {
+  const style = {
+    "--gradient-light": getGradientStops(themes.light),
+    "--gradient-dark": getGradientStops(themes.dark ?? themes.light),
+  } as CSSProperties;
+
+  return style;
+}
+
+export function useGradientStops(themes: { light: string[]; dark?: string[] }) {
   return useMemo(() => {
-    const style = {
-      "--gradient-light": getGradientStops(flag.background.light),
-      "--gradient-dark": getGradientStops(
-        flag.background.dark ?? flag.background.light
-      ),
-    } as CSSProperties;
+    const style = getThemedGradients(themes);
 
     return {
       style,
     };
-  }, [flag.background]);
+  }, [themes]);
 }

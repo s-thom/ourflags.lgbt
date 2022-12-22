@@ -13,3 +13,12 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+
+@layer utilities {
+  .gradient-light {
+    --tw-gradient-stops: var(--gradient-light);
+  }
+  .gradient-dark {
+    --tw-gradient-stops: var(--gradient-dark);
+  }
+}
