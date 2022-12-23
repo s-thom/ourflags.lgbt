@@ -21,11 +21,25 @@ import { FlagData, FlagMeta } from "../types/types";
 const PNG_SIZES = [128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
 
-const colorValidator = z.string().regex(/#[0-9A-Za-z]{6}/);
+const colorValidator = z
+  .string()
+  .regex(/^#[0-9A-Za-z]{6}$/, "Colours must be specified in `#RRGGBB` format");
 const metaValidator: z.ZodSchema<FlagMeta> = z.object({
-  id: z.string(),
+  id: z
+    .string()
+    .regex(
+      /^[a-z][a-z0-9-]*$/,
+      "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter"
+    ),
   name: z.string(),
-  shortcodes: z.array(z.string().length(2)),
+  shortcodes: z.array(
+    z
+      .string()
+      .regex(
+        /^[a-z][a-z0-9]+$/,
+        "Shortcodes must be at least two lowercase alphanumeric characters, and must start with a letter"
+      )
+  ),
   flag: z.object({
     stripes: z.array(colorValidator),
     additionalPaths: z.string().optional(),
@@ -119,13 +133,22 @@ async function writeFlagMetaCollection(files: FlagData[]) {
   const logger = getMethodLogger("writeFlagMetaCollection", baseLogger);
   const trace = getTracer(logger);
 
+  const flagMetaList = files.map((file) => file.meta);
+
+  const flagMap: { [key: string]: FlagMeta } = {};
+  flagMetaList.forEach((flag) => {
+    flagMap[flag.id] = flag;
+  });
+
   trace("Writing flag collection");
   try {
     await writeFile(
       join(DATA, "meta.ts"),
-      `import { FlagMeta } from "../types/types";\nconst FLAGS: FlagMeta[] = ${JSON.stringify(
-        files.map((file) => file.meta)
-      )};\nexport default FLAGS;`
+      `import { FlagMeta } from "../types/types";\nexport const FLAGS: FlagMeta[] = ${JSON.stringify(
+        flagMetaList
+      )};export const FLAGS_BY_ID: { [key: string]: FlagMeta } = ${JSON.stringify(
+        flagMap
+      )};\n`
     );
   } catch (err) {
     const newError = new Error("Failed to write combined flag data", {

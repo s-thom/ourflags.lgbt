@@ -1,4 +1,4 @@
-import FLAGS from "../data/meta";
+import { FLAGS } from "../data/meta";
 import { FlagMeta } from "../types/types";
 
 export function buildShareString(flags: FlagMeta[]): string {

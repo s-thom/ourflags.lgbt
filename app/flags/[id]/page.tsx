@@ -3,7 +3,7 @@ import { FullWidthSection } from "../../../components/layout/FullWidthSection";
 import { PageHeading } from "../../../components/layout/Headings";
 import { Main } from "../../../components/layout/Main";
 import { Section } from "../../../components/layout/Section";
-import FLAGS from "../../../data/meta";
+import { FLAGS } from "../../../data/meta";
 import { getFlagData } from "../../../lib/getFlagData";
 import { renderMarkdownToReact } from "../../../lib/remark";
 
