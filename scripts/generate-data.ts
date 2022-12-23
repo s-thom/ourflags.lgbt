@@ -32,21 +32,23 @@ const metaValidator: z.ZodSchema<FlagMeta> = z.object({
       "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter"
     ),
   name: z.string(),
-  shortcodes: z.array(
-    z
-      .string()
-      .regex(
-        /^[a-z][a-z0-9]+$/,
-        "Shortcodes must be at least two lowercase alphanumeric characters, and must start with a letter"
-      )
-  ),
+  shortcodes: z
+    .array(
+      z
+        .string()
+        .regex(
+          /^[A-Z][a-z0-9]+$/,
+          "Shortcodes must start with a capital letter, and then have at least one more lowercase alphanumeric character"
+        )
+    )
+    .min(1),
   flag: z.object({
-    stripes: z.array(colorValidator),
+    stripes: z.array(colorValidator).min(1),
     additionalPaths: z.string().optional(),
   }),
   background: z.object({
-    light: z.array(colorValidator),
-    dark: z.array(colorValidator).optional(),
+    light: z.array(colorValidator).min(1),
+    dark: z.array(colorValidator).min(1).optional(),
   }),
 });
 

@@ -1,7 +1,7 @@
 ---
 id: test1
 name: Test One
-shortcodes: ["t1"]
+shortcodes: ["Ttt"]
 flag:
   stripes: ["#FF0000"]
 background:
