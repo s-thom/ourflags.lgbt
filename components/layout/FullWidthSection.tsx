@@ -6,8 +6,8 @@ export function FullWidthSection({
   ...rest
 }: HTMLAttributes<HTMLElement>) {
   return (
-    <section className={`${className}`} {...rest}>
+    <div className={`${className}`} {...rest}>
       {children}
-    </section>
+    </div>
   );
 }

@@ -1,12 +1,9 @@
-import { Inter } from "@next/font/google";
 import DarkModeListener from "../components/client/DarkModeListener";
 import { Footer } from "../components/layout/Footer";
-import { Header } from "../components/layout/Header";
 import { Main } from "../components/layout/Main";
 import { getThemedGradients } from "../lib/colors";
+import { FONT_FAMILIES } from "../lib/fonts";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 const BG_THEMES = {
   light: ["#fde8ee", "#eaf2e1", "#f1ebfc"],
@@ -31,10 +28,9 @@ export default function RootLayout({
         <script src="/dark.js" type="text/javascript" />
       </head>
       <body
-        className={`min-h-screen flex flex-col text-black dark:text-white bg-gradient-to-br gradient-light dark:gradient-dark ${inter.className}`}
+        className={`min-h-screen flex flex-col text-black dark:text-white bg-gradient-to-br gradient-light dark:gradient-dark ${FONT_FAMILIES.body.className}`}
         style={style}
       >
-        <Header />
         <Main>{children}</Main>
         <Footer />
         <DarkModeListener />

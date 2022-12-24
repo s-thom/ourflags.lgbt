@@ -4,16 +4,13 @@ import { FlagExcerptSection } from "../../components/both/FlagExcerptSection";
 import { FullWidthSection } from "../../components/layout/FullWidthSection";
 import { PageHeading } from "../../components/layout/Headings";
 import { Section } from "../../components/layout/Section";
+import { FONT_FAMILIES } from "../../lib/fonts";
 import { getFlagData } from "../../lib/getFlagData";
 import { renderMarkdownToReact } from "../../lib/remark";
 import { parseShareString } from "../../lib/shortcodes";
 import { pmap } from "../../lib/utils";
 
-export default async function FlagsIdPage({
-  params,
-}: {
-  params: { ids: string };
-}) {
+export default async function IdsPage({ params }: { params: { ids: string } }) {
   const flags = parseShareString(params.ids);
 
   if (flags.length === 0) {
@@ -23,7 +20,15 @@ export default async function FlagsIdPage({
   return (
     <>
       <Section className="py-8 sm:py-12 md:py-16">
-        <PageHeading className="text-center">My flags are</PageHeading>
+        <PageHeading className="text-center">
+          <Link
+            href="/about"
+            className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+          >
+            My flags
+          </Link>{" "}
+          <span className={`${FONT_FAMILIES.body.className}`}>are</span>
+        </PageHeading>
       </Section>
       <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 pb-2 md:pb-4">
         {await pmap(flags, async (flag) => {
@@ -45,19 +50,6 @@ export default async function FlagsIdPage({
           );
         })}
       </div>
-
-      <Section>
-        <p>
-          Like what you see?{" "}
-          <Link
-            href="/"
-            className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
-          >
-            Create your own page
-          </Link>
-          .
-        </p>
-      </Section>
     </>
   );
 }

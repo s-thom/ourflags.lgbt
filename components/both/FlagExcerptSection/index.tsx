@@ -25,12 +25,12 @@ export function FlagExcerptSection({
 
   return (
     <div
-      className={`p-4 bg-gradient-to-br text-white gradient-light dark:gradient-dark`}
+      className={`p-4 bg-gradient-to-br text-white gradient-light dark:gradient-dark shadow-inner`}
       style={style}
     >
-      <Section className="flex gap-8 flex-col lg:flex-row items-center lg:items-start justify-center">
+      <Section className="flex gap-8 flex-col lg:flex-row items-center justify-center">
         {showFlag && (
-          <div className="shrink-0">
+          <div className="shrink-0 lg:self-start">
             <Image
               src={`/images/flags/${flag.id}_128.png`}
               alt={flag.name}
@@ -40,16 +40,18 @@ export function FlagExcerptSection({
             />
           </div>
         )}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col grow gap-1">
           {showName && <MajorHeading>{flag.name}</MajorHeading>}
           {children}
           {showReadMore && (
-            <Link
-              href={`/flags/${flag.id}`}
-              className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
-            >
-              Read more…
-            </Link>
+            <div className="prose prose-neutral dark:prose-invert">
+              <Link
+                href={`/flags/${flag.id}`}
+                className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+              >
+                Read more…
+              </Link>
+            </div>
           )}
         </div>
       </Section>

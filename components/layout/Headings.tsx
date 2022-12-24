@@ -22,24 +22,6 @@ export function PageHeading({
 }
 
 /**
- * A visually smaller heading to use within navigation
- */
-export function NavigationHeading({
-  className = "",
-  children,
-  ...rest
-}: HTMLAttributes<HTMLElement>) {
-  return (
-    <h1
-      className={`font-bold text-2xl sm:text-4xl md:text-6xl ${headingFont.className} ${className}`}
-      {...rest}
-    >
-      {children}
-    </h1>
-  );
-}
-
-/**
  * A top-level heading
  */
 export function MajorHeading({
@@ -49,7 +31,7 @@ export function MajorHeading({
 }: HTMLAttributes<HTMLElement>) {
   return (
     <h2
-      className={`font-bold text-xl sm:text-2xl md:text-2xl ${headingFont.className} ${className}`}
+      className={`font-bold text-2xl sm:text-3xl md:text-4xl ${headingFont.className} ${className}`}
       {...rest}
     >
       {children}
