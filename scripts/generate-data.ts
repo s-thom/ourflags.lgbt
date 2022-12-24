@@ -3,7 +3,7 @@ import matter from "gray-matter";
 import { exec } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import z, { ZodError } from "zod";
+import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { getFaviconSvg, getStripedFlagSvg } from "../lib/flagSvg";
 import { getLogger, getMethodLogger, getTracer } from "../lib/logger";
@@ -15,42 +15,12 @@ import {
 } from "../lib/paths";
 import { svgToPng } from "../lib/svgToPng";
 import { pmap } from "../lib/utils";
+import { flagMetaValidator } from "../lib/validation";
 import pkg from "../package.json" assert { type: "json" };
 import { FlagData, FlagMeta } from "../types/types";
 
 const PNG_SIZES = [128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
-
-const colorValidator = z
-  .string()
-  .regex(/^#[0-9A-Za-z]{6}$/, "Colours must be specified in `#RRGGBB` format");
-const metaValidator: z.ZodSchema<FlagMeta> = z.object({
-  id: z
-    .string()
-    .regex(
-      /^[a-z][a-z0-9-]*$/,
-      "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter"
-    ),
-  name: z.string(),
-  shortcodes: z
-    .array(
-      z
-        .string()
-        .regex(
-          /^[A-Z][a-z0-9]+$/,
-          "Shortcodes must start with a capital letter, and then have at least one more lowercase alphanumeric character"
-        )
-    )
-    .min(1),
-  flag: z.object({
-    stripes: z.array(colorValidator).min(1),
-    additionalPaths: z.string().optional(),
-  }),
-  background: z.object({
-    light: z.array(colorValidator).min(1),
-    dark: z.array(colorValidator).min(1).optional(),
-  }),
-});
 
 const baseLogger = getLogger("generate-data");
 
@@ -87,7 +57,7 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
   trace("Validating frontmatter");
   let validated: FlagMeta;
   try {
-    validated = metaValidator.parse(rawMatter.data);
+    validated = flagMetaValidator.parse(rawMatter.data);
   } catch (err) {
     const newError = new Error("Failed to validate flag frontmatter.", {
       cause: err,

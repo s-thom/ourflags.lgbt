@@ -1,24 +1,6 @@
-export interface FlagMeta {
-  id: string;
-  name: string;
-  shortcodes: string[];
-  flag: {
-    stripes: string[];
-    additionalPaths?: string;
-  };
-  background: {
-    light: string[];
-    dark?: string[];
-  };
-}
+import z from "zod";
+import type { flagDataValidator, flagMetaValidator } from "../lib/validation";
 
-export interface FlagData {
-  content: string;
-  excerpt?: string;
-  meta: FlagMeta;
-}
+export type FlagMeta = z.infer<typeof flagMetaValidator>;
 
-export interface Point2 {
-  x: number;
-  y: number;
-}
+export type FlagData = z.infer<typeof flagDataValidator>;

@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "next dev | pino-pretty -clt",
     "build": "next build",
-    "postinstall": "npm run prepare",
-    "prepare": "npm run prepare:data",
-    "prepare:data": "tsx scripts/generate-data.ts | pino-pretty -clt",
+    "generate-data": "tsx scripts/generate-data.ts | pino-pretty -clt",
     "start": "next start",
     "lint": "next lint --dir app --dir pages --dir components --dir lib",
     "lint:fix": "next lint --dir app --dir pages --dir components --dir lib --fix",
@@ -37,7 +35,9 @@
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
     "typescript": "4.9.4",
-    "unified": "^10.1.2"
+    "unified": "^10.1.2",
+    "zod": "^3.20.2",
+    "zod-validation-error": "^0.2.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.8",
@@ -57,8 +57,6 @@
     "prettier": "^2.8.1",
     "prettier-plugin-organize-imports": "^3.2.1",
     "tailwindcss": "^3.2.4",
-    "tsx": "^3.12.1",
-    "zod": "^3.20.2",
-    "zod-validation-error": "^0.2.2"
+    "tsx": "^3.12.1"
   }
 }
