@@ -105,11 +105,18 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
     throw newError;
   }
 
+  const contentWithoutExcerpt = rawMatter.excerpt
+    ? rawMatter.content
+        .slice(rawMatter.excerpt.length) // Get rid of excerpt at top
+        .replace(/^(?:\r?\n)*-{3,}/, "") // Remove the <hr>
+        .trim()
+    : rawMatter.content.trim();
+
   trace("Finished parsing flag metadata");
   return {
     meta: validated,
     excerpt: rawMatter.excerpt?.trim(),
-    content: rawMatter.content.trim(),
+    content: contentWithoutExcerpt,
   };
 }
 
