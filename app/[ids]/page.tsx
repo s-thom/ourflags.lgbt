@@ -22,7 +22,7 @@ export default async function FlagsIdPage({
 
   return (
     <>
-      <Section className="pb-2 md:pb-4">
+      <Section className="py-8 sm:py-12 md:py-16">
         <PageHeading className="text-center">My flags are</PageHeading>
       </Section>
       <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 pb-2 md:pb-4">
@@ -37,7 +37,9 @@ export default async function FlagsIdPage({
                 showName
                 showReadMore
               >
-                {excerpt}
+                <article className="prose prose-invert md:prose-lg lg:prose-xl">
+                  {excerpt}
+                </article>
               </FlagExcerptSection>
             </FullWidthSection>
           );

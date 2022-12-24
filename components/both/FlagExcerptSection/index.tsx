@@ -28,7 +28,7 @@ export function FlagExcerptSection({
       className={`p-4 bg-gradient-to-br text-white gradient-light dark:gradient-dark`}
       style={style}
     >
-      <Section className="flex gap-8 flex-col lg:flex-row items-center lg:items-start">
+      <Section className="flex gap-8 flex-col lg:flex-row items-center lg:items-start justify-center">
         {showFlag && (
           <div className="shrink-0">
             <Image
