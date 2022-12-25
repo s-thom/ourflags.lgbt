@@ -1,14 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FlagExcerptSection } from "../../components/both/FlagExcerptSection";
 import { FullWidthSection } from "../../components/layout/FullWidthSection";
 import { PageHeading } from "../../components/layout/Headings";
 import { Section } from "../../components/layout/Section";
 import { FONT_FAMILIES } from "../../lib/fonts";
-import { getFlagData } from "../../lib/getData";
-import { renderMarkdownToReact } from "../../lib/remark";
 import { parseShareString } from "../../lib/shortcodes";
-import { pmap } from "../../lib/utils";
+import { FlagSectionWithContent } from "./flag";
 
 export default async function IdsPage({ params }: { params: { ids: string } }) {
   const flags = parseShareString(params.ids);
@@ -31,21 +28,13 @@ export default async function IdsPage({ params }: { params: { ids: string } }) {
         </PageHeading>
       </Section>
       <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 pb-2 md:pb-4">
-        {await pmap(flags, async (flag) => {
-          const data = await getFlagData(flag.id);
-          const excerpt = await renderMarkdownToReact(data.excerpt ?? "");
+        {flags.map((flag) => {
           return (
-            <FullWidthSection key={data.meta.id}>
-              <FlagExcerptSection
-                flag={data.meta}
-                showFlag
-                showName
-                showReadMore
-              >
-                <article className="prose prose-invert md:prose-lg lg:prose-xl">
-                  {excerpt}
-                </article>
-              </FlagExcerptSection>
+            <FullWidthSection key={flag.id}>
+              {/* FlagSectionWithContent is an async server component, but
+                  Typescript doesn't know that. */}
+              {/* @ts-expect-error */}
+              <FlagSectionWithContent flag={flag} />
             </FullWidthSection>
           );
         })}

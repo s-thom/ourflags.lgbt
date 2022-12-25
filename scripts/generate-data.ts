@@ -373,7 +373,7 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
       join(DATA_CATEGORIES, "categories.ts"),
       `import { CategoryMeta } from "../../types/types";\nexport const CATEGORIES: CategoryMeta[] = ${JSON.stringify(
         categoryMetaList
-      )};\n\nexport const CATEGORIES_BY_ID: { [key: string]: CategoryMeta } = {};\nCATEGORIES.forEach((category) => { CATEGORIES_BY_ID[category.id] = category; });\n`
+      )};\n\nexport const CATEGORIES_BY_ID: { [key: string]: CategoryMeta } = {};\nCATEGORIES.forEach((category) => { CATEGORIES_BY_ID[category.id] = category; });`
     );
   } catch (err) {
     const newError = new Error("Failed to write combined category data", {

@@ -42,7 +42,7 @@ export function FlagExcerptSection({
         )}
         <div className="flex flex-col grow gap-1">
           {showName && <MajorHeading>{flag.name}</MajorHeading>}
-          {children}
+          {children && <div>{children}</div>}
           {showReadMore && (
             <div className="prose prose-neutral dark:prose-invert">
               <Link
