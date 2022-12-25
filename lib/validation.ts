@@ -26,13 +26,12 @@ export const flagMetaValidator = z.object({
     stripes: z.array(colorValidator).min(1),
     additionalPaths: z.string().optional(),
   }),
+  categories: z.array(z.string()).default([]),
   background: z.object({
     light: z.array(colorValidator).min(1),
     dark: z.array(colorValidator).min(1).optional(),
   }),
 });
-
-export type FlagMeta = z.infer<typeof flagMetaValidator>;
 
 export const flagDataValidator = z.object({
   meta: flagMetaValidator,
@@ -40,4 +39,22 @@ export const flagDataValidator = z.object({
   excerpt: z.string().optional(),
 });
 
-export type FlagData = z.infer<typeof flagDataValidator>;
+export const categoryMetaValidator = z.object({
+  id: z
+    .string()
+    .regex(
+      /^[a-z][a-z0-9-]*$/,
+      "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter"
+    ),
+  name: z.string(),
+  background: z.object({
+    light: z.array(colorValidator).min(1),
+    dark: z.array(colorValidator).min(1).optional(),
+  }),
+});
+
+export const categoryDataValidator = z.object({
+  meta: categoryMetaValidator,
+  content: z.string(),
+  excerpt: z.string().optional(),
+});

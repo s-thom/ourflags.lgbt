@@ -8,22 +8,26 @@ import { fromZodError } from "zod-validation-error";
 import { getFaviconSvg, getStripedFlagSvg } from "../lib/flagSvg";
 import { getLogger, getMethodLogger, getTracer } from "../lib/logger";
 import {
-  CONTENT_MARKDOWN,
+  CONTENT_CATEGORIES,
+  CONTENT_FLAGS,
   DATA,
+  DATA_CATEGORIES,
+  DATA_FLAGS,
   PUBLIC_IMAGES_FAVICONS,
   PUBLIC_IMAGES_FLAGS,
 } from "../lib/paths";
 import { svgToPng } from "../lib/svgToPng";
 import { pmap } from "../lib/utils";
-import { flagMetaValidator } from "../lib/validation";
+import { categoryMetaValidator, flagMetaValidator } from "../lib/validation";
 import pkg from "../package.json" assert { type: "json" };
-import { FlagData, FlagMeta } from "../types/types";
+import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../types/types";
 
 const PNG_SIZES = [128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
 
 const baseLogger = getLogger("generate-data");
 
+// #region Flags
 async function parseFlagMeta(path: string): Promise<FlagData> {
   const logger = getMethodLogger("parseFlagMeta", baseLogger);
   const trace = getTracer(logger, { path });
@@ -96,7 +100,10 @@ async function writeFlagContentFile(file: FlagData) {
 
   trace("Writing flag content");
   try {
-    await writeFile(join(DATA, `${file.meta.id}.json`), JSON.stringify(file));
+    await writeFile(
+      join(DATA_FLAGS, `${file.meta.id}.json`),
+      JSON.stringify(file)
+    );
   } catch (err) {
     const newError = new Error("Failed to write flag data", {
       cause: err,
@@ -122,12 +129,10 @@ async function writeFlagMetaCollection(files: FlagData[]) {
   trace("Writing flag collection");
   try {
     await writeFile(
-      join(DATA, "meta.ts"),
-      `import { FlagMeta } from "../types/types";\nexport const FLAGS: FlagMeta[] = ${JSON.stringify(
+      join(DATA_FLAGS, "flags.ts"),
+      `import { FlagMeta } from "../../types/types";\nexport const FLAGS: FlagMeta[] = ${JSON.stringify(
         flagMetaList
-      )};export const FLAGS_BY_ID: { [key: string]: FlagMeta } = ${JSON.stringify(
-        flagMap
-      )};\n`
+      )};\n\nexport const FLAGS_BY_ID: { [key: string]: FlagMeta } = {};\nFLAGS.forEach((flag) => { FLAGS_BY_ID[flag.id] = flag; });`
     );
   } catch (err) {
     const newError = new Error("Failed to write combined flag data", {
@@ -138,33 +143,6 @@ async function writeFlagMetaCollection(files: FlagData[]) {
   }
 
   trace("Finished writing flag collection");
-}
-
-async function writeSiteMetadata() {
-  const logger = getMethodLogger("writeSiteMetadata", baseLogger);
-  const trace = getTracer(logger);
-
-  const data = { name: "My Flags", version: pkg.version };
-
-  trace("Writing site metadata");
-  try {
-    await writeFile(
-      join(DATA, "site.ts"),
-      Object.entries(data)
-        .map(
-          ([key, value]) => `export const ${key} = ${JSON.stringify(value)};`
-        )
-        .join("")
-    );
-  } catch (err) {
-    const newError = new Error("Failed to write site metadata", {
-      cause: err,
-    });
-    logger.error(newError.message, { err });
-    throw newError;
-  }
-
-  trace("Finished writing site metadata");
 }
 
 async function writeFlagPublicImage(file: FlagData) {
@@ -252,6 +230,216 @@ async function writeFlagFavicon(file: FlagData) {
   trace("Finished generating favicons for flag");
 }
 
+async function runFlagTasks() {
+  const logger = getMethodLogger("runFlagTasks", baseLogger);
+  const trace = getTracer(logger);
+
+  trace("Listing files in content directory");
+  const filenames = await readdir(CONTENT_FLAGS);
+
+  trace("Parsing frontmatter from Markdown files");
+  const data = await pmap(filenames, (file) =>
+    parseFlagMeta(join(CONTENT_FLAGS, file))
+  );
+
+  trace("Starting tasks. Prepare for log spam");
+  const individualWritePromises = data.map((file) =>
+    writeFlagContentFile(file)
+  );
+  const imagePromises = data.map((file) => writeFlagPublicImage(file));
+  const faviconPromises = data.map((file) => writeFlagFavicon(file));
+  const metaWritePromise = writeFlagMetaCollection(data);
+
+  try {
+    await Promise.all([
+      metaWritePromise,
+      ...individualWritePromises,
+      ...imagePromises,
+      ...faviconPromises,
+    ]);
+  } catch (err) {
+    const newError = new Error("Failed to run all tasks", { cause: err });
+    logger.error(newError.message);
+    throw newError;
+  }
+  trace("Finished tasks");
+}
+// #endregion
+
+// #region Categories
+async function parseCategoryMeta(path: string): Promise<CategoryData> {
+  const logger = getMethodLogger("parseCategoryMeta", baseLogger);
+  const trace = getTracer(logger, { path });
+
+  trace("Parsing category metadata");
+
+  trace("Reading file");
+  let fileContent: Buffer;
+  try {
+    fileContent = await readFile(path);
+  } catch (err) {
+    const newError = new Error("Failed to read category file", {
+      cause: err,
+    });
+    logger.error(newError.message, { err, path });
+    throw newError;
+  }
+
+  trace("Extracting frontmatter from markdown");
+  let rawMatter: matter.GrayMatterFile<Buffer>;
+  try {
+    rawMatter = matter(fileContent, { excerpt: true });
+  } catch (err) {
+    const newError = new Error("Failed to parse category markdown", {
+      cause: err,
+    });
+    logger.error(newError.message, { err, path });
+    throw newError;
+  }
+
+  trace("Validating frontmatter");
+  let validated: CategoryMeta;
+  try {
+    validated = categoryMetaValidator.parse(rawMatter.data);
+  } catch (err) {
+    const newError = new Error("Failed to validate category frontmatter.", {
+      cause: err,
+    });
+
+    if (err instanceof ZodError) {
+      logger.error(newError.message, {
+        path,
+        errors: fromZodError(err).message,
+        raw: err.format(),
+      });
+    } else {
+      logger.error(newError.message, { err, path });
+    }
+    throw newError;
+  }
+
+  const contentWithoutExcerpt = rawMatter.excerpt
+    ? rawMatter.content
+        .slice(rawMatter.excerpt.length) // Get rid of excerpt at top
+        .replace(/^(?:\r?\n)*-{3,}/, "") // Remove the <hr>
+        .trim()
+    : rawMatter.content.trim();
+
+  trace("Finished parsing category metadata");
+  return {
+    meta: validated,
+    excerpt: rawMatter.excerpt?.trim(),
+    content: contentWithoutExcerpt,
+  };
+}
+
+async function writeCategoryContentFile(file: CategoryData) {
+  const logger = getMethodLogger("writeCategoryContentFile", baseLogger);
+  const trace = getTracer(logger, { categoryId: file.meta.id });
+
+  trace("Writing category content");
+  try {
+    await writeFile(
+      join(DATA_CATEGORIES, `${file.meta.id}.json`),
+      JSON.stringify(file)
+    );
+  } catch (err) {
+    const newError = new Error("Failed to write category data", {
+      cause: err,
+    });
+    logger.error(newError.message, { err, categoryId: file.meta.id });
+    throw newError;
+  }
+
+  trace("Finished writing category content");
+}
+
+async function writeCategoryMetaCollection(files: CategoryData[]) {
+  const logger = getMethodLogger("writeCategoryMetaCollection", baseLogger);
+  const trace = getTracer(logger);
+
+  const categoryMetaList = files.map((file) => file.meta);
+
+  const categoryMap: { [key: string]: CategoryMeta } = {};
+  categoryMetaList.forEach((category) => {
+    categoryMap[category.id] = category;
+  });
+
+  trace("Writing category collection");
+  try {
+    await writeFile(
+      join(DATA_CATEGORIES, "categories.ts"),
+      `import { CategoryMeta } from "../../types/types";\nexport const CATEGORIES: CategoryMeta[] = ${JSON.stringify(
+        categoryMetaList
+      )};\n\nexport const CATEGORIES_BY_ID: { [key: string]: CategoryMeta } = {};\nCATEGORIES.forEach((category) => { CATEGORIES_BY_ID[category.id] = category; });\n`
+    );
+  } catch (err) {
+    const newError = new Error("Failed to write combined category data", {
+      cause: err,
+    });
+    logger.error(newError.message, { err });
+    throw newError;
+  }
+
+  trace("Finished writing category collection");
+}
+
+async function runCategoryTasks() {
+  const logger = getMethodLogger("runCategoryTasks", baseLogger);
+  const trace = getTracer(logger);
+
+  trace("Listing files in content directory");
+  const filenames = await readdir(CONTENT_CATEGORIES);
+
+  trace("Parsing frontmatter from Markdown files");
+  const data = await pmap(filenames, (file) =>
+    parseCategoryMeta(join(CONTENT_CATEGORIES, file))
+  );
+
+  trace("Starting tasks. Prepare for log spam");
+  const individualWritePromises = data.map((file) =>
+    writeCategoryContentFile(file)
+  );
+  const metaWritePromise = writeCategoryMetaCollection(data);
+
+  try {
+    await Promise.all([metaWritePromise, ...individualWritePromises]);
+  } catch (err) {
+    const newError = new Error("Failed to run all tasks", { cause: err });
+    logger.error(newError.message);
+    throw newError;
+  }
+  trace("Finished tasks");
+}
+// #endregion
+
+async function writeSiteMetadata() {
+  const logger = getMethodLogger("writeSiteMetadata", baseLogger);
+  const trace = getTracer(logger);
+
+  const data = { name: "My Flags", version: pkg.version };
+
+  trace("Writing site metadata");
+  try {
+    await writeFile(
+      join(DATA, "site.ts"),
+      Object.entries(data)
+        .map(
+          ([key, value]) => `export const ${key} = ${JSON.stringify(value)};`
+        )
+        .join("")
+    );
+  } catch (err) {
+    const newError = new Error("Failed to write site metadata", {
+      cause: err,
+    });
+    logger.error(newError.message, { err });
+    throw newError;
+  }
+
+  trace("Finished writing site metadata");
+}
+
 async function formatOutput() {
   const logger = getMethodLogger("formatOutput", baseLogger);
   const trace = getTracer(logger);
@@ -270,46 +458,28 @@ async function run() {
   const logger = getMethodLogger("run", baseLogger);
   const trace = getTracer(logger);
 
-  logger.info("Reading markdown files");
-  trace("Listing files in content directory");
-  const filenames = await readdir(CONTENT_MARKDOWN);
-
-  trace("Parsing frontmatter from Markdown files");
-  const data = await pmap(filenames, (file) =>
-    parseFlagMeta(join(CONTENT_MARKDOWN, file))
-  );
-
   logger.info("Generating output");
   trace("Creating output directories");
   await Promise.all([
-    mkdir(DATA, { recursive: true }),
+    mkdir(DATA_FLAGS, { recursive: true }),
+    mkdir(DATA_CATEGORIES, { recursive: true }),
     mkdir(PUBLIC_IMAGES_FLAGS, { recursive: true }),
     mkdir(PUBLIC_IMAGES_FAVICONS, { recursive: true }),
   ]);
 
+  logger.info("Running generation tasks");
   trace("Starting tasks. Prepare for log spam");
-  const individualWritePromises = data.map((file) =>
-    writeFlagContentFile(file)
-  );
-  const imagePromises = data.map((file) => writeFlagPublicImage(file));
-  const faviconPromises = data.map((file) => writeFlagFavicon(file));
-  const metaWritePromise = writeFlagMetaCollection(data);
-  const siteWritePromise = writeSiteMetadata();
-
   try {
     await Promise.all([
-      metaWritePromise,
-      siteWritePromise,
-      ...individualWritePromises,
-      ...imagePromises,
-      ...faviconPromises,
+      runFlagTasks(),
+      runCategoryTasks(),
+      writeSiteMetadata(),
     ]);
   } catch (err) {
     const newError = new Error("Failed to run all tasks", { cause: err });
-    logger.error(newError.message);
+    logger.error(newError.message, { err: newError });
     throw newError;
   }
-  trace("Finished tasks");
 
   logger.info("Formatting generated files");
   try {

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev | pino-pretty -clt",
     "build": "next build",
+    "clean": "rimraf data/flags data/categories data/site.ts",
     "generate-data": "tsx scripts/generate-data.ts | pino-pretty -clt",
     "start": "next start",
     "lint": "next lint --dir app --dir pages --dir components --dir lib",
@@ -56,6 +57,7 @@
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "prettier-plugin-organize-imports": "^3.2.1",
+    "rimraf": "^3.0.2",
     "tailwindcss": "^3.2.4",
     "tsx": "^3.12.1"
   }

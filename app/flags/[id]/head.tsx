@@ -1,5 +1,5 @@
 import * as site from "../../../data/site";
-import { getFlagData } from "../../../lib/getFlagData";
+import { getFlagData } from "../../../lib/getData";
 
 export default async function FlagsIdHead({
   params,

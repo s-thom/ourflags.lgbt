@@ -5,7 +5,7 @@ import { FullWidthSection } from "../../components/layout/FullWidthSection";
 import { PageHeading } from "../../components/layout/Headings";
 import { Section } from "../../components/layout/Section";
 import { FONT_FAMILIES } from "../../lib/fonts";
-import { getFlagData } from "../../lib/getFlagData";
+import { getFlagData } from "../../lib/getData";
 import { renderMarkdownToReact } from "../../lib/remark";
 import { parseShareString } from "../../lib/shortcodes";
 import { pmap } from "../../lib/utils";

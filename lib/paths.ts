@@ -3,9 +3,12 @@ import { join } from "path";
 export const BASE_PATH = process.cwd();
 
 export const DATA = join(BASE_PATH, "data");
+export const DATA_FLAGS = join(DATA, "flags");
+export const DATA_CATEGORIES = join(DATA, "categories");
 
 export const CONTENT = join(BASE_PATH, "content");
-export const CONTENT_MARKDOWN = join(CONTENT, "markdown");
+export const CONTENT_FLAGS = join(CONTENT, "flags");
+export const CONTENT_CATEGORIES = join(CONTENT, "categories");
 
 export const PUBLIC = join(BASE_PATH, "public");
 export const PUBLIC_IMAGES = join(PUBLIC, "images");

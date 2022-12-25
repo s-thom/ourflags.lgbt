@@ -2,8 +2,8 @@ import { FlagExcerptSection } from "../../../components/both/FlagExcerptSection"
 import { FullWidthSection } from "../../../components/layout/FullWidthSection";
 import { PageHeading } from "../../../components/layout/Headings";
 import { Section } from "../../../components/layout/Section";
-import { FLAGS } from "../../../data/meta";
-import { getFlagData } from "../../../lib/getFlagData";
+import { FLAGS } from "../../../data/flags/flags";
+import { getFlagData } from "../../../lib/getData";
 import { renderMarkdownToReact } from "../../../lib/remark";
 
 export default async function FlagsIdPage({
