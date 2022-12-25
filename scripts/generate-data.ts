@@ -22,6 +22,8 @@ import { categoryMetaValidator, flagMetaValidator } from "../lib/validation";
 import pkg from "../package.json" assert { type: "json" };
 import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../types/types";
 
+const DEFAULT_FAVICON_ID = "test1";
+
 const PNG_SIZES = [128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
 
@@ -419,7 +421,11 @@ async function writeSiteMetadata() {
   const logger = getMethodLogger("writeSiteMetadata", baseLogger);
   const trace = getTracer(logger);
 
-  const data = { name: "My Flags", version: pkg.version };
+  const data = {
+    name: "My Flags",
+    version: pkg.version,
+    defaultFaviconId: DEFAULT_FAVICON_ID,
+  };
 
   trace("Writing site metadata");
   try {
