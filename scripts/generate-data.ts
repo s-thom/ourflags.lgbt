@@ -120,6 +120,7 @@ async function writeFlagMetaCollection(files: FlagData[]) {
   const trace = getTracer(logger);
 
   const flagMetaList = files.map((file) => file.meta);
+  flagMetaList.sort((a, z) => a.order - z.order);
 
   const flagMap: { [key: string]: FlagMeta } = {};
   flagMetaList.forEach((flag) => {
@@ -359,6 +360,7 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
   const trace = getTracer(logger);
 
   const categoryMetaList = files.map((file) => file.meta);
+  categoryMetaList.sort((a, z) => a.order - z.order);
 
   const categoryMap: { [key: string]: CategoryMeta } = {};
   categoryMetaList.forEach((category) => {

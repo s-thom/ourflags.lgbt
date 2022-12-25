@@ -1,6 +1,7 @@
 ---
 id: test3
 name: Test Three
+order: 1
 shortcodes: ["Three"]
 flag:
   stripes: ["#0000FF"]

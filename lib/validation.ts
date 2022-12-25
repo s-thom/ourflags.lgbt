@@ -12,6 +12,7 @@ export const flagMetaValidator = z.object({
       "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter"
     ),
   name: z.string(),
+  order: z.number(),
   shortcodes: z
     .array(
       z
@@ -47,6 +48,7 @@ export const categoryMetaValidator = z.object({
       "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter"
     ),
   name: z.string(),
+  order: z.number(),
   background: z.object({
     light: z.array(colorValidator).min(1),
     dark: z.array(colorValidator).min(1).optional(),
