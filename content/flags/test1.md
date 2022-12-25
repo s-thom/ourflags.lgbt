@@ -3,6 +3,7 @@ id: test1
 name: Test One
 order: 2
 shortcodes: ["Ttt"]
+categories: ["cat1","cat2"]
 flag:
   stripes: ["#FF0000"]
 background:

@@ -3,9 +3,12 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Plus, Trash2 } from "lucide-react";
-import { FlagMeta } from "../../../types/types";
+import Image from "next/image";
+import { useGradientStops } from "../../lib/colors";
+import { COMMON_ASPECT_RATIO } from "../../lib/flagSvg";
+import { FlagMeta } from "../../types/types";
 
-export interface FlagChipProps {
+export interface FlagFormChipProps {
   flag: FlagMeta;
   hasDragHandle?: boolean;
   onClick?: () => void;
@@ -13,20 +16,22 @@ export interface FlagChipProps {
   onRemove?: () => void;
 }
 
-export function FlagChip({
+export function FlagFormChip({
   flag,
   hasDragHandle,
   onClick,
   onAdd,
   onRemove,
-}: FlagChipProps) {
+}: FlagFormChipProps) {
   const hasAdditionalActions = !!(hasDragHandle || onRemove || onAdd);
   const TextComponent = onClick ? "button" : "div";
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: flag.id, disabled: !hasAdditionalActions });
 
-  const style = {
+  const { style: gradientStyles } = useGradientStops(flag.background);
+
+  const dndStyles = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
@@ -34,7 +39,7 @@ export function FlagChip({
   if (!hasAdditionalActions) {
     return (
       <TextComponent
-        className="inline-block px-1 rounded border border-neutral-400"
+        className="inline-block p-2 rounded border border-neutral-400"
         onClick={onClick}
       >
         {flag.name}
@@ -44,24 +49,31 @@ export function FlagChip({
 
   return (
     <div
-      className="inline-flex gap-1 px-1 rounded border border-neutral-400"
-      style={style}
+      className="inline-flex gap-2 p-2 rounded-lg border border-neutral-400 bg-gradient-to-br gradient-light dark:gradient-dark"
+      style={{ ...dndStyles, ...gradientStyles }}
       ref={setNodeRef}
     >
       {hasDragHandle && (
-        <button {...listeners} {...attributes}>
+        <button aria-label={`Move ${flag.name}`} {...listeners} {...attributes}>
           <GripVertical />
         </button>
       )}
+      <Image
+        src={`/images/flags/${flag.id}_24.png`}
+        alt={flag.name}
+        height={24}
+        width={24 * COMMON_ASPECT_RATIO}
+        className="rounded"
+      />
       <TextComponent onClick={onClick}>{flag.name}</TextComponent>
       {onAdd && (
-        <button onClick={onAdd}>
-          <Plus aria-label={`Add ${flag.name}`} />
+        <button aria-label={`Add ${flag.name}`} onClick={onAdd}>
+          <Plus />
         </button>
       )}
       {onRemove && (
-        <button onClick={onRemove}>
-          <Trash2 aria-label={`Remove ${flag.name}`} />
+        <button aria-label={`Remove ${flag.name}`} onClick={onRemove}>
+          <Trash2 />
         </button>
       )}
     </div>

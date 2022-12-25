@@ -24,7 +24,7 @@ import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../types/types";
 
 const DEFAULT_FAVICON_ID = "test1";
 
-const PNG_SIZES = [128, 840, 1080];
+const PNG_SIZES = [24, 128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
 
 const baseLogger = getLogger("generate-data");

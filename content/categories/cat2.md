@@ -7,3 +7,5 @@ background:
 ---
 
 category 2 explanation
+
+---

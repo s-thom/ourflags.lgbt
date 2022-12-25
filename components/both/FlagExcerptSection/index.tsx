@@ -40,7 +40,7 @@ export function FlagExcerptSection({
             />
           </div>
         )}
-        <div className="flex flex-col grow gap-1">
+        <div className="w-full flex flex-col grow gap-1">
           {showName && <MajorHeading>{flag.name}</MajorHeading>}
           {children && <div>{children}</div>}
           {showReadMore && (

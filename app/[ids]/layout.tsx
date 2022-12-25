@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { Section } from "../../components/layout/Section";
 
 export default function IdsLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       {children}
-      <Section className="prose prose-neutral dark:prose-invert p-4 mt-10 md:mt-20 bg-white/30 rounded-xl shadow-inner max-w-sm sm:max-w-md md:max-w-lg">
+      <div className="prose prose-neutral dark:prose-invert p-4 mt-10 md:mt-20 bg-white/30 rounded-xl shadow-inner max-w-sm sm:max-w-md md:max-w-lg mx-auto px-4 sm:px-6 md:px-8">
         <p>
           <Link
             href="/"
@@ -22,7 +21,7 @@ export default function IdsLayout({ children }: { children: React.ReactNode }) {
           </Link>{" "}
           to learn more about queer history and representation.
         </p>
-      </Section>
+      </div>
     </div>
   );
 }
