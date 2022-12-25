@@ -423,7 +423,9 @@ async function writeSiteMetadata() {
 
   const data = {
     name: "My Flags",
+    baseUrl: "https://myflags.lgbt",
     version: pkg.version,
+    faviconSizes: FAVICON_SIZES,
     defaultFaviconId: DEFAULT_FAVICON_ID,
   };
 
