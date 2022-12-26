@@ -5,7 +5,7 @@ import { PageHeading } from "../../components/layout/Headings";
 import { Section } from "../../components/layout/Section";
 import { FONT_FAMILIES } from "../../lib/fonts";
 import { parseShareString } from "../../lib/shortcodes";
-import { FlagSectionWithContent } from "./flag";
+import { FlagSectionWithContent } from "./components";
 
 export default async function IdsPage({ params }: { params: { ids: string } }) {
   const flags = parseShareString(params.ids);

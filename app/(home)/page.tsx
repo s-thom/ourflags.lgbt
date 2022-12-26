@@ -9,7 +9,7 @@ import {
 } from "../../components/link-form";
 import { CATEGORIES } from "../../data/categories/categories";
 import { FLAGS } from "../../data/flags/flags";
-import { CategorySectionWithContent } from "./category";
+import { CategorySectionWithContent } from "./components";
 
 export default function Home() {
   return (

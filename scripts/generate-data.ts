@@ -24,7 +24,15 @@ import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../types/types";
 
 const DEFAULT_FAVICON_ID = "test1";
 
-const PNG_SIZES = [24, 128, 840, 1080];
+/**
+ * Notes for each size is used
+ * - 24:   Used inline in chips for link form
+ * - 64:   Used in all flags list
+ * - 128:  Used on shared pages and detail pages
+ * - 840:
+ * - 1080: For anyone who wants a larger image and types the URL themselves
+ */
+const PNG_SIZES = [24, 64, 128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
 
 const baseLogger = getLogger("generate-data");

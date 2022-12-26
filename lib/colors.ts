@@ -86,6 +86,9 @@ function getGradientStops(colors: string[]): string {
   return moreColors.join(", ");
 }
 
+/**
+ * Server components only
+ */
 export function getThemedGradients(themes: {
   light: string[];
   dark?: string[];
@@ -98,6 +101,9 @@ export function getThemedGradients(themes: {
   return style;
 }
 
+/**
+ * Client components only
+ */
 export function useGradientStops(themes: { light: string[]; dark?: string[] }) {
   return useMemo(() => {
     const style = getThemedGradients(themes);
