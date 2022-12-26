@@ -1,14 +1,13 @@
-import { CommonHead } from "../components/head/common";
-import { Favicons } from "../components/head/favicons";
-import * as site from "../data/site";
+import { HeadTags } from "../components/head";
 
 export default function Head() {
   return (
-    <>
-      <CommonHead path="/" title={undefined} />
-      <title>{site.name}</title>
-      <meta name="description" content="Share your pride with the world" />
-      <Favicons flags={[]} />
-    </>
+    <HeadTags
+      title={undefined}
+      description="Share your pride with the world"
+      path="/"
+      flags={[]}
+      overrideFaviconFlags="default"
+    />
   );
 }

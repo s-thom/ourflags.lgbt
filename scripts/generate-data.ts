@@ -20,7 +20,13 @@ import { svgToPng } from "../lib/svgToPng";
 import { pmap } from "../lib/utils";
 import { categoryMetaValidator, flagMetaValidator } from "../lib/validation";
 import pkg from "../package.json" assert { type: "json" };
-import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../types/types";
+import {
+  CategoryData,
+  CategoryMeta,
+  FlagData,
+  FlagMeta,
+  Size,
+} from "../types/types";
 
 const DEFAULT_FAVICON_ID = "test1";
 
@@ -34,6 +40,7 @@ const DEFAULT_FAVICON_ID = "test1";
  */
 const PNG_SIZES = [24, 64, 128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
+const OG_IMAGE_SIZES: Size[] = [{ width: 0, height: 0 }];
 
 const baseLogger = getLogger("generate-data");
 
@@ -435,6 +442,7 @@ async function writeSiteMetadata() {
     version: pkg.version,
     faviconSizes: FAVICON_SIZES,
     defaultFaviconId: DEFAULT_FAVICON_ID,
+    ogImageSizes: OG_IMAGE_SIZES,
   };
 
   trace("Writing site metadata");

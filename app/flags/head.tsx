@@ -1,11 +1,12 @@
-import { CommonHead } from "../../components/head/common";
-import { Favicons } from "../../components/head/favicons";
+import { HeadTags } from "../../components/head";
 
 export default async function FlagsHead() {
   return (
-    <>
-      <CommonHead path="/flags" title="All flags" />
-      <Favicons flags={[]} />
-    </>
+    <HeadTags
+      title="All flags"
+      path="/flags"
+      flags={[]}
+      overrideFaviconFlags="default"
+    />
   );
 }

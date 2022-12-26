@@ -7,6 +7,13 @@ export function buildShareString(flags: FlagMeta[]): string {
 }
 
 export function parseShareString(path: string): FlagMeta[] {
+  // Special cases
+  switch (path) {
+    case "all":
+      return FLAGS;
+    default:
+  }
+
   const parts = path.match(/[A-Z][a-z0-9]+/g);
   if (!parts) {
     return [];

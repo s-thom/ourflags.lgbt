@@ -5,9 +5,13 @@ import {
   PropsWithChildren,
   ReactNode,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useState,
 } from "react";
+
+const useEffectSafe =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 export interface CustomDetailsProps extends PropsWithChildren {
   initialOpen?: boolean;
@@ -22,7 +26,7 @@ export function CustomDetails({
   children,
 }: CustomDetailsProps) {
   const [isMounted, setIsMounted] = useState(false);
-  useLayoutEffect(() => {
+  useEffectSafe(() => {
     setIsMounted(true);
     return () => setIsMounted(false);
   }, []);

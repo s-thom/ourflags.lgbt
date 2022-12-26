@@ -1,5 +1,4 @@
-import { CommonHead } from "../../../components/head/common";
-import { Favicons } from "../../../components/head/favicons";
+import { HeadTags } from "../../../components/head";
 import { getFlagData } from "../../../lib/getData";
 
 export default async function FlagsIdHead({
@@ -10,9 +9,11 @@ export default async function FlagsIdHead({
   const data = await getFlagData(params.id);
 
   return (
-    <>
-      <CommonHead path={`/flags/${params.id}`} title={data.meta.name} />
-      <Favicons flags={[data.meta]} />
-    </>
+    <HeadTags
+      title={data.meta.name}
+      description="Share your pride with the world"
+      path={`/flags/${params.id}`}
+      flags={[data.meta]}
+    />
   );
 }

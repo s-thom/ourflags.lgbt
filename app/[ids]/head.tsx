@@ -1,5 +1,4 @@
-import { CommonHead } from "../../components/head/common";
-import { Favicons } from "../../components/head/favicons";
+import { HeadTags } from "../../components/head";
 import { buildShareString, parseShareString } from "../../lib/shortcodes";
 
 export default async function FlagsIdHead({
@@ -10,12 +9,11 @@ export default async function FlagsIdHead({
   const flags = parseShareString(params.ids);
 
   return (
-    <>
-      <CommonHead
-        path={`/${buildShareString(flags)}`}
-        title={`${flags.length} ${flags.length === 1 ? "flag" : "flags"}`}
-      />
-      <Favicons flags={flags} />
-    </>
+    <HeadTags
+      title={`${flags.length} ${flags.length === 1 ? "flag" : "flags"}`}
+      description="Share your pride with the world"
+      path={`/${buildShareString(flags)}`}
+      flags={flags}
+    />
   );
 }

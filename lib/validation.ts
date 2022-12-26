@@ -60,3 +60,15 @@ export const categoryDataValidator = z.object({
   content: z.string(),
   excerpt: z.string().optional(),
 });
+
+export const sizeValidator = z
+  .string()
+  .regex(/^\d+x\d+$/)
+  .transform((str) => {
+    const [, w, h] = /^(\d+)x(\d+)$/.exec(str)!;
+
+    return {
+      width: parseInt(w!, 10),
+      height: parseInt(h!, 10),
+    };
+  });
