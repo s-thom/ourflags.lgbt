@@ -14,6 +14,7 @@ export default async function FlagsIdHead({
       description="Share your pride with the world"
       path={`/flags/${params.id}`}
       flags={[data.meta]}
+      ogImageStyle="single"
     />
   );
 }

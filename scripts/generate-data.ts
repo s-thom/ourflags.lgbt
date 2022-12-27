@@ -40,7 +40,7 @@ const DEFAULT_FAVICON_ID = "test1";
  */
 const PNG_SIZES = [24, 64, 128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
-const OG_IMAGE_SIZES: Size[] = [{ width: 0, height: 0 }];
+const OG_IMAGE_SIZES: Size[] = [{ width: 1200, height: 630 }];
 
 const baseLogger = getLogger("generate-data");
 

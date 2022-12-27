@@ -2,7 +2,6 @@ import DarkModeListener from "../components/client/DarkModeListener";
 import { Footer } from "../components/layout/Footer";
 import { Main } from "../components/layout/Main";
 import { getThemedGradients } from "../lib/colors";
-import { FONT_FAMILIES } from "../lib/fonts";
 import "./globals.css";
 
 const BG_THEMES = {
@@ -28,7 +27,7 @@ export default function RootLayout({
         <script src="/dark.js" type="text/javascript" />
       </head>
       <body
-        className={`min-h-screen flex flex-col text-black dark:text-white bg-gradient-to-br gradient-light dark:gradient-dark ${FONT_FAMILIES.body.className}`}
+        className={`min-h-screen flex flex-col text-black dark:text-white bg-gradient-to-br gradient-light dark:gradient-dark font-body`}
         style={style}
       >
         <Main>{children}</Main>

@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "~@fontsource/inter/variable-full.css";
+@import "~@fontsource/permanent-marker/latin-400.css";
+
+/* https://www.industrialempathy.com/perfect-ish-font-fallback/ */
+@font-face {
+  font-family: "Inter-fallback";
+  size-adjust: 107%;
+  src: local("Arial");
+}
+
+@font-face {
+  font-family: "Permanent Marker-fallback";
+  size-adjust: 112.46%;
+  src: local("Arial");
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

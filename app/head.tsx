@@ -8,6 +8,8 @@ export default function Head() {
       path="/"
       flags={[]}
       overrideFaviconFlags="default"
+      overrideOgFlags="all"
+      ogImageStyle="title"
     />
   );
 }

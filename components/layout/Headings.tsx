@@ -1,7 +1,4 @@
-import { Permanent_Marker } from "@next/font/google";
 import { HTMLAttributes } from "react";
-
-const headingFont = Permanent_Marker({ subsets: ["latin"], weight: ["400"] });
 
 /**
  * The most important heading on the page. May not appear on every page
@@ -13,7 +10,7 @@ export function PageHeading({
 }: HTMLAttributes<HTMLElement>) {
   return (
     <h1
-      className={`font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl ${headingFont.className} ${className}`}
+      className={`font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-headings ${className}`}
       {...rest}
     >
       {children}
@@ -31,7 +28,7 @@ export function MajorHeading({
 }: HTMLAttributes<HTMLElement>) {
   return (
     <h2
-      className={`font-bold text-2xl sm:text-3xl md:text-4xl ${headingFont.className} ${className}`}
+      className={`font-bold text-2xl sm:text-3xl md:text-4xl font-headings ${className}`}
       {...rest}
     >
       {children}
@@ -49,7 +46,7 @@ export function MinorHeading({
 }: HTMLAttributes<HTMLElement>) {
   return (
     <h3
-      className={`font-bold text-lg sm:text-xl md:text-xl ${headingFont.className} ${className}`}
+      className={`font-bold text-lg sm:text-xl md:text-xl font-headings ${className}`}
       {...rest}
     >
       {children}

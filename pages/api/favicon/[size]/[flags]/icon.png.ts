@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next/types";
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -26,20 +27,26 @@ const queryValidator = z.object({
 
 const logger = getLogger("favicon");
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: NextApiResponse
 ) {
   const result = queryValidator.safeParse(req.query);
   if (!result.success) {
     logger.error(fromZodError(result.error).message);
-    res.status(400).json({ err: "Invalid parameters" });
-    return;
+    return new NextResponse(JSON.stringify({ err: "Invalid parameters" }), {
+      status: 400,
+    });
   }
 
   const { flags, size } = result.data;
 
   const svg = getFaviconSvg(flags);
   const png = svgToPng(svg, size.width);
-  res.status(200).send(png);
+
+  return res
+    .status(200)
+    .setHeader("Content-Type", "image/png")
+    .setHeader("Cache-Control", "max-age=0, s-maxage=86400")
+    .send(png);
 }

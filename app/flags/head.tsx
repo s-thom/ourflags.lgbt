@@ -7,6 +7,8 @@ export default async function FlagsHead() {
       path="/flags"
       flags={[]}
       overrideFaviconFlags="default"
+      overrideOgFlags="all"
+      ogImageStyle="title"
     />
   );
 }
