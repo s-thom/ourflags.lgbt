@@ -1,5 +1,11 @@
 import { NextSeo } from "next-seo";
-import * as site from "../../data/site";
+import {
+  BASE_URL,
+  DEFAULT_FLAG_ID,
+  FAVICON_SIZES,
+  OG_IMAGE_SIZES,
+  SITE_NAME,
+} from "../../lib/constants";
 import { buildShareString } from "../../lib/shortcodes";
 import { FlagMeta, Size } from "../../types/types";
 
@@ -11,7 +17,7 @@ function getFaviconUrl(size: number, flags: FlagMeta[], override?: string) {
   switch (flags.length) {
     case 0:
       // Default URL, will 404
-      return `/images/favicons/${site.defaultFaviconId}_${size}.png`;
+      return `/images/favicons/${DEFAULT_FLAG_ID}_${size}.png`;
     case 1:
       // Can use the plain URL to avoid function invocations
       return `/images/favicons/${flags[0]!.id}_${size}.png`;
@@ -53,13 +59,13 @@ export function HeadTags({
   overrideOgFlags,
   ogImageStyle,
 }: HeadTagsProps) {
-  const canonicalUrl = new URL(path, site.baseUrl).toString();
+  const canonicalUrl = new URL(path, BASE_URL).toString();
 
   return (
     <>
       <meta charSet="utf-8" />
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      {site.faviconSizes.map((size) => (
+      {FAVICON_SIZES.map((size) => (
         <link
           key={size}
           href={getFaviconUrl(size, flags, overrideFaviconFlags)}
@@ -71,28 +77,28 @@ export function HeadTags({
       <NextSeo
         useAppDir
         title={title}
-        titleTemplate={`%s - ${site.name}`}
-        defaultTitle={site.name}
+        titleTemplate={`%s - ${SITE_NAME}`}
+        defaultTitle={SITE_NAME}
         description={description}
         canonical={canonicalUrl}
         themeColor="#976eaa"
         openGraph={{
           type: "website",
-          title: title ? `${title} - ${site.name}` : site.name,
+          title: title ? `${title} - ${SITE_NAME}` : SITE_NAME,
           url: canonicalUrl,
-          siteName: site.name,
+          siteName: SITE_NAME,
           locale: "en_US",
           images: ogImageStyle
-            ? site.ogImageSizes.map((size) => {
+            ? OG_IMAGE_SIZES.map((size) => {
                 const url = new URL(
                   getOgUrl(size, ogImageStyle, flags, overrideOgFlags),
-                  site.baseUrl
+                  BASE_URL
                 ).toString();
                 return {
                   url,
                   width: size.width,
                   height: size.height,
-                  alt: title ? `${title} - ${site.name}` : site.name,
+                  alt: title ? `${title} - ${SITE_NAME}` : SITE_NAME,
                   type: "image/png",
                   secureUrl: url,
                 };

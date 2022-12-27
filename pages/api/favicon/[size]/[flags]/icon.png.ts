@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next/types";
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
-import * as site from "../../../../../data/site";
+import { FAVICON_SIZES } from "../../../../../lib/constants";
 import { getFaviconSvg } from "../../../../../lib/flagSvg";
 import { parseShareString } from "../../../../../lib/shortcodes";
 import { svgToPng } from "../../../../../lib/svgToPng";
@@ -14,10 +14,10 @@ const queryValidator = z.object({
       message: "Size must be square",
     })
     .refine(
-      (size) => site.faviconSizes.includes(size.width),
+      (size) => FAVICON_SIZES.includes(size.width),
       (size) => ({
         message: `Size must be one of the allowed sizes (expected one of ${JSON.stringify(
-          site.faviconSizes
+          FAVICON_SIZES
         )}, got ${size.width})`,
       })
     ),

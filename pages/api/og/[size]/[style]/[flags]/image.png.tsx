@@ -4,8 +4,10 @@ import { ReactNode } from "react";
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
 import { OgTitleStyle } from "../../../../../../components/og/OgTitleStyle";
-import * as site from "../../../../../../data/site";
-import { FLAG_ASPECT_RATIO } from "../../../../../../lib/constants";
+import {
+  FLAG_ASPECT_RATIO,
+  OG_IMAGE_SIZES,
+} from "../../../../../../lib/constants";
 import { getStripedFlagContent } from "../../../../../../lib/flagSvg";
 import { parseShareString } from "../../../../../../lib/shortcodes";
 import { sizeValidator } from "../../../../../../lib/validation";
@@ -29,12 +31,12 @@ const headingsFontPromise = fetch(
 const queryValidator = z.object({
   size: sizeValidator.refine(
     (size) =>
-      !!site.ogImageSizes.find(
+      !!OG_IMAGE_SIZES.find(
         (s) => s.width === size.width && s.height === size.height
       ),
     (size) => ({
       message: `Size must be one of the allowed sizes (expected one of ${JSON.stringify(
-        site.ogImageSizes
+        OG_IMAGE_SIZES
       )}, got ${JSON.stringify(size)})`,
     })
   ),

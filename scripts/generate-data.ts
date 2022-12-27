@@ -5,11 +5,11 @@ import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import { FAVICON_SIZES, PNG_SIZES } from "../lib/constants";
 import { getFaviconSvg, getStripedFlagSvg } from "../lib/flagSvg";
 import {
   CONTENT_CATEGORIES,
   CONTENT_FLAGS,
-  DATA,
   DATA_CATEGORIES,
   DATA_FLAGS,
   PUBLIC_IMAGES_FAVICONS,
@@ -18,31 +18,21 @@ import {
 import { svgToPng } from "../lib/svgToPng";
 import { pmap } from "../lib/utils";
 import { categoryMetaValidator, flagMetaValidator } from "../lib/validation";
-import pkg from "../package.json" assert { type: "json" };
-import {
-  CategoryData,
-  CategoryMeta,
-  FlagData,
-  FlagMeta,
-  Size,
-} from "../types/types";
-
-const DEFAULT_FAVICON_ID = "test1";
-
-/**
- * Notes for each size is used
- * - 24:   Used inline in chips for link form
- * - 64:   Used in all flags list
- * - 128:  Used on shared pages and detail pages
- * - 840:
- * - 1080: For anyone who wants a larger image and types the URL themselves
- */
-const PNG_SIZES = [24, 64, 128, 840, 1080];
-const FAVICON_SIZES = [32, 128, 192];
-const OG_IMAGE_SIZES: Size[] = [{ width: 1200, height: 630 }];
+import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../types/types";
 
 const I_REALLY_LIKE_LOG_SPAM = false;
 const trace = (s: string) => I_REALLY_LIKE_LOG_SPAM && console.trace(s);
+
+function sortMeta<T extends { name: string; order?: number }>(
+  a: T,
+  z: T
+): number {
+  if (a.order !== z.order) {
+    return (a.order ?? Infinity) - (z.order ?? Infinity);
+  }
+
+  return a.name.localeCompare(z.name);
+}
 
 // #region Flags
 async function parseFlagMeta(path: string): Promise<FlagData> {
@@ -128,7 +118,7 @@ async function writeFlagContentFile(file: FlagData) {
 
 async function writeFlagMetaCollection(files: FlagData[]) {
   const flagMetaList = files.map((file) => file.meta);
-  flagMetaList.sort((a, z) => a.order - z.order);
+  flagMetaList.sort(sortMeta);
 
   const flagMap: { [key: string]: FlagMeta } = {};
   flagMetaList.forEach((flag) => {
@@ -350,7 +340,7 @@ async function writeCategoryContentFile(file: CategoryData) {
 
 async function writeCategoryMetaCollection(files: CategoryData[]) {
   const categoryMetaList = files.map((file) => file.meta);
-  categoryMetaList.sort((a, z) => a.order - z.order);
+  categoryMetaList.sort(sortMeta);
 
   const categoryMap: { [key: string]: CategoryMeta } = {};
   categoryMetaList.forEach((category) => {
@@ -402,37 +392,6 @@ async function runCategoryTasks() {
 }
 // #endregion
 
-async function writeSiteMetadata() {
-  const data = {
-    name: "My Flags",
-    baseUrl: "https://myflags.lgbt",
-    version: pkg.version,
-    faviconSizes: FAVICON_SIZES,
-    defaultFaviconId: DEFAULT_FAVICON_ID,
-    ogImageSizes: OG_IMAGE_SIZES,
-  };
-
-  trace("Writing site metadata");
-  try {
-    await writeFile(
-      join(DATA, "site.ts"),
-      Object.entries(data)
-        .map(
-          ([key, value]) => `export const ${key} = ${JSON.stringify(value)};`
-        )
-        .join("")
-    );
-  } catch (err) {
-    const newError = new Error("Failed to write site metadata", {
-      cause: err,
-    });
-    console.error(newError.message, { err });
-    throw newError;
-  }
-
-  trace("Finished writing site metadata");
-}
-
 async function formatOutput() {
   trace("Formatting generated files");
   await new Promise((res, rej) => {
@@ -457,28 +416,19 @@ async function run() {
   console.log("Running generation tasks");
   trace("Starting tasks. Prepare for log spam");
   try {
-    await Promise.all([
-      runFlagTasks(),
-      runCategoryTasks(),
-      writeSiteMetadata(),
-    ]);
+    await Promise.all([runFlagTasks(), runCategoryTasks()]);
   } catch (err) {
-    const newError = new Error("Failed to run all tasks", { cause: err });
-    console.error(newError.message, { err: newError });
-    throw newError;
+    throw new Error("Failed to run all tasks", { cause: err });
   }
 
   console.log("Formatting generated files");
   try {
     await formatOutput();
   } catch (err) {
-    const newError = new Error("Failed to format files. Check for corruption", {
+    throw new Error("Failed to format files. Check for corruption", {
       cause: err,
     });
-    console.error(newError.message);
-    throw newError;
   }
-  console.log("Done");
 }
 
 process.on("unhandledRejection", (err) => {
@@ -486,4 +436,7 @@ process.on("unhandledRejection", (err) => {
   process.exit(1);
 });
 
-run();
+run().then(
+  () => console.log("Done"),
+  (err) => console.error("Error generating data", { err })
+);
