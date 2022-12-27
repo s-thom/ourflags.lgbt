@@ -17,7 +17,7 @@ export async function CategorySectionWithContent({
 
   return (
     <CategoryExcerptSection category={category} showName>
-      <article className="prose prose-invert md:prose-lg lg:prose-xl pb-4 sm:pb-5 md:pb-6">
+      <article className="prose prose-neutral dark:prose-invert md:prose-lg lg:prose-xl pb-4 sm:pb-5 md:pb-6">
         {excerpt}
       </article>
       {children}

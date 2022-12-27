@@ -5,7 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useGradientStops } from "../../lib/colors";
-import { COMMON_ASPECT_RATIO } from "../../lib/flagSvg";
+import { FLAG_ASPECT_RATIO } from "../../lib/constants";
 import { FlagMeta } from "../../types/types";
 
 export interface FlagFormChipProps {
@@ -36,20 +36,9 @@ export function FlagFormChip({
     transition,
   };
 
-  if (!hasAdditionalActions) {
-    return (
-      <TextComponent
-        className="inline-block p-2 rounded border border-neutral-400"
-        onClick={onClick}
-      >
-        {flag.name}
-      </TextComponent>
-    );
-  }
-
   return (
     <div
-      className="inline-flex gap-2 p-2 rounded-lg border border-neutral-400 bg-gradient-to-br gradient-light dark:gradient-dark"
+      className="inline-flex gap-2 p-2 rounded-lg border border-neutral-500 dark:border-neutral-200 bg-gradient-to-br gradient-light dark:gradient-dark"
       style={{ ...dndStyles, ...gradientStyles }}
       ref={setNodeRef}
     >
@@ -62,7 +51,7 @@ export function FlagFormChip({
         src={`/images/flags/${flag.id}_24.png`}
         alt={flag.name}
         height={24}
-        width={24 * COMMON_ASPECT_RATIO}
+        width={24 * FLAG_ASPECT_RATIO}
         className="rounded"
       />
       <TextComponent onClick={onClick}>{flag.name}</TextComponent>

@@ -2,11 +2,20 @@ import DarkModeListener from "../components/client/DarkModeListener";
 import { Footer } from "../components/layout/Footer";
 import { Main } from "../components/layout/Main";
 import { getThemedGradients } from "../lib/colors";
+import { colorValidator } from "../lib/validation";
 import "./globals.css";
 
 const BG_THEMES = {
-  light: ["#fde8ee", "#eaf2e1", "#f1ebfc"],
-  dark: ["#241117", "#141b0a", "#1a1424"],
+  light: [
+    "oklch(95% 0.024 16)",
+    "oklch(95% 0.024 160)",
+    "oklch(95% 0.024 305)",
+  ].map((c) => colorValidator.parse(c)),
+  dark: [
+    "oklch(20% 0.033 16)",
+    "oklch(20% 0.033 160)",
+    "oklch(20% 0.033 305)",
+  ].map((c) => colorValidator.parse(c)),
 };
 
 export default function RootLayout({

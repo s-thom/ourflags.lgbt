@@ -1,9 +1,9 @@
 import { FlagMeta } from "../types/types";
+import { FLAG_ASPECT_RATIO } from "./constants";
 import { range, template } from "./utils";
 
-export const COMMON_ASPECT_RATIO = 3 / 2;
 export const HEIGHT = 840; // Least common multiple of 3, 5, 7, and 8 so we have integers when building paths
-export const WIDTH = HEIGHT * COMMON_ASPECT_RATIO;
+export const WIDTH = HEIGHT * FLAG_ASPECT_RATIO;
 
 function getHeight(index: number, numStripes: number): number {
   return index * Math.floor(HEIGHT / numStripes);

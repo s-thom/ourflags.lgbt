@@ -18,7 +18,7 @@ export function CategoryExcerptSection({
 
   return (
     <div
-      className={`p-4 bg-gradient-to-br text-white gradient-light dark:gradient-dark shadow-inner`}
+      className={`p-4 bg-gradient-to-br gradient-light dark:gradient-dark shadow-inner`}
       style={style}
     >
       <Section className="flex gap-8 flex-col lg:flex-row items-center justify-center">

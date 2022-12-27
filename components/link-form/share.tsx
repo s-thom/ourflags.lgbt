@@ -41,7 +41,7 @@ export function LinkFormShare() {
             <ClipboardCopy />
           </button>
         </div>
-        <div>Select flags below to get a URL</div>
+        <div>Select flags to get a URL</div>
       </div>
     );
   }

@@ -4,7 +4,6 @@ import z from "zod";
 import { fromZodError } from "zod-validation-error";
 import * as site from "../../../../../data/site";
 import { getFaviconSvg } from "../../../../../lib/flagSvg";
-import { getLogger } from "../../../../../lib/logger";
 import { parseShareString } from "../../../../../lib/shortcodes";
 import { svgToPng } from "../../../../../lib/svgToPng";
 import { sizeValidator } from "../../../../../lib/validation";
@@ -25,15 +24,14 @@ const queryValidator = z.object({
   flags: z.string().transform((str) => parseShareString(str)),
 });
 
-const logger = getLogger("favicon");
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const result = queryValidator.safeParse(req.query);
   if (!result.success) {
-    logger.error(fromZodError(result.error).message);
+    // eslint-disable-next-line no-console
+    console.error(fromZodError(result.error).message);
     return new NextResponse(JSON.stringify({ err: "Invalid parameters" }), {
       status: 400,
     });

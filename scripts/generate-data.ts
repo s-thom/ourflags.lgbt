@@ -6,7 +6,6 @@ import { join } from "node:path";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { getFaviconSvg, getStripedFlagSvg } from "../lib/flagSvg";
-import { getLogger, getMethodLogger, getTracer } from "../lib/logger";
 import {
   CONTENT_CATEGORIES,
   CONTENT_FLAGS,
@@ -42,13 +41,11 @@ const PNG_SIZES = [24, 64, 128, 840, 1080];
 const FAVICON_SIZES = [32, 128, 192];
 const OG_IMAGE_SIZES: Size[] = [{ width: 1200, height: 630 }];
 
-const baseLogger = getLogger("generate-data");
+const I_REALLY_LIKE_LOG_SPAM = false;
+const trace = (s: string) => I_REALLY_LIKE_LOG_SPAM && console.trace(s);
 
 // #region Flags
 async function parseFlagMeta(path: string): Promise<FlagData> {
-  const logger = getMethodLogger("parseFlagMeta", baseLogger);
-  const trace = getTracer(logger, { path });
-
   trace("Parsing flag metadata");
 
   trace("Reading file");
@@ -59,7 +56,7 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
     const newError = new Error("Failed to read flag file", {
       cause: err,
     });
-    logger.error(newError.message, { err, path });
+    console.error(newError.message, { err, path });
     throw newError;
   }
 
@@ -71,7 +68,7 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
     const newError = new Error("Failed to parse flag markdown", {
       cause: err,
     });
-    logger.error(newError.message, { err, path });
+    console.error(newError.message, { err, path });
     throw newError;
   }
 
@@ -85,13 +82,13 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
     });
 
     if (err instanceof ZodError) {
-      logger.error(newError.message, {
+      console.error(newError.message, {
         path,
         errors: fromZodError(err).message,
         raw: err.format(),
       });
     } else {
-      logger.error(newError.message, { err, path });
+      console.error(newError.message, { err, path });
     }
     throw newError;
   }
@@ -112,9 +109,6 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
 }
 
 async function writeFlagContentFile(file: FlagData) {
-  const logger = getMethodLogger("writeFlagContentFile", baseLogger);
-  const trace = getTracer(logger, { flagId: file.meta.id });
-
   trace("Writing flag content");
   try {
     await writeFile(
@@ -125,7 +119,7 @@ async function writeFlagContentFile(file: FlagData) {
     const newError = new Error("Failed to write flag data", {
       cause: err,
     });
-    logger.error(newError.message, { err, flagId: file.meta.id });
+    console.error(newError.message, { err, flagId: file.meta.id });
     throw newError;
   }
 
@@ -133,9 +127,6 @@ async function writeFlagContentFile(file: FlagData) {
 }
 
 async function writeFlagMetaCollection(files: FlagData[]) {
-  const logger = getMethodLogger("writeFlagMetaCollection", baseLogger);
-  const trace = getTracer(logger);
-
   const flagMetaList = files.map((file) => file.meta);
   flagMetaList.sort((a, z) => a.order - z.order);
 
@@ -156,7 +147,7 @@ async function writeFlagMetaCollection(files: FlagData[]) {
     const newError = new Error("Failed to write combined flag data", {
       cause: err,
     });
-    logger.error(newError.message, { err });
+    console.error(newError.message, { err });
     throw newError;
   }
 
@@ -164,12 +155,9 @@ async function writeFlagMetaCollection(files: FlagData[]) {
 }
 
 async function writeFlagPublicImage(file: FlagData) {
-  const logger = getMethodLogger("writeFlagPublicImage", baseLogger);
-  const trace = getTracer(logger, { flagId: file.meta.id });
-
   trace("Generating images for flag");
   if (!file.meta.flag) {
-    logger.warn("Flag has no flag data, so no image can be generated", {
+    console.warn("Flag has no flag data, so no image can be generated", {
       flagId: file.meta.id,
     });
     return;
@@ -191,7 +179,7 @@ async function writeFlagPublicImage(file: FlagData) {
       const newError = new Error("Failed to convert flag SVG to PNG", {
         cause: err,
       });
-      logger.error(newError.message, {
+      console.error(newError.message, {
         err,
         flagId: file.meta.id,
         height,
@@ -208,7 +196,7 @@ async function writeFlagPublicImage(file: FlagData) {
       const newError = new Error("Failed to write image for flag", {
         cause: err,
       });
-      logger.error(newError.message, {
+      console.error(newError.message, {
         err,
         flagId: file.meta.id,
         height,
@@ -221,13 +209,10 @@ async function writeFlagPublicImage(file: FlagData) {
 }
 
 async function writeFlagFavicon(file: FlagData) {
-  const logger = getMethodLogger("writeFlagFavicon", baseLogger);
-  const trace = getTracer(logger, { flagId: file.meta.id });
-
   trace("Generating favicons for flag");
 
   if (!file.meta.flag) {
-    logger.warn("Flag has no flag data, so no favicon can be generated", {
+    console.warn("Flag has no flag data, so no favicon can be generated", {
       flagId: file.meta.id,
     });
     return;
@@ -249,9 +234,6 @@ async function writeFlagFavicon(file: FlagData) {
 }
 
 async function runFlagTasks() {
-  const logger = getMethodLogger("runFlagTasks", baseLogger);
-  const trace = getTracer(logger);
-
   trace("Listing files in content directory");
   const filenames = await readdir(CONTENT_FLAGS);
 
@@ -277,7 +259,7 @@ async function runFlagTasks() {
     ]);
   } catch (err) {
     const newError = new Error("Failed to run all tasks", { cause: err });
-    logger.error(newError.message);
+    console.error(newError.message);
     throw newError;
   }
   trace("Finished tasks");
@@ -286,9 +268,6 @@ async function runFlagTasks() {
 
 // #region Categories
 async function parseCategoryMeta(path: string): Promise<CategoryData> {
-  const logger = getMethodLogger("parseCategoryMeta", baseLogger);
-  const trace = getTracer(logger, { path });
-
   trace("Parsing category metadata");
 
   trace("Reading file");
@@ -299,7 +278,7 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
     const newError = new Error("Failed to read category file", {
       cause: err,
     });
-    logger.error(newError.message, { err, path });
+    console.error(newError.message, { err, path });
     throw newError;
   }
 
@@ -311,7 +290,7 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
     const newError = new Error("Failed to parse category markdown", {
       cause: err,
     });
-    logger.error(newError.message, { err, path });
+    console.error(newError.message, { err, path });
     throw newError;
   }
 
@@ -325,13 +304,13 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
     });
 
     if (err instanceof ZodError) {
-      logger.error(newError.message, {
+      console.error(newError.message, {
         path,
         errors: fromZodError(err).message,
         raw: err.format(),
       });
     } else {
-      logger.error(newError.message, { err, path });
+      console.error(newError.message, { err, path });
     }
     throw newError;
   }
@@ -352,9 +331,6 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
 }
 
 async function writeCategoryContentFile(file: CategoryData) {
-  const logger = getMethodLogger("writeCategoryContentFile", baseLogger);
-  const trace = getTracer(logger, { categoryId: file.meta.id });
-
   trace("Writing category content");
   try {
     await writeFile(
@@ -365,7 +341,7 @@ async function writeCategoryContentFile(file: CategoryData) {
     const newError = new Error("Failed to write category data", {
       cause: err,
     });
-    logger.error(newError.message, { err, categoryId: file.meta.id });
+    console.error(newError.message, { err, categoryId: file.meta.id });
     throw newError;
   }
 
@@ -373,9 +349,6 @@ async function writeCategoryContentFile(file: CategoryData) {
 }
 
 async function writeCategoryMetaCollection(files: CategoryData[]) {
-  const logger = getMethodLogger("writeCategoryMetaCollection", baseLogger);
-  const trace = getTracer(logger);
-
   const categoryMetaList = files.map((file) => file.meta);
   categoryMetaList.sort((a, z) => a.order - z.order);
 
@@ -396,7 +369,7 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
     const newError = new Error("Failed to write combined category data", {
       cause: err,
     });
-    logger.error(newError.message, { err });
+    console.error(newError.message, { err });
     throw newError;
   }
 
@@ -404,9 +377,6 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
 }
 
 async function runCategoryTasks() {
-  const logger = getMethodLogger("runCategoryTasks", baseLogger);
-  const trace = getTracer(logger);
-
   trace("Listing files in content directory");
   const filenames = await readdir(CONTENT_CATEGORIES);
 
@@ -425,7 +395,7 @@ async function runCategoryTasks() {
     await Promise.all([metaWritePromise, ...individualWritePromises]);
   } catch (err) {
     const newError = new Error("Failed to run all tasks", { cause: err });
-    logger.error(newError.message);
+    console.error(newError.message);
     throw newError;
   }
   trace("Finished tasks");
@@ -433,9 +403,6 @@ async function runCategoryTasks() {
 // #endregion
 
 async function writeSiteMetadata() {
-  const logger = getMethodLogger("writeSiteMetadata", baseLogger);
-  const trace = getTracer(logger);
-
   const data = {
     name: "My Flags",
     baseUrl: "https://myflags.lgbt",
@@ -459,7 +426,7 @@ async function writeSiteMetadata() {
     const newError = new Error("Failed to write site metadata", {
       cause: err,
     });
-    logger.error(newError.message, { err });
+    console.error(newError.message, { err });
     throw newError;
   }
 
@@ -467,9 +434,6 @@ async function writeSiteMetadata() {
 }
 
 async function formatOutput() {
-  const logger = getMethodLogger("formatOutput", baseLogger);
-  const trace = getTracer(logger);
-
   trace("Formatting generated files");
   await new Promise((res, rej) => {
     const task = exec("npx next lint --dir data --fix");
@@ -481,10 +445,7 @@ async function formatOutput() {
 }
 
 async function run() {
-  const logger = getMethodLogger("run", baseLogger);
-  const trace = getTracer(logger);
-
-  logger.info("Generating output");
+  console.log("Generating output");
   trace("Creating output directories");
   await Promise.all([
     mkdir(DATA_FLAGS, { recursive: true }),
@@ -493,7 +454,7 @@ async function run() {
     mkdir(PUBLIC_IMAGES_FAVICONS, { recursive: true }),
   ]);
 
-  logger.info("Running generation tasks");
+  console.log("Running generation tasks");
   trace("Starting tasks. Prepare for log spam");
   try {
     await Promise.all([
@@ -503,25 +464,25 @@ async function run() {
     ]);
   } catch (err) {
     const newError = new Error("Failed to run all tasks", { cause: err });
-    logger.error(newError.message, { err: newError });
+    console.error(newError.message, { err: newError });
     throw newError;
   }
 
-  logger.info("Formatting generated files");
+  console.log("Formatting generated files");
   try {
     await formatOutput();
   } catch (err) {
     const newError = new Error("Failed to format files. Check for corruption", {
       cause: err,
     });
-    logger.error(newError.message);
+    console.error(newError.message);
     throw newError;
   }
-  logger.info("Done");
+  console.log("Done");
 }
 
 process.on("unhandledRejection", (err) => {
-  baseLogger.debug("Unhandled rejection", { err });
+  console.error("Unhandled rejection", { err });
   process.exit(1);
 });
 

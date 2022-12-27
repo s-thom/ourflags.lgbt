@@ -5,10 +5,8 @@ import z from "zod";
 import { fromZodError } from "zod-validation-error";
 import { OgTitleStyle } from "../../../../../../components/og/OgTitleStyle";
 import * as site from "../../../../../../data/site";
-import {
-  COMMON_ASPECT_RATIO,
-  getStripedFlagContent,
-} from "../../../../../../lib/flagSvg";
+import { FLAG_ASPECT_RATIO } from "../../../../../../lib/constants";
+import { getStripedFlagContent } from "../../../../../../lib/flagSvg";
 import { parseShareString } from "../../../../../../lib/shortcodes";
 import { sizeValidator } from "../../../../../../lib/validation";
 import { FlagMeta, Size } from "../../../../../../types/types";
@@ -46,7 +44,7 @@ const queryValidator = z.object({
 
 function getTilesSvg(flags: FlagMeta[], size: Size) {
   const flagWidth = size.width / NUM_COLUMNS;
-  const flagHeight = flagWidth / COMMON_ASPECT_RATIO;
+  const flagHeight = flagWidth / FLAG_ASPECT_RATIO;
   const numRows = Math.ceil(size.height / flagHeight);
 
   const bits = flags.map((flag) =>

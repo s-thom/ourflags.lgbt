@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
 import { useGradientStops } from "../../../lib/colors";
-import { COMMON_ASPECT_RATIO } from "../../../lib/flagSvg";
+import { FLAG_ASPECT_RATIO } from "../../../lib/constants";
 import { FlagMeta } from "../../../types/types";
 import { MajorHeading } from "../../layout/Headings";
 import { Section } from "../../layout/Section";
@@ -25,7 +25,7 @@ export function FlagExcerptSection({
 
   return (
     <div
-      className={`p-4 bg-gradient-to-br text-white gradient-light dark:gradient-dark shadow-inner`}
+      className={`p-4 bg-gradient-to-br gradient-light dark:gradient-dark shadow-inner`}
       style={style}
     >
       <Section className="flex gap-8 flex-col lg:flex-row items-center justify-center">
@@ -35,7 +35,7 @@ export function FlagExcerptSection({
               src={`/images/flags/${flag.id}_128.png`}
               alt={flag.name}
               height={128}
-              width={128 * COMMON_ASPECT_RATIO}
+              width={128 * FLAG_ASPECT_RATIO}
               className="rounded-xl"
             />
           </div>
