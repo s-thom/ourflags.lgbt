@@ -4,6 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useGradientStops } from "../../lib/colors";
 import { FLAG_ASPECT_RATIO } from "../../lib/constants";
 import { FlagMeta } from "../../types/types";
@@ -11,7 +12,6 @@ import { FlagMeta } from "../../types/types";
 export interface FlagFormChipProps {
   flag: FlagMeta;
   hasDragHandle?: boolean;
-  onClick?: () => void;
   onAdd?: () => void;
   onRemove?: () => void;
 }
@@ -19,12 +19,10 @@ export interface FlagFormChipProps {
 export function FlagFormChip({
   flag,
   hasDragHandle,
-  onClick,
   onAdd,
   onRemove,
 }: FlagFormChipProps) {
   const hasAdditionalActions = !!(hasDragHandle || onRemove || onAdd);
-  const TextComponent = onClick ? "button" : "div";
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: flag.id, disabled: !hasAdditionalActions });
@@ -43,25 +41,36 @@ export function FlagFormChip({
       ref={setNodeRef}
     >
       {hasDragHandle && (
-        <button aria-label={`Move ${flag.name}`} {...listeners} {...attributes}>
+        <button
+          aria-label={`Move: ${flag.name}`}
+          {...listeners}
+          {...attributes}
+        >
           <GripVertical />
         </button>
       )}
       <Image
         src={`/images/flags/${flag.id}_24.png`}
         alt={flag.name}
+        title={flag.name}
         height={24}
         width={24 * FLAG_ASPECT_RATIO}
         className="rounded"
       />
-      <TextComponent onClick={onClick}>{flag.name}</TextComponent>
+      <Link
+        title={flag.name}
+        href={`/flags/${flag.id}`}
+        className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+      >
+        {flag.shortName ?? flag.name}
+      </Link>
       {onAdd && (
-        <button aria-label={`Add ${flag.name}`} onClick={onAdd}>
+        <button aria-label={`Add: ${flag.name}`} onClick={onAdd}>
           <Plus />
         </button>
       )}
       {onRemove && (
-        <button aria-label={`Remove ${flag.name}`} onClick={onRemove}>
+        <button aria-label={`Remove: ${flag.name}`} onClick={onRemove}>
           <Trash2 />
         </button>
       )}

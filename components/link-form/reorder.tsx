@@ -68,20 +68,18 @@ export function FlagFormReorder() {
         items={selectedFlagIds}
         strategy={verticalListSortingStrategy}
       >
-        <div className="flex flex-col gap-2 p-2 border border-dashed rounded-xl border-neutral-400 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900 min-w-[24rem] max-w-full">
-          <div className="text-center text-neutral-700 dark:text-neutral-400">
+        <div className="flex flex-wrap gap-2 p-2 border border-dashed rounded-xl border-neutral-400 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900 min-w-[24rem] max-w-full">
+          <div className="text-center text-neutral-700 dark:text-neutral-400 basis-full">
             Reorder your flags
-          </div>{" "}
-          <div className="flex flex-wrap gap-2">
-            {selected.map((flag) => (
-              <FlagFormChip
-                key={flag.id}
-                flag={flag}
-                onRemove={() => removeFlag(flag.id)}
-                hasDragHandle
-              />
-            ))}
           </div>
+          {selected.map((flag) => (
+            <FlagFormChip
+              key={flag.id}
+              flag={flag}
+              onRemove={() => removeFlag(flag.id)}
+              hasDragHandle
+            />
+          ))}
         </div>
       </SortableContext>
     </DndContext>

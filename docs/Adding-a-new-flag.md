@@ -27,9 +27,10 @@ The metadata is specified in [YAML](https://yaml.org/).
 | ---------------------- | -------------------------------------------------------------------------------- | -------- |
 | `id`                   | Unique ID for this flag. Should match the file name.                             | ✅       |
 | `name`                 | Name of the flag.                                                                | ✅       |
+| `shortName`            | A shorter name to show in space-constrained areas.                               |          |
 | `order`                | Override for sorting. Equal values are sorted alphabetically by name.            |          |
-| `shortcodes`           | List of shortcodes that refer to this flag. Must be unique to this flag.         |          |
-| `categories`           | List of categories this flag can appear in.                                      |          |
+| `shortcodes`           | List of shortcodes that refer to this flag. Must be unique to this flag.         | ✅       |
+| `categories`           | List of categories this flag can appear in.                                      | ✅       |
 | `flag`                 | Data for building the flag image.                                                | ✅       |
 | `flag.stripes`         | List of colours for each horizontal stripe in the flag.                          | ✅       |
 | `flag.additionalPaths` | String of SVG elements that go on top of the stripes.                            |          |
