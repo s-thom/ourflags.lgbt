@@ -10,13 +10,18 @@ function getHeight(index: number, numStripes: number): number {
 }
 
 function getRectPathData(index: number, numStripes: number) {
-  const start = getHeight(index, numStripes);
+  // Due to some weird, the PNGs often had a pixel of dark between stripes.
+  // In order to try combat this, I'm instead generating the stripes from the
+  // bottom up, using larger rectangles and layering over them with each
+  // smaller rectangle.
+  // const start = getHeight(index, numStripes);
+  const start = 0;
   const end = getHeight(index + 1, numStripes);
   return `M0,${start} L0,${end} ${WIDTH},${end} ${WIDTH},${start}z`;
 }
 
 function getEqualPaths(numStripes: number) {
-  return range(numStripes)
+  return range(numStripes, numStripes - 1, -1)
     .map(
       (i) =>
         `<path fill="{{color${i}}}" d="${getRectPathData(i, numStripes)}" />`
