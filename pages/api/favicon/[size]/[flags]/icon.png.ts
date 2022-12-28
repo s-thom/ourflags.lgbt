@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next/types";
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -32,9 +31,7 @@ export default async function handler(
   if (!result.success) {
     // eslint-disable-next-line no-console
     console.error(fromZodError(result.error).message);
-    return new NextResponse(JSON.stringify({ err: "Invalid parameters" }), {
-      status: 400,
-    });
+    return res.status(400).json({ err: "Invalid parameters" });
   }
 
   const { flags, size } = result.data;

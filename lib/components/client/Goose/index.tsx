@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useRef } from "react";
+import { trackEvent } from "../../../analytics";
 import { delay } from "../../../utils";
 
 import styles from "./Goose.module.css";
@@ -45,7 +46,7 @@ export function Goose() {
       settings.count === 5 ||
       settings.count % 10 === 0
     ) {
-      umami?.trackEvent("goose", { type: "click", count: settings.count });
+      trackEvent("click", "goose", { count: settings.count });
     }
 
     await delay(TOOLTIP_TIMEOUT);

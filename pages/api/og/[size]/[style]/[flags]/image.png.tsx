@@ -6,6 +6,7 @@ import { fromZodError } from "zod-validation-error";
 import { OgTitleStyle } from "../../../../../../lib/components/og/OgTitleStyle";
 import {
   FLAG_ASPECT_RATIO,
+  FLAG_SVG_VIEWBOX_HEIGHT,
   OG_IMAGE_SIZES,
 } from "../../../../../../lib/constants";
 import { getStripedFlagContent } from "../../../../../../lib/server/flagSvg";
@@ -47,6 +48,7 @@ const queryValidator = z.object({
 function getTilesSvg(flags: FlagMeta[], size: Size) {
   const flagWidth = size.width / NUM_COLUMNS;
   const flagHeight = flagWidth / FLAG_ASPECT_RATIO;
+  const scale = flagHeight / FLAG_SVG_VIEWBOX_HEIGHT;
   const numRows = Math.ceil(size.height / flagHeight);
 
   const bits = flags.map((flag) =>
@@ -57,14 +59,14 @@ function getTilesSvg(flags: FlagMeta[], size: Size) {
   for (let rowIndex = 0; rowIndex < numRows; rowIndex++) {
     for (let colIndex = 0; colIndex < NUM_COLUMNS; colIndex++) {
       // TODO: Add some variation to the indexes
-      const flagIndex = (rowIndex + colIndex) % bits.length;
+      const flagIndex = (rowIndex * NUM_COLUMNS + colIndex) % bits.length;
       const flagSvg = bits[flagIndex]!;
 
       const xOffset = colIndex * flagWidth;
       const yOffset = rowIndex * flagHeight;
 
       groups.push(
-        `<g transform="translate(${xOffset} ${yOffset})">${flagSvg}</g>`
+        `<g transform="translate(${xOffset} ${yOffset}) scale(${scale})">${flagSvg}</g>`
       );
     }
   }

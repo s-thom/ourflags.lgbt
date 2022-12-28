@@ -1,8 +1,8 @@
-import { FLAG_ASPECT_RATIO } from "../constants";
+import { FLAG_ASPECT_RATIO, FLAG_SVG_VIEWBOX_HEIGHT } from "../constants";
 import { FlagMeta } from "../types";
 import { range, template } from "../utils";
 
-export const HEIGHT = 840; // Least common multiple of 3, 5, 7, and 8 so we have integers when building paths
+export const HEIGHT = FLAG_SVG_VIEWBOX_HEIGHT;
 export const WIDTH = HEIGHT * FLAG_ASPECT_RATIO;
 
 function getHeight(index: number, numStripes: number): number {

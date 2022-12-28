@@ -3,7 +3,9 @@ import { Size } from "./types";
 export const SITE_NAME = "My Flags";
 export const BASE_URL = "https://myflags.lgbt";
 
-export const DEFAULT_FLAG_ID = "test1";
+export const DEFAULT_FLAG_ID = "progress-intersex";
+// Least common multiple of 3, 5, 7, and 8 so we have integers when building paths
+export const FLAG_SVG_VIEWBOX_HEIGHT = 840;
 
 /**
  * Notes for each size is used

@@ -6,6 +6,7 @@ import { GripVertical, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback } from "react";
+import { trackEvent } from "../../analytics";
 import { useGradientStops } from "../../colors";
 import { FLAG_ASPECT_RATIO } from "../../constants";
 import { FlagMeta } from "../../types";
@@ -36,7 +37,7 @@ export function FlagFormChip({
   };
 
   const onAddClick = useCallback(() => {
-    umami?.trackEvent("Add flag", {
+    trackEvent("click", "Add flag", {
       type: "click",
       action: "add",
       flagId: flag.id,
@@ -44,7 +45,7 @@ export function FlagFormChip({
     onAdd?.();
   }, [flag.id, onAdd]);
   const onRemoveClick = useCallback(() => {
-    umami?.trackEvent("Remove flag", {
+    trackEvent("click", "Remove flag", {
       type: "click",
       action: "remove",
       flagId: flag.id,
