@@ -41,12 +41,11 @@ export function Goose() {
     settings.count++;
 
     if (
-      typeof umami !== "undefined" &&
-      (settings.count === 1 ||
-        settings.count === 5 ||
-        settings.count % 10 === 0)
+      settings.count === 1 ||
+      settings.count === 5 ||
+      settings.count % 10 === 0
     ) {
-      umami.trackEvent("goose", { count: settings.count });
+      umami?.trackEvent("goose", { type: "click", count: settings.count });
     }
 
     await delay(TOOLTIP_TIMEOUT);

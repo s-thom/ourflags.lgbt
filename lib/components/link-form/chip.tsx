@@ -5,6 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useCallback } from "react";
 import { useGradientStops } from "../../colors";
 import { FLAG_ASPECT_RATIO } from "../../constants";
 import { FlagMeta } from "../../types";
@@ -33,6 +34,23 @@ export function FlagFormChip({
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
+  const onAddClick = useCallback(() => {
+    umami?.trackEvent("Add flag", {
+      type: "click",
+      action: "add",
+      flagId: flag.id,
+    });
+    onAdd?.();
+  }, [flag.id, onAdd]);
+  const onRemoveClick = useCallback(() => {
+    umami?.trackEvent("Remove flag", {
+      type: "click",
+      action: "remove",
+      flagId: flag.id,
+    });
+    onRemove?.();
+  }, [flag.id, onRemove]);
 
   return (
     <div
@@ -65,12 +83,12 @@ export function FlagFormChip({
         {flag.shortName ?? flag.name}
       </Link>
       {onAdd && (
-        <button aria-label={`Add: ${flag.name}`} onClick={onAdd}>
+        <button aria-label={`Add: ${flag.name}`} onClick={onAddClick}>
           <Plus />
         </button>
       )}
       {onRemove && (
-        <button aria-label={`Remove: ${flag.name}`} onClick={onRemove}>
+        <button aria-label={`Remove: ${flag.name}`} onClick={onRemoveClick}>
           <Trash2 />
         </button>
       )}

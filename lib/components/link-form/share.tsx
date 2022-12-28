@@ -19,6 +19,7 @@ export function LinkFormShare() {
   const defaultUrl = useMemo(() => `${baseUrl}/♡♡♡♡♡♡♡`, [baseUrl]);
 
   const copyUrlToClipboard = useCallback(() => {
+    umami?.trackEvent("Copy URL", { type: "click" });
     navigator.clipboard.writeText(shareUrl).catch(() => {
       // eslint-disable-next-line no-console
       console.error("Failed to write to clipboard");
