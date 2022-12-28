@@ -121,7 +121,7 @@ async function writeFlagMetaCollection(files: FlagData[]) {
   try {
     await writeFile(
       join(DATA_FLAGS, "flags.ts"),
-      `import { FlagMeta } from "../../types/types";\nexport const FLAGS: FlagMeta[] = ${JSON.stringify(
+      `import { FlagMeta } from "../../types";\nexport const FLAGS: FlagMeta[] = ${JSON.stringify(
         flagMetaList
       )};\n\nexport const FLAGS_BY_ID: { [key: string]: FlagMeta } = {};\nFLAGS.forEach((flag) => { FLAGS_BY_ID[flag.id] = flag; });`
     );
@@ -331,7 +331,7 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
   try {
     await writeFile(
       join(DATA_CATEGORIES, "categories.ts"),
-      `import { CategoryMeta } from "../../types/types";\nexport const CATEGORIES: CategoryMeta[] = ${JSON.stringify(
+      `import { CategoryMeta } from "../../types";\nexport const CATEGORIES: CategoryMeta[] = ${JSON.stringify(
         categoryMetaList
       )};\n\nexport const CATEGORIES_BY_ID: { [key: string]: CategoryMeta } = {};\nCATEGORIES.forEach((category) => { CATEGORIES_BY_ID[category.id] = category; });`
     );
