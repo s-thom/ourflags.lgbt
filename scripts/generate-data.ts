@@ -3,6 +3,8 @@ import matter from "gray-matter";
 import { exec } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { promisify } from "node:util";
+import rimrafCb from "rimraf";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { FAVICON_SIZES, PNG_SIZES } from "../lib/constants";
@@ -20,8 +22,12 @@ import { pmap } from "../lib/utils";
 import { categoryMetaValidator, flagMetaValidator } from "../lib/validation";
 import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../types/types";
 
+const rimraf = promisify(rimrafCb);
+
 const I_REALLY_LIKE_LOG_SPAM = false;
 const trace = (s: string) => I_REALLY_LIKE_LOG_SPAM && console.trace(s);
+
+let numErrors = 0;
 
 function sortMeta<T extends { name: string; order?: number }>(
   a: T,
@@ -43,11 +49,9 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
   try {
     fileContent = await readFile(path);
   } catch (err) {
-    const newError = new Error("Failed to read flag file", {
+    throw new Error("Failed to read flag file", {
       cause: err,
     });
-    console.error(newError.message, { err, path });
-    throw newError;
   }
 
   trace("Extracting frontmatter from markdown");
@@ -55,11 +59,9 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
   try {
     rawMatter = matter(fileContent, { excerpt: true });
   } catch (err) {
-    const newError = new Error("Failed to parse flag markdown", {
+    throw new Error("Failed to parse flag markdown", {
       cause: err,
     });
-    console.error(newError.message, { err, path });
-    throw newError;
   }
 
   trace("Validating frontmatter");
@@ -67,20 +69,9 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
   try {
     validated = flagMetaValidator.parse(rawMatter.data);
   } catch (err) {
-    const newError = new Error("Failed to validate flag frontmatter.", {
+    throw new Error("Failed to validate flag frontmatter.", {
       cause: err,
     });
-
-    if (err instanceof ZodError) {
-      console.error(newError.message, {
-        path,
-        errors: fromZodError(err).message,
-        raw: err.format(),
-      });
-    } else {
-      console.error(newError.message, { err, path });
-    }
-    throw newError;
   }
 
   const contentWithoutExcerpt = rawMatter.excerpt
@@ -106,11 +97,9 @@ async function writeFlagContentFile(file: FlagData) {
       JSON.stringify(file)
     );
   } catch (err) {
-    const newError = new Error("Failed to write flag data", {
+    throw new Error("Failed to write flag data", {
       cause: err,
     });
-    console.error(newError.message, { err, flagId: file.meta.id });
-    throw newError;
   }
 
   trace("Finished writing flag content");
@@ -134,11 +123,9 @@ async function writeFlagMetaCollection(files: FlagData[]) {
       )};\n\nexport const FLAGS_BY_ID: { [key: string]: FlagMeta } = {};\nFLAGS.forEach((flag) => { FLAGS_BY_ID[flag.id] = flag; });`
     );
   } catch (err) {
-    const newError = new Error("Failed to write combined flag data", {
+    throw new Error("Failed to write combined flag data", {
       cause: err,
     });
-    console.error(newError.message, { err });
-    throw newError;
   }
 
   trace("Finished writing flag collection");
@@ -166,15 +153,9 @@ async function writeFlagPublicImage(file: FlagData) {
     try {
       png = svgToPng(svg, height);
     } catch (err) {
-      const newError = new Error("Failed to convert flag SVG to PNG", {
+      throw new Error("Failed to convert flag SVG to PNG", {
         cause: err,
       });
-      console.error(newError.message, {
-        err,
-        flagId: file.meta.id,
-        height,
-      });
-      throw newError;
     }
 
     try {
@@ -183,15 +164,9 @@ async function writeFlagPublicImage(file: FlagData) {
         png
       );
     } catch (err) {
-      const newError = new Error("Failed to write image for flag", {
+      throw new Error("Failed to write image for flag", {
         cause: err,
       });
-      console.error(newError.message, {
-        err,
-        flagId: file.meta.id,
-        height,
-      });
-      throw newError;
     }
   });
 
@@ -228,9 +203,29 @@ async function runFlagTasks() {
   const filenames = await readdir(CONTENT_FLAGS);
 
   trace("Parsing frontmatter from Markdown files");
-  const data = await pmap(filenames, (file) =>
-    parseFlagMeta(join(CONTENT_FLAGS, file))
+  const data: FlagData[] = [];
+  const failedFiles: [string, unknown][] = [];
+  await pmap(filenames, (file) =>
+    parseFlagMeta(join(CONTENT_FLAGS, file)).then(
+      (d) => data.push(d),
+      (err) => {
+        const cause = err?.cause ?? err;
+        if (cause instanceof ZodError) {
+          failedFiles.push([file, fromZodError(cause).message]);
+        } else {
+          failedFiles.push([file, err?.message]);
+        }
+      }
+    )
   );
+
+  if (failedFiles.length > 0) {
+    console.warn(
+      `${failedFiles.length} flags had metadata errors`,
+      Object.fromEntries(failedFiles)
+    );
+    numErrors += failedFiles.length;
+  }
 
   trace("Starting tasks. Prepare for log spam");
   const individualWritePromises = data.map((file) =>
@@ -248,9 +243,7 @@ async function runFlagTasks() {
       ...faviconPromises,
     ]);
   } catch (err) {
-    const newError = new Error("Failed to run all tasks", { cause: err });
-    console.error(newError.message);
-    throw newError;
+    throw new Error("Failed to run all tasks", { cause: err });
   }
   trace("Finished tasks");
 }
@@ -265,11 +258,9 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
   try {
     fileContent = await readFile(path);
   } catch (err) {
-    const newError = new Error("Failed to read category file", {
+    throw new Error("Failed to read category file", {
       cause: err,
     });
-    console.error(newError.message, { err, path });
-    throw newError;
   }
 
   trace("Extracting frontmatter from markdown");
@@ -277,11 +268,9 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
   try {
     rawMatter = matter(fileContent, { excerpt: true });
   } catch (err) {
-    const newError = new Error("Failed to parse category markdown", {
+    throw new Error("Failed to parse category markdown", {
       cause: err,
     });
-    console.error(newError.message, { err, path });
-    throw newError;
   }
 
   trace("Validating frontmatter");
@@ -289,20 +278,9 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
   try {
     validated = categoryMetaValidator.parse(rawMatter.data);
   } catch (err) {
-    const newError = new Error("Failed to validate category frontmatter.", {
+    throw new Error("Failed to validate category frontmatter.", {
       cause: err,
     });
-
-    if (err instanceof ZodError) {
-      console.error(newError.message, {
-        path,
-        errors: fromZodError(err).message,
-        raw: err.format(),
-      });
-    } else {
-      console.error(newError.message, { err, path });
-    }
-    throw newError;
   }
 
   const contentWithoutExcerpt = rawMatter.excerpt
@@ -328,11 +306,9 @@ async function writeCategoryContentFile(file: CategoryData) {
       JSON.stringify(file)
     );
   } catch (err) {
-    const newError = new Error("Failed to write category data", {
+    throw new Error("Failed to write category data", {
       cause: err,
     });
-    console.error(newError.message, { err, categoryId: file.meta.id });
-    throw newError;
   }
 
   trace("Finished writing category content");
@@ -356,11 +332,9 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
       )};\n\nexport const CATEGORIES_BY_ID: { [key: string]: CategoryMeta } = {};\nCATEGORIES.forEach((category) => { CATEGORIES_BY_ID[category.id] = category; });`
     );
   } catch (err) {
-    const newError = new Error("Failed to write combined category data", {
+    throw new Error("Failed to write combined category data", {
       cause: err,
     });
-    console.error(newError.message, { err });
-    throw newError;
   }
 
   trace("Finished writing category collection");
@@ -371,9 +345,29 @@ async function runCategoryTasks() {
   const filenames = await readdir(CONTENT_CATEGORIES);
 
   trace("Parsing frontmatter from Markdown files");
-  const data = await pmap(filenames, (file) =>
-    parseCategoryMeta(join(CONTENT_CATEGORIES, file))
+  const data: CategoryData[] = [];
+  const failedFiles: [string, unknown][] = [];
+  await pmap(filenames, (file) =>
+    parseCategoryMeta(join(CONTENT_CATEGORIES, file)).then(
+      (d) => data.push(d),
+      (err) => {
+        const cause = err?.cause ?? err;
+        if (cause instanceof ZodError) {
+          failedFiles.push([file, fromZodError(cause).message]);
+        } else {
+          failedFiles.push([file, err?.message]);
+        }
+      }
+    )
   );
+
+  if (failedFiles.length > 0) {
+    console.warn(
+      `${failedFiles.length} categories had metadata errors`,
+      Object.fromEntries(failedFiles)
+    );
+    numErrors += failedFiles.length;
+  }
 
   trace("Starting tasks. Prepare for log spam");
   const individualWritePromises = data.map((file) =>
@@ -384,9 +378,7 @@ async function runCategoryTasks() {
   try {
     await Promise.all([metaWritePromise, ...individualWritePromises]);
   } catch (err) {
-    const newError = new Error("Failed to run all tasks", { cause: err });
-    console.error(newError.message);
-    throw newError;
+    throw new Error("Failed to run all tasks", { cause: err });
   }
   trace("Finished tasks");
 }
@@ -404,7 +396,14 @@ async function formatOutput() {
 }
 
 async function run() {
-  console.log("Generating output");
+  console.log("Creating output directories");
+  trace("Cleaning directories");
+  await Promise.all([
+    rimraf(DATA_FLAGS),
+    rimraf(DATA_CATEGORIES),
+    rimraf(PUBLIC_IMAGES_FLAGS),
+    rimraf(PUBLIC_IMAGES_FAVICONS),
+  ]);
   trace("Creating output directories");
   await Promise.all([
     mkdir(DATA_FLAGS, { recursive: true }),
@@ -437,6 +436,15 @@ process.on("unhandledRejection", (err) => {
 });
 
 run().then(
-  () => console.log("Done"),
-  (err) => console.error("Error generating data", { err })
+  () => {
+    if (numErrors > 0) {
+      console.error(`Done - ${numErrors} errors`);
+      process.exit(1);
+    }
+    console.log("Done");
+  },
+  (err) => {
+    console.error("Error generating data", { err });
+    process.exit(1);
+  }
 );
