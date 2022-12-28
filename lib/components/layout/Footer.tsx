@@ -3,7 +3,7 @@ import { Goose } from "../client/Goose";
 
 export function Footer() {
   return (
-    <footer className="flex flex-row items-center justify-between p-2 mx-auto max-w-7xl w-full self-end text-sm">
+    <footer className="mx-auto flex w-full max-w-7xl flex-row items-center justify-between self-end p-2 text-sm">
       <div className="text-sm">
         Created by{" "}
         <Link

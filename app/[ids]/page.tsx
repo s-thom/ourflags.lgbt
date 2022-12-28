@@ -26,7 +26,7 @@ export default async function IdsPage({ params }: { params: { ids: string } }) {
           <span className="font-body">are</span>
         </PageHeading>
       </Section>
-      <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 pb-2 md:pb-4">
+      <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
         {flags.map((flag) => {
           return (
             <FullWidthSection key={flag.id}>

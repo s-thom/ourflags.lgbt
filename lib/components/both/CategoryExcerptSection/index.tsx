@@ -18,11 +18,11 @@ export function CategoryExcerptSection({
 
   return (
     <div
-      className={`p-4 bg-gradient-to-br gradient-light dark:gradient-dark shadow-inner`}
+      className={`gradient-light dark:gradient-dark bg-gradient-to-br p-4 shadow-inner`}
       style={style}
     >
-      <Section className="flex gap-8 flex-col lg:flex-row items-center justify-center">
-        <div className="w-full flex flex-col grow gap-1">
+      <Section className="flex flex-col items-center justify-center gap-8 lg:flex-row">
+        <div className="flex w-full grow flex-col gap-1">
           {showName && <MajorHeading>{category.name}</MajorHeading>}
           {children && <div>{children}</div>}
         </div>

@@ -29,13 +29,13 @@ export function LinkFormShare() {
   if (flags.length === 0) {
     return (
       <div>
-        <div className="inline-flex gap-2 m-2 p-2 border rounded-xl text-neutral-700 dark:text-neutral-400 border-neutral-400 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900 min-w-[24rem] max-w-full">
-          <div className="grow p-2 px-3 rounded-lg bg-neutral-200 dark:bg-neutral-800">
+        <div className="m-2 inline-flex min-w-[24rem] max-w-full gap-2 rounded-xl border border-neutral-400 bg-neutral-100 p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">
+          <div className="grow rounded-lg bg-neutral-200 p-2 px-3 dark:bg-neutral-800">
             {defaultUrl}
           </div>
           <button
             disabled
-            className="p-2 rounded-lg bg-neutral-200 dark:bg-neutral-800"
+            className="rounded-lg bg-neutral-200 p-2 dark:bg-neutral-800"
             aria-label="Copy URL to clipboard"
             onClick={copyUrlToClipboard}
           >
@@ -48,12 +48,12 @@ export function LinkFormShare() {
   }
   return (
     <div>
-      <div className="inline-flex gap-2 m-2 p-2 border rounded-xl border-green-400 bg-green-100 dark:border-green-800 dark:bg-green-900 min-w-[24rem] max-w-full">
-        <div className="select-all grow p-2 px-3 rounded-lg bg-green-200 dark:bg-green-700 overflow-auto">
+      <div className="m-2 inline-flex min-w-[24rem] max-w-full gap-2 rounded-xl border border-green-400 bg-green-100 p-2 dark:border-green-800 dark:bg-green-900">
+        <div className="grow select-all overflow-auto rounded-lg bg-green-200 p-2 px-3 dark:bg-green-700">
           {shareUrl}
         </div>
         <button
-          className="p-2 rounded-lg bg-green-200 dark:bg-green-700"
+          className="rounded-lg bg-green-200 p-2 dark:bg-green-700"
           aria-label="Copy share URL"
           onClick={copyUrlToClipboard}
         >

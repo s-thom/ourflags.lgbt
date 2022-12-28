@@ -13,7 +13,7 @@ export async function FlagSummary({ flag }: FlagSummaryProps) {
 
   return (
     <div
-      className="p-2 rounded-xl bg-gradient-to-br gradient-light dark:gradient-dark flex gap-4 items-center"
+      className="gradient-light dark:gradient-dark flex items-center gap-4 rounded-xl bg-gradient-to-br p-2"
       style={style}
     >
       <div className="shrink-0">

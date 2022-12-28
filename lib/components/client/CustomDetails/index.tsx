@@ -39,18 +39,18 @@ export function CustomDetails({
   const open = !isMounted || isOpen;
 
   return (
-    <div className={`basis-full w-full group ${open ? "open" : "closed"}`}>
-      <div className="flex gap-4 items-center basis-full justify-start w-full">
+    <div className={`group w-full basis-full ${open ? "open" : "closed"}`}>
+      <div className="flex w-full basis-full items-center justify-start gap-4">
         <div className="shrink-0">
           {isMounted && (
             <button
-              className="p-2 rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50"
+              className="rounded-lg bg-neutral-200/50 p-2 dark:bg-neutral-800/50"
               aria-label={
                 isOpen ? `Hide ${label ?? ""}` : `Show ${label ?? ""}`
               }
               onClick={toggleOpen}
             >
-              <Triangle className="transition-transform	rotate-90 group-[.open]:rotate-180" />
+              <Triangle className="rotate-90	transition-transform group-[.open]:rotate-180" />
             </button>
           )}
         </div>

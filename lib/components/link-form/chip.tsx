@@ -54,7 +54,7 @@ export function FlagFormChip({
 
   return (
     <div
-      className="inline-flex gap-2 p-2 rounded-lg border border-neutral-500 dark:border-neutral-200 bg-gradient-to-br gradient-light dark:gradient-dark"
+      className="gradient-light dark:gradient-dark inline-flex gap-2 rounded-lg border border-neutral-500 bg-gradient-to-br p-2 dark:border-neutral-200"
       style={{ ...dndStyles, ...gradientStyles }}
       ref={setNodeRef}
     >

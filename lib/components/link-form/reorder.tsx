@@ -68,8 +68,8 @@ export function FlagFormReorder() {
         items={selectedFlagIds}
         strategy={verticalListSortingStrategy}
       >
-        <div className="flex flex-wrap gap-2 p-2 border border-dashed rounded-xl border-neutral-400 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900 min-w-[24rem] max-w-full">
-          <div className="text-center text-neutral-700 dark:text-neutral-400 basis-full">
+        <div className="flex min-w-[24rem] max-w-full flex-wrap gap-2 rounded-xl border border-dashed border-neutral-400 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900">
+          <div className="basis-full text-center text-neutral-700 dark:text-neutral-400">
             Reorder your flags
           </div>
           {selected.map((flag) => (

@@ -25,10 +25,10 @@ export function FlagExcerptSection({
 
   return (
     <div
-      className={`p-4 bg-gradient-to-br gradient-light dark:gradient-dark shadow-inner`}
+      className={`gradient-light dark:gradient-dark bg-gradient-to-br p-4 shadow-inner`}
       style={style}
     >
-      <Section className="flex gap-8 flex-col lg:flex-row items-center justify-center">
+      <Section className="flex flex-col items-center justify-center gap-8 lg:flex-row">
         {showFlag && (
           <div className="shrink-0 lg:self-start">
             <Image
@@ -40,7 +40,7 @@ export function FlagExcerptSection({
             />
           </div>
         )}
-        <div className="w-full flex flex-col grow gap-1">
+        <div className="flex w-full grow flex-col gap-1">
           {showName && <MajorHeading>{flag.name}</MajorHeading>}
           {children && <div>{children}</div>}
           {showReadMore && (

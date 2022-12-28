@@ -391,7 +391,7 @@ async function runCategoryTasks() {
 async function formatOutput() {
   trace("Formatting generated files");
   await new Promise((res, rej) => {
-    const task = exec("npx next lint --dir data --fix");
+    const task = exec("npx next lint --dir lib/data --fix");
     task.on("error", rej);
     task.on("close", res);
   });

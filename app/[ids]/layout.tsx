@@ -4,7 +4,7 @@ export default function IdsLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       {children}
-      <div className="prose prose-neutral dark:prose-invert p-4 mt-10 md:mt-20 bg-white/30 rounded-xl shadow-inner max-w-sm sm:max-w-md md:max-w-lg mx-auto px-4 sm:px-6 md:px-8">
+      <div className="prose prose-neutral mx-auto mt-10 max-w-sm rounded-xl bg-white/30 p-4 px-4 shadow-inner dark:prose-invert sm:max-w-md sm:px-6 md:mt-20 md:max-w-lg md:px-8">
         <p>
           <Link
             href="/"

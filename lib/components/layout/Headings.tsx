@@ -10,7 +10,7 @@ export function PageHeading({
 }: HTMLAttributes<HTMLElement>) {
   return (
     <h1
-      className={`font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-headings ${className}`}
+      className={`font-headings text-5xl font-bold sm:text-6xl md:text-7xl lg:text-8xl ${className}`}
       {...rest}
     >
       {children}
@@ -28,7 +28,7 @@ export function MajorHeading({
 }: HTMLAttributes<HTMLElement>) {
   return (
     <h2
-      className={`font-bold text-2xl sm:text-3xl md:text-4xl font-headings ${className}`}
+      className={`font-headings text-2xl font-bold sm:text-3xl md:text-4xl ${className}`}
       {...rest}
     >
       {children}
@@ -46,7 +46,7 @@ export function MinorHeading({
 }: HTMLAttributes<HTMLElement>) {
   return (
     <h3
-      className={`font-bold text-lg sm:text-xl md:text-xl font-headings ${className}`}
+      className={`font-headings text-lg font-bold sm:text-xl md:text-xl ${className}`}
       {...rest}
     >
       {children}

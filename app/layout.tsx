@@ -36,7 +36,7 @@ export default function RootLayout({
         <script src="/dark.js" type="text/javascript" />
       </head>
       <body
-        className={`min-h-screen flex flex-col text-black dark:text-white bg-gradient-to-br gradient-light dark:gradient-dark font-body`}
+        className={`gradient-light dark:gradient-dark flex min-h-screen flex-col bg-gradient-to-br font-body text-black dark:text-white`}
         style={style}
       >
         <Main>{children}</Main>

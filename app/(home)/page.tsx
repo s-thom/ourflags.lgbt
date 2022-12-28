@@ -17,11 +17,11 @@ import { CategorySectionWithContent } from "./components";
 export default function Home() {
   return (
     <div>
-      <Section className="text-center py-8 sm:py-12 md:py-16">
+      <Section className="py-8 text-center sm:py-12 md:py-16">
         <PageHeading>Select your flags</PageHeading>
         <MajorHeading>and get a link to share with the world</MajorHeading>
       </Section>
-      <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 pb-2 md:pb-4">
+      <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
         <LinkFormContext>
           <Section className="text-center">
             <LinkFormShare />

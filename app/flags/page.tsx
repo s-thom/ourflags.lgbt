@@ -16,7 +16,7 @@ export default async function FlagsListPage() {
         <PageHeading className="text-center">All flags</PageHeading>
       </Section>
       <Section>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-[masonry] gap-4">
+        <div className="grid grid-cols-1 grid-rows-[masonry] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {sortedByName.map((flag) => (
             <div key={flag.id}>
               {/* FlagSummary is an async server component, but
