@@ -2,6 +2,8 @@
 
 Flags are defined in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) files in the `content/flags` directory. This allows for rich text formatting, though this isn't necessary most of the time.
 
+If editing in VS Code, there is a snippet with a template for a new flag. To use it, create your new file, type `newflag`, and bring up the intellisense box (default `ctrl/cmd + space`) to select it.
+
 ## Format
 
 Each flag's Markdown file is made of three sections, as follows.

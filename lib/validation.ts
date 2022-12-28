@@ -1,6 +1,11 @@
 import { formatHex, Oklch, parse } from "culori";
 import z from "zod";
 
+// Adding fields to these validators automatically updates the types throughout the code,
+// so you'll get errors if the code isn't compatible with your change.
+// You will need to update all of the Markdown files yourself, as well as
+// the template snippets in the `.vscode` folder.
+
 export const colorValidator = z.string().transform((color) => {
   // Culori doesn't support a parser for OKLch, so I've hacked this together a bit
   const doOklchHack = color.startsWith("oklch(");
