@@ -54,6 +54,7 @@ export const flagMetaValidator = z.object({
   flag: z.object({
     stripes: z.array(colorValidator).min(1),
     additionalPaths: z.string().optional(),
+    additionalPathsFavicon: z.string().optional(),
   }),
   categories: z.array(z.string()).default([]),
   background: z.object({

@@ -90,7 +90,10 @@ export function getFaviconSvg(flags: FlagMeta[]): string {
   const layers = list.map((meta, index) => {
     return `
 <g mask="url(#flag${index})">
-${getStripedFlagContent(meta.flag.stripes, meta.flag.additionalPaths)}
+${getStripedFlagContent(
+  meta.flag.stripes,
+  meta.flag.additionalPathsFavicon ?? meta.flag.additionalPaths
+)}
 </g>
     `.trim();
   });

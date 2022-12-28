@@ -148,6 +148,7 @@ async function writeFlagPublicImage(file: FlagData) {
     file.meta.flag.stripes,
     file.meta.flag.additionalPaths
   );
+  await writeFile(join(PUBLIC_IMAGES_FLAGS, `${file.meta.id}.svg`), svg);
 
   trace("About to write PNGs");
   await pmap(PNG_SIZES, async (height) => {

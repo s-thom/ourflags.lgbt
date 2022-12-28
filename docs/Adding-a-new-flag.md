@@ -25,20 +25,21 @@ Full content. Shown on each flags' detail page.
 
 The metadata is specified in [YAML](https://yaml.org/).
 
-| Name                   | Description                                                                      | Required |
-| ---------------------- | -------------------------------------------------------------------------------- | -------- |
-| `id`                   | Unique ID for this flag. Should match the file name.                             | ✅       |
-| `name`                 | Name of the flag.                                                                | ✅       |
-| `shortName`            | A shorter name to show in space-constrained areas.                               |          |
-| `order`                | Override for sorting. Equal values are sorted alphabetically by name.            |          |
-| `shortcodes`           | List of shortcodes that refer to this flag. Must be unique to this flag.         | ✅       |
-| `categories`           | List of categories this flag can appear in.                                      | ✅       |
-| `flag`                 | Data for building the flag image.                                                | ✅       |
-| `flag.stripes`         | List of colours for each horizontal stripe in the flag.                          | ✅       |
-| `flag.additionalPaths` | String of SVG elements that go on top of the stripes.                            |          |
-| `background`           | Background colours for the gradient used in sections for this flag.              | ✅       |
-| `background.light`     | Gradient colours to use in light themes.                                         | ✅       |
-| `background.dark`      | Gradient colours to use in dark themes. Uses the light theme colours if omitted. |          |
+| Name                          | Description                                                                                                                               | Required |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `id`                          | Unique ID for this flag. Should match the file name.                                                                                      | ✅       |
+| `name`                        | Name of the flag.                                                                                                                         | ✅       |
+| `shortName`                   | A shorter name to show in space-constrained areas.                                                                                        |          |
+| `order`                       | Override for sorting. Equal values are sorted alphabetically by name.                                                                     |          |
+| `shortcodes`                  | List of shortcodes that refer to this flag. Must be unique to this flag.                                                                  | ✅       |
+| `categories`                  | List of categories this flag can appear in.                                                                                               | ✅       |
+| `flag`                        | Data for building the flag image.                                                                                                         | ✅       |
+| `flag.stripes`                | List of colours for each horizontal stripe in the flag.                                                                                   | ✅       |
+| `flag.additionalPaths`        | String of SVG elements that go on top of the stripes.                                                                                     |          |
+| `flag.additionalPathsFavicon` | String of SVG elements that go on top of the stripes. This property is only used in favicons, in case `additionalPaths` looks off-centre. |          |
+| `background`                  | Background colours for the gradient used in sections for this flag.                                                                       | ✅       |
+| `background.light`            | Gradient colours to use in light themes.                                                                                                  | ✅       |
+| `background.dark`             | Gradient colours to use in dark themes. Uses the light theme colours if omitted.                                                          |          |
 
 Annotated example:
 
