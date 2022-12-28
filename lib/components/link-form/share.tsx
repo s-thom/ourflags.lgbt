@@ -3,8 +3,8 @@
 import { ClipboardCopy } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useMemo } from "react";
-import { buildShareString } from "../../lib/shortcodes";
-import { useBaseUrl } from "../../lib/urls";
+import { buildShareString } from "../../shortcodes";
+import { useBaseUrl } from "../../urls";
 import { useSelectedFlags } from "./context";
 
 export function LinkFormShare() {

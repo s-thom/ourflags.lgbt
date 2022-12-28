@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { FLAGS } from "../../data/flags/flags";
+import { FLAGS } from "../../lib/data/flags/flags";
 
 type Data = {
   ok: boolean;

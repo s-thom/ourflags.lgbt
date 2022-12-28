@@ -1,8 +1,8 @@
 import { PropsWithChildren } from "react";
-import { CategoryExcerptSection } from "../../components/both/CategoryExcerptSection";
-import { getCategoryData } from "../../lib/getData";
-import { renderMarkdownToReact } from "../../lib/remark";
-import { CategoryMeta } from "../../types/types";
+import { CategoryExcerptSection } from "../../lib/components/both/CategoryExcerptSection";
+import { getCategoryData } from "../../lib/server/getData";
+import { renderMarkdownToReact } from "../../lib/server/remark";
+import { CategoryMeta } from "../../lib/types";
 
 export interface CategoryExcerptSectionProps extends PropsWithChildren {
   category: CategoryMeta;

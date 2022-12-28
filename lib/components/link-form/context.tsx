@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 import { FLAGS } from "../../data/flags/flags";
-import { FlagMeta } from "../../types/types";
+import { FlagMeta } from "../../types";
 
 export interface LinkFormContextValue {
   selectedFlags: string[];

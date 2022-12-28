@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import { useGradientStops } from "../../../lib/colors";
-import { FLAG_ASPECT_RATIO } from "../../../lib/constants";
-import { FlagMeta } from "../../../types/types";
+import { useGradientStops } from "../../../colors";
+import { FLAG_ASPECT_RATIO } from "../../../constants";
+import { FlagMeta } from "../../../types";
 import { MajorHeading } from "../../layout/Headings";
 import { Section } from "../../layout/Section";
 

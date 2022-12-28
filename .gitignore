@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-/data/
+/lib/data/
 /public/images/flags/
 /public/images/favicons/
 

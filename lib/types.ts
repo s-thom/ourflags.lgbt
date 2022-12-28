@@ -5,7 +5,7 @@ import type {
   flagDataValidator,
   flagMetaValidator,
   sizeValidator,
-} from "../lib/validation";
+} from "./server/validation";
 
 export type FlagMeta = z.infer<typeof flagMetaValidator>;
 

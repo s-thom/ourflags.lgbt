@@ -1,5 +1,5 @@
-import { FLAGS } from "../data/flags/flags";
-import { FlagMeta } from "../types/types";
+import { FLAGS } from "./data/flags/flags";
+import { FlagMeta } from "./types";
 
 export function buildShareString(flags: FlagMeta[]): string {
   // TODO: Use other entries in shortcode array based on certain conditions

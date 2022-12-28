@@ -1,4 +1,4 @@
-import { BASE_URL, SITE_NAME } from "../../lib/constants";
+import { BASE_URL, SITE_NAME } from "../../constants";
 
 export function OgTitleStyle() {
   return (

@@ -1,8 +1,8 @@
 import { PropsWithChildren } from "react";
-import { FlagExcerptSection } from "../../components/both/FlagExcerptSection";
-import { getFlagData } from "../../lib/getData";
-import { renderMarkdownToReact } from "../../lib/remark";
-import { FlagMeta } from "../../types/types";
+import { FlagExcerptSection } from "../../lib/components/both/FlagExcerptSection";
+import { getFlagData } from "../../lib/server/getData";
+import { renderMarkdownToReact } from "../../lib/server/remark";
+import { FlagMeta } from "../../lib/types";
 
 export interface FlagExcerptSectionProps extends PropsWithChildren {
   flag: FlagMeta;

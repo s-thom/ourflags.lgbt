@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getThemedGradients } from "../../lib/colors";
 import { FLAG_ASPECT_RATIO } from "../../lib/constants";
-import { FlagMeta } from "../../types/types";
+import { FlagMeta } from "../../lib/types";
 
 export interface FlagSummaryProps {
   flag: FlagMeta;

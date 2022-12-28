@@ -1,8 +1,8 @@
-import DarkModeListener from "../components/client/DarkModeListener";
-import { Footer } from "../components/layout/Footer";
-import { Main } from "../components/layout/Main";
 import { getThemedGradients } from "../lib/colors";
-import { colorValidator } from "../lib/validation";
+import DarkModeListener from "../lib/components/client/DarkModeListener";
+import { Footer } from "../lib/components/layout/Footer";
+import { Main } from "../lib/components/layout/Main";
+import { colorValidator } from "../lib/server/validation";
 import "./globals.css";
 
 const BG_THEMES = {

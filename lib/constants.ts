@@ -1,4 +1,4 @@
-import { Size } from "../types/types";
+import { Size } from "./types";
 
 export const SITE_NAME = "My Flags";
 export const BASE_URL = "https://myflags.lgbt";

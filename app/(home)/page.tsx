@@ -1,14 +1,17 @@
-import { FullWidthSection } from "../../components/layout/FullWidthSection";
-import { MajorHeading, PageHeading } from "../../components/layout/Headings";
-import { Section } from "../../components/layout/Section";
+import { FullWidthSection } from "../../lib/components/layout/FullWidthSection";
+import {
+  MajorHeading,
+  PageHeading,
+} from "../../lib/components/layout/Headings";
+import { Section } from "../../lib/components/layout/Section";
 import {
   FlagFormList,
   FlagFormReorder,
   LinkFormContext,
   LinkFormShare,
-} from "../../components/link-form";
-import { CATEGORIES } from "../../data/categories/categories";
-import { FLAGS } from "../../data/flags/flags";
+} from "../../lib/components/link-form";
+import { CATEGORIES } from "../../lib/data/categories/categories";
+import { FLAGS } from "../../lib/data/flags/flags";
 import { CategorySectionWithContent } from "./components";
 
 export default function Home() {

@@ -1,6 +1,6 @@
-import { PageHeading } from "../../components/layout/Headings";
-import { Section } from "../../components/layout/Section";
-import { FLAGS } from "../../data/flags/flags";
+import { PageHeading } from "../../lib/components/layout/Headings";
+import { Section } from "../../lib/components/layout/Section";
+import { FLAGS } from "../../lib/data/flags/flags";
 import { FlagSummary } from "./components";
 
 export default async function FlagsListPage() {

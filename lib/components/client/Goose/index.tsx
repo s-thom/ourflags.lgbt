@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useRef } from "react";
-import { delay } from "../../../lib/utils";
+import { delay } from "../../../utils";
 
 import styles from "./Goose.module.css";
 import goose from "./goose.png";

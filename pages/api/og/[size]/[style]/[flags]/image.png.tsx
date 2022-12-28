@@ -3,15 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { ReactNode } from "react";
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
-import { OgTitleStyle } from "../../../../../../components/og/OgTitleStyle";
+import { OgTitleStyle } from "../../../../../../lib/components/og/OgTitleStyle";
 import {
   FLAG_ASPECT_RATIO,
   OG_IMAGE_SIZES,
 } from "../../../../../../lib/constants";
-import { getStripedFlagContent } from "../../../../../../lib/flagSvg";
+import { getStripedFlagContent } from "../../../../../../lib/server/flagSvg";
+import { sizeValidator } from "../../../../../../lib/server/validation";
 import { parseShareString } from "../../../../../../lib/shortcodes";
-import { sizeValidator } from "../../../../../../lib/validation";
-import { FlagMeta, Size } from "../../../../../../types/types";
+import { FlagMeta, Size } from "../../../../../../lib/types";
 
 const NUM_COLUMNS = 5;
 

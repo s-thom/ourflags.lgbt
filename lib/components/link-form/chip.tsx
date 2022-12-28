@@ -5,9 +5,9 @@ import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useGradientStops } from "../../lib/colors";
-import { FLAG_ASPECT_RATIO } from "../../lib/constants";
-import { FlagMeta } from "../../types/types";
+import { useGradientStops } from "../../colors";
+import { FLAG_ASPECT_RATIO } from "../../constants";
+import { FlagMeta } from "../../types";
 
 export interface FlagFormChipProps {
   flag: FlagMeta;

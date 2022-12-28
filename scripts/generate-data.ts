@@ -8,7 +8,7 @@ import rimrafCb from "rimraf";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { FAVICON_SIZES, PNG_SIZES } from "../lib/constants";
-import { getFaviconSvg, getStripedFlagSvg } from "../lib/flagSvg";
+import { getFaviconSvg, getStripedFlagSvg } from "../lib/server/flagSvg";
 import {
   CONTENT_CATEGORIES,
   CONTENT_FLAGS,
@@ -16,11 +16,14 @@ import {
   DATA_FLAGS,
   PUBLIC_IMAGES_FAVICONS,
   PUBLIC_IMAGES_FLAGS,
-} from "../lib/paths";
-import { svgToPng } from "../lib/svgToPng";
+} from "../lib/server/paths";
+import { svgToPng } from "../lib/server/svgToPng";
+import {
+  categoryMetaValidator,
+  flagMetaValidator,
+} from "../lib/server/validation";
+import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../lib/types";
 import { pmap } from "../lib/utils";
-import { categoryMetaValidator, flagMetaValidator } from "../lib/validation";
-import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../types/types";
 
 const rimraf = promisify(rimrafCb);
 

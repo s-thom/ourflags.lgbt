@@ -2,7 +2,7 @@ import { join } from "path";
 
 export const BASE_PATH = process.cwd();
 
-export const DATA = join(BASE_PATH, "data");
+export const DATA = join(BASE_PATH, "lib", "data");
 export const DATA_FLAGS = join(DATA, "flags");
 export const DATA_CATEGORIES = join(DATA, "categories");
 

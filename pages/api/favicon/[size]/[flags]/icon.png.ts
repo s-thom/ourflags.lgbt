@@ -3,10 +3,10 @@ import { NextApiRequest, NextApiResponse } from "next/types";
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
 import { FAVICON_SIZES } from "../../../../../lib/constants";
-import { getFaviconSvg } from "../../../../../lib/flagSvg";
+import { getFaviconSvg } from "../../../../../lib/server/flagSvg";
+import { svgToPng } from "../../../../../lib/server/svgToPng";
+import { sizeValidator } from "../../../../../lib/server/validation";
 import { parseShareString } from "../../../../../lib/shortcodes";
-import { svgToPng } from "../../../../../lib/svgToPng";
-import { sizeValidator } from "../../../../../lib/validation";
 
 const queryValidator = z.object({
   size: sizeValidator

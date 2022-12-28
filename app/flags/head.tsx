@@ -1,4 +1,4 @@
-import { HeadTags } from "../../components/head";
+import { HeadTags } from "../../lib/components/head";
 
 export default async function FlagsHead() {
   return (

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FullWidthSection } from "../../components/layout/FullWidthSection";
-import { PageHeading } from "../../components/layout/Headings";
-import { Section } from "../../components/layout/Section";
+import { FullWidthSection } from "../../lib/components/layout/FullWidthSection";
+import { PageHeading } from "../../lib/components/layout/Headings";
+import { Section } from "../../lib/components/layout/Section";
 import { parseShareString } from "../../lib/shortcodes";
 import { FlagSectionWithContent } from "./components";
 

@@ -1,4 +1,4 @@
-import { HeadTags } from "../../components/head";
+import { HeadTags } from "../../lib/components/head";
 import { buildShareString, parseShareString } from "../../lib/shortcodes";
 
 export default async function FlagsIdHead({

@@ -5,9 +5,9 @@ import {
   FAVICON_SIZES,
   OG_IMAGE_SIZES,
   SITE_NAME,
-} from "../../lib/constants";
-import { buildShareString } from "../../lib/shortcodes";
-import { FlagMeta, Size } from "../../types/types";
+} from "../../constants";
+import { buildShareString } from "../../shortcodes";
+import { FlagMeta, Size } from "../../types";
 
 function getFaviconUrl(size: number, flags: FlagMeta[], override?: string) {
   // For the trivial cases, we can use the favicon images generated at build time.

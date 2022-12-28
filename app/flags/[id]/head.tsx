@@ -1,5 +1,5 @@
-import { HeadTags } from "../../../components/head";
-import { getFlagData } from "../../../lib/getData";
+import { HeadTags } from "../../../lib/components/head";
+import { getFlagData } from "../../../lib/server/getData";
 
 export default async function FlagsIdHead({
   params,

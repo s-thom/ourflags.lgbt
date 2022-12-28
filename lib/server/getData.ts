@@ -1,7 +1,7 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { cache } from "react";
-import { FlagData } from "../types/types";
+import { FlagData } from "../types";
 import { DATA_CATEGORIES, DATA_FLAGS } from "./paths";
 
 export const getFlagData = cache(async function getFlagData(

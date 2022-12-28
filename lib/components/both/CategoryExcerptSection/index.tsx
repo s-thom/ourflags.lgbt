@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
-import { useGradientStops } from "../../../lib/colors";
-import { CategoryMeta } from "../../../types/types";
+import { useGradientStops } from "../../../colors";
+import { CategoryMeta } from "../../../types";
 import { MajorHeading } from "../../layout/Headings";
 import { Section } from "../../layout/Section";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { FlagMeta } from "../../types/types";
+import { FlagMeta } from "../../types";
 import { FlagFormChip } from "./chip";
 import { useLinkFormState, useSelectedFlags } from "./context";
 
