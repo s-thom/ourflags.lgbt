@@ -1,7 +1,13 @@
 import { Size } from "./types";
 
+const isDev = process.env.NODE_ENV === "development";
+
 export const SITE_NAME = "My Flags";
-export const BASE_URL = "https://myflags.lgbt";
+
+const fallbackUrl = isDev ? "http://localhost:3000" : "https://myflags.lgbt";
+export const BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL
+  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  : fallbackUrl;
 
 export const DEFAULT_FLAG_ID = "progress-intersex";
 // Least common multiple of 3, 5, 7, and 8 so we have integers when building paths

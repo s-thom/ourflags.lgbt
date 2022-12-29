@@ -4,17 +4,10 @@ import { ReactNode } from "react";
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
 import { OgTitleStyle } from "../../../../../../lib/components/og/OgTitleStyle";
-import {
-  FLAG_ASPECT_RATIO,
-  FLAG_SVG_VIEWBOX_HEIGHT,
-  OG_IMAGE_SIZES,
-} from "../../../../../../lib/constants";
-import { getStripedFlagContent } from "../../../../../../lib/server/flagSvg";
+import { TiledBackground } from "../../../../../../lib/components/og/TiledBackground";
+import { OG_IMAGE_SIZES } from "../../../../../../lib/constants";
 import { sizeValidator } from "../../../../../../lib/server/validation";
 import { parseShareString } from "../../../../../../lib/shortcodes";
-import { FlagMeta, Size } from "../../../../../../lib/types";
-
-const NUM_COLUMNS = 5;
 
 const bodyFontPromise = fetch(
   new URL(
@@ -44,43 +37,6 @@ const queryValidator = z.object({
   style: z.string(),
   flags: z.string().transform((str) => parseShareString(str)),
 });
-
-function getTilesSvg(flags: FlagMeta[], size: Size) {
-  const flagWidth = size.width / NUM_COLUMNS;
-  const flagHeight = flagWidth / FLAG_ASPECT_RATIO;
-  const scale = flagHeight / FLAG_SVG_VIEWBOX_HEIGHT;
-  const numRows = Math.ceil(size.height / flagHeight);
-
-  const bits = flags.map((flag) =>
-    getStripedFlagContent(flag.flag.stripes, flag.flag.additionalPaths)
-  );
-
-  const groups: string[] = [];
-  for (let rowIndex = 0; rowIndex < numRows; rowIndex++) {
-    for (let colIndex = 0; colIndex < NUM_COLUMNS; colIndex++) {
-      // TODO: Add some variation to the indexes
-      const flagIndex = (rowIndex * NUM_COLUMNS + colIndex) % bits.length;
-      const flagSvg = bits[flagIndex]!;
-
-      const xOffset = colIndex * flagWidth;
-      const yOffset = rowIndex * flagHeight;
-
-      groups.push(
-        `<g transform="translate(${xOffset} ${yOffset}) scale(${scale})">${flagSvg}</g>`
-      );
-    }
-  }
-
-  const svg = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size.width} ${
-    size.height
-  }">
-${groups.join("")}
-</svg>
-  `.trim();
-
-  return svg;
-}
 
 export default async function handler(req: NextRequest) {
   // Next's edge routes don't have a req.query, so I'm faking it a bit.
@@ -128,15 +84,7 @@ export default async function handler(req: NextRequest) {
           fontFamily: "Body",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element,jsx-a11y/alt-text */}
-        <img
-          src={`data:image/svg+xml,${encodeURIComponent(
-            getTilesSvg(flags, size)
-          )}`}
-          tw="absolute top-0 left-0"
-          width={size.width}
-          height={size.height}
-        />
+        <TiledBackground flags={flags} size={size} />
         <div tw="absolute top-0 left-0 bg-black/80 w-full h-full" />
         {children}
       </div>
