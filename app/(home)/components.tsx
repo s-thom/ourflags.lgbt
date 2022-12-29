@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { CategoryExcerptSection } from "../../lib/components/both/CategoryExcerptSection";
+import { CategoryExcerptSection } from "../../lib/components/layout/CategoryExcerptSection";
 import { getCategoryData } from "../../lib/server/getData";
 import { renderMarkdownToReact } from "../../lib/server/remark";
 import { CategoryMeta } from "../../lib/types";

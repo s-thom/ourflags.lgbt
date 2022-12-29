@@ -1,8 +1,8 @@
 import { PropsWithChildren } from "react";
 import { useGradientStops } from "../../../colors";
 import { CategoryMeta } from "../../../types";
-import { MajorHeading } from "../../layout/Headings";
-import { Section } from "../../layout/Section";
+import { MajorHeading } from "../Headings";
+import { Section } from "../Section";
 
 export interface CategoryExcerptSectionProps extends PropsWithChildren {
   category: CategoryMeta;

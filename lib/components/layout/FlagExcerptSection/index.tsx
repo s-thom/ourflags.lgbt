@@ -4,8 +4,8 @@ import { PropsWithChildren } from "react";
 import { useGradientStops } from "../../../colors";
 import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FlagMeta } from "../../../types";
-import { MajorHeading } from "../../layout/Headings";
-import { Section } from "../../layout/Section";
+import { MajorHeading } from "../Headings";
+import { Section } from "../Section";
 
 export interface FlagExcerptSectionProps extends PropsWithChildren {
   flag: FlagMeta;

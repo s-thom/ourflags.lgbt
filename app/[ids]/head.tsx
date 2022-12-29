@@ -14,7 +14,7 @@ export default async function FlagsIdHead({
       description="Share your pride with the world"
       path={`/${buildShareString(flags)}`}
       flags={flags}
-      ogImageStyle="list"
+      ogImageStyle="my-flags"
     />
   );
 }

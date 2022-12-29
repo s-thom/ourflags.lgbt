@@ -1,4 +1,4 @@
-import { FlagExcerptSection } from "../../../lib/components/both/FlagExcerptSection";
+import { FlagExcerptSection } from "../../../lib/components/layout/FlagExcerptSection";
 import { FullWidthSection } from "../../../lib/components/layout/FullWidthSection";
 import { PageHeading } from "../../../lib/components/layout/Headings";
 import { Section } from "../../../lib/components/layout/Section";

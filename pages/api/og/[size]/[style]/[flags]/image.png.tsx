@@ -1,10 +1,8 @@
 import { ImageResponse } from "@vercel/og";
 import { NextRequest, NextResponse } from "next/server";
-import { ReactNode } from "react";
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
-import { OgTitleStyle } from "../../../../../../lib/components/og/OgTitleStyle";
-import { TiledBackground } from "../../../../../../lib/components/og/TiledBackground";
+import { OgImage } from "../../../../../../lib/components/og/OgImage";
 import { OG_IMAGE_SIZES } from "../../../../../../lib/constants";
 import { sizeValidator } from "../../../../../../lib/server/validation";
 import { parseShareString } from "../../../../../../lib/shortcodes";
@@ -60,35 +58,8 @@ export default async function handler(req: NextRequest) {
 
   const { flags, style, size } = result.data;
 
-  let children: ReactNode;
-  switch (style) {
-    case "single":
-    case "list":
-    case "title":
-    default:
-      children = <OgTitleStyle />;
-  }
-
   return new ImageResponse(
-    (
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "white",
-          position: "relative",
-          fontFamily: "Body",
-        }}
-      >
-        <TiledBackground flags={flags} size={size} />
-        <div tw="absolute top-0 left-0 bg-black/80 w-full h-full" />
-        {children}
-      </div>
-    ),
+    <OgImage flags={flags} size={size} style={style} />,
     {
       fonts: [
         {
