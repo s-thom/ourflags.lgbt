@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { FlagMeta, Size } from "../../types";
 import { OgMyFlagsStyle } from "./OgMyFlagsStyle";
+import { OgSingleStyle } from "./OgSingleStyle";
 import { OgTitleStyle } from "./OgTitleStyle";
 import { TiledBackground } from "./TiledBackground";
 
@@ -17,6 +18,8 @@ export function OgImage({ flags, size, style }: OgImageProps) {
       children = <OgMyFlagsStyle flags={flags} size={size} />;
       break;
     case "single":
+      children = <OgSingleStyle flag={flags[0]!} size={size} />;
+      break;
     case "title":
     default:
       children = <OgTitleStyle />;

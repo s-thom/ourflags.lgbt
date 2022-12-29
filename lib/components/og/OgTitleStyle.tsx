@@ -2,7 +2,7 @@ import { BASE_URL, SITE_NAME } from "../../constants";
 
 export function OgTitleStyle() {
   return (
-    <div tw="flex flex-col text-white items-center h-full w-full">
+    <div tw="flex flex-col text-white justify-center items-center h-full w-full">
       <h1 tw="font-bold text-9xl" style={{ fontFamily: "Headings" }}>
         {SITE_NAME}
       </h1>
