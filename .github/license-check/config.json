@@ -1,0 +1,29 @@
+{
+  "ignore": [
+    "*.*",
+    ".next/",
+    ".vscode/",
+    "content/",
+    "docs/",
+    ".github/license-check/header-MPLv2.txt"
+  ],
+  "ignoreFile": ".gitignore",
+  "license": ".github/license-check/header-MPLv2.txt",
+  "licenseFormats": {
+    "js|jsx|ts|tsx": {
+      "eachLine": {
+        "prepend": "// "
+      },
+      "append": ""
+    },
+    "css": {
+      "prepend": "/*",
+      "append": " */\n",
+      "eachLine": {
+        "prepend": " * "
+      }
+    }
+  },
+  "trailingWhitespace": "TRIM",
+  "regexIdentifier": "##"
+}
