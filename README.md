@@ -1,10 +1,12 @@
-# [MyFlags.lgbt](https://myflags.lgbt/)
+# [OurFlags.lgbt](https://ourflags.lgbt/)
 
-[!["My Flags - Share your pride with the world" above a pattern of pride flags](./.github/media/banner.png)](https://myflags.lgbt/)
+[!["These are Our Flags, and we fly them with pride" above a pattern of pride flags](./.github/media/banner.png)](https://ourflags.lgbt/)
 
-My Flags is a website to generate shareable links with information about pride flags. Members of the community aren't always defined by a single idea, and the ability to change the labels and symbols we use is a ley part of many people's discovery of who they are. This site aims to break down barriers and allow people outside of the rainbow community to learn about queer identities and symbols without the initial awkward questions.
+Our Flags is a reference website for the flags used by the queer community. This site aims to break down barriers and allow people outside of the rainbow community to learn about queer identities and symbols without the initial awkward questions.
 
-![The flag selection page, showing the URL generated when selecting two flags](./.github/media/url-builder.png)
+People can also select flags that represent themselves to get a link to a page summarising those flags. Members of the community often aren't defined by a single idea, so the links generated can have any combination of flags in any order.
+
+![The flag selection page, showing the URL generated when selecting flags](./.github/media/url-builder.png)
 
 ## Contributing
 
@@ -25,10 +27,8 @@ A quick (non-lawyer) summary.
   - If the code is part of a larger work, the rest of the work does not have to be MPL.
 - You may reuse parts of the text content of the site as long as those parts are under the same license (CC BY-SA 4.0).
   - You must provide attribution when doing so.
-  - A direct link back to [myflags.lgbt](https://myflags.lgbt/) would be very much appreciated.
+  - A direct link back to [ourflags.lgbt](https://ourflags.lgbt/) would be very much appreciated.
 
-<div style="text-align: center">
+---
 
 ![The goose from Untitled Goose Game holding a Progress pride flag](./lib/components/client/Goose/goose.png)
-
-</div>

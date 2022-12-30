@@ -9,20 +9,18 @@
 import { ClipboardCopy } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useMemo } from "react";
+import { BASE_URL } from "../../constants";
 import { buildShareString } from "../../shortcodes";
-import { useBaseUrl } from "../../urls";
 import { useSelectedFlags } from "./context";
 
 export function LinkFormShare() {
-  const baseUrl = useBaseUrl();
-
   const { selected: flags } = useSelectedFlags();
 
   const shareUrl = useMemo(
-    () => `${baseUrl}/${buildShareString(flags)}`,
-    [baseUrl, flags]
+    () => `${BASE_URL}/${buildShareString(flags)}`,
+    [flags]
   );
-  const defaultUrl = useMemo(() => `${baseUrl}/♡♡♡♡♡♡♡`, [baseUrl]);
+  const defaultUrl = useMemo(() => `${BASE_URL}/♡♡♡♡♡♡♡`, []);
 
   const copyUrlToClipboard = useCallback(() => {
     umami?.trackEvent("Copy URL", { type: "click" });

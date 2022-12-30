@@ -8,12 +8,16 @@ import { Size } from "./types";
 
 const isDev = process.env.NODE_ENV === "development";
 
-export const SITE_NAME = "My Flags";
+export const SITE_NAME = "Our Flags";
 
-const fallbackUrl = isDev ? "http://localhost:3000" : "https://myflags.lgbt";
-export const BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL
+// Get the base URL for this environment. This needs to be accurate for
+// absolute URLs, such as those for OpenGraph images.
+const environmentUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  : fallbackUrl;
+  : undefined;
+const fallbackUrl = isDev ? "http://localhost:3000" : "https://ourflags.lgbt";
+export const BASE_URL = environmentUrl ?? vercelUrl ?? fallbackUrl;
 
 export const DEFAULT_FLAG_ID = "progress-intersex";
 // Least common multiple of 3, 5, 7, and 8 so we have integers when building paths

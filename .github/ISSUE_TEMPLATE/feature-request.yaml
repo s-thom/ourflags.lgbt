@@ -8,7 +8,7 @@ body:
       value: |
         Thanks for suggesting a new feature to be added to the site.
 
-        If you're a developer who has the know-how, check out our [contributing guide](https://github.com/s-thom/myflags.lgbt/blob/main/docs/CONTRIBUTING.md) and see if you want to make the change yourself.
+        If you're a developer who has the know-how, check out our [contributing guide](https://github.com/s-thom/ourflags.lgbt/blob/main/docs/CONTRIBUTING.md) and see if you want to make the change yourself.
   - type: textarea
     id: feature
     attributes:
@@ -20,7 +20,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/s-thom/myflags.lgbt/blob/main/docs/CODE_OF_CONDUCT.md)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/s-thom/ourflags.lgbt/blob/main/docs/CODE_OF_CONDUCT.md)
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true

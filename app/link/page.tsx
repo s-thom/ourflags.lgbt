@@ -20,7 +20,7 @@ import { CATEGORIES } from "../../lib/data/categories/categories";
 import { FLAGS } from "../../lib/data/flags/flags";
 import { CategorySectionWithContent } from "./components";
 
-export default function Home() {
+export default function LinkPage() {
   return (
     <div>
       <Section className="py-8 text-center sm:py-12 md:py-16">

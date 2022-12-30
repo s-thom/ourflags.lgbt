@@ -17,7 +17,10 @@ export default async function FlagsIdHead({
   return (
     <HeadTags
       title={data.meta.name}
-      description="Share your pride with the world"
+      description={`Learn about the ${data.meta.name.replace(
+        / flag$/i,
+        ""
+      )} flag, its history, and the people it represents`}
       path={`/flags/${params.id}`}
       flags={[data.meta]}
       ogImageStyle="single"

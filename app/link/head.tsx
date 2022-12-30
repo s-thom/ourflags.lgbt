@@ -6,12 +6,12 @@
 
 import { HeadTags } from "../../lib/components/head";
 
-export default async function FlagsHead() {
+export default function Head() {
   return (
     <HeadTags
-      title="All flags"
+      title={undefined}
       description="These are our flags, and we fly them with pride"
-      path="/flags"
+      path="/link"
       flags={[]}
       overrideFaviconFlags="default"
       overrideOgFlags="all"

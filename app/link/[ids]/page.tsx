@@ -6,13 +6,17 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FullWidthSection } from "../../lib/components/layout/FullWidthSection";
-import { PageHeading } from "../../lib/components/layout/Headings";
-import { Section } from "../../lib/components/layout/Section";
-import { parseShareString } from "../../lib/shortcodes";
+import { FullWidthSection } from "../../../lib/components/layout/FullWidthSection";
+import { PageHeading } from "../../../lib/components/layout/Headings";
+import { Section } from "../../../lib/components/layout/Section";
+import { parseShareString } from "../../../lib/shortcodes";
 import { FlagSectionWithContent } from "./components";
 
-export default async function IdsPage({ params }: { params: { ids: string } }) {
+export default async function LinkIdsPage({
+  params,
+}: {
+  params: { ids: string };
+}) {
   const flags = parseShareString(params.ids);
 
   if (flags.length === 0) {

@@ -10,7 +10,7 @@ By participating and contributing to this project, you agree to uphold our [code
 
 Contributions are made to this repo via Issues and Pull Requests (PRs). A few general guidelines:
 
-- If you find a security vulnerability, please disclose it responsibly by sending an email to _`myflags+security@`[`[domain on my profile]`](https://github.com/s-thom)_.
+- If you find a security vulnerability, please disclose it responsibly by sending an email to _`ourflags+security@`[`[domain on my profile]`](https://github.com/s-thom)_.
 - Search for existing Issues and PRs before creating your own.
 - Remember the human. This project is maintained in people's spare time, so responses might not be immediate.
 
