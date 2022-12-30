@@ -1,0 +1,34 @@
+name: Flag Request
+description: Request a new flag to be added
+title: "[Flag Request]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new flag to be added to the site. This website is trying to document flags that are in use by the community, as well as some of the history that has led to the flags we have today.
+
+        If you're a developer who has the know-how, check out our [contributing guide](https://github.com/s-thom/myflags.lgbt/blob/main/docs/CONTRIBUTING.md) and see if you want to make the change yourself.
+  - type: checkboxes
+    id: in-use
+    attributes:
+      label: Is this flag suitable for the website?
+      description: This question is a quick filter to remove meme flags and the like. If your flag doesn't meet these criteria, it may still be considered
+      options:
+        - label: This flag is in-use today
+        - label: This flag is widely recognised by the queer community
+  - type: textarea
+    id: flag
+    attributes:
+      label: Describe the flag, its role in the community, and why it should be included
+      description: You can attach an image by pasting it in. Sources are always appreciated
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/s-thom/myflags.lgbt/blob/main/docs/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

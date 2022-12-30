@@ -1,0 +1,26 @@
+name: Feature Request
+description: Request a new feature to be added to the site
+title: "[Feature Request]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature to be added to the site.
+
+        If you're a developer who has the know-how, check out our [contributing guide](https://github.com/s-thom/myflags.lgbt/blob/main/docs/CONTRIBUTING.md) and see if you want to make the change yourself.
+  - type: textarea
+    id: feature
+    attributes:
+      label: Describe the feature
+      description: Write at a suitable level of detail, so that someone unfamiliar with the idea will be able to know what you're requesting
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/s-thom/myflags.lgbt/blob/main/docs/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

@@ -1,0 +1,54 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to submit a bug report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What issue did you find?
+      description: Also include what you expected to happen when you found the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: What steps can be taken to replicate the behaviour you saw?
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: dropdown
+    id: devices
+    attributes:
+      label: What devices are you seeing the problem on?
+      multiple: true
+      options:
+        - Windows
+        - Android
+        - MacOS
+        - iOS
+  - type: textarea
+    id: code-candidates
+    attributes:
+      label: Likely culprit
+      description: If you've done some digging into the code to figure things out, let us know where to start looking
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/s-thom/myflags.lgbt/blob/main/docs/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

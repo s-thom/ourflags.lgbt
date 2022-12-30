@@ -1,0 +1,19 @@
+name: General Question
+description: Ask a question
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Ask away!
+      description: Also include what you expected to happen when you found the issue.
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/s-thom/myflags.lgbt/blob/main/docs/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

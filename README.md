@@ -12,7 +12,7 @@ Want to contribute to this project? Check out the [contributing guidelines](./do
 
 ### Contributors
 
-If you make changes to this project, add your name and a link to your GitHib profile here.
+If you make changes to this project, add your name and a link to your GitHub profile here.
 
 ## License
 
