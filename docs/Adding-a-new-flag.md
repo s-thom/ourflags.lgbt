@@ -52,8 +52,8 @@ name: Gilbert Baker Pride Flag
 # In this case, this flag will appear very highly (probably first).
 order: 1
 # Shortcodes are used in the share links.
-# The link `/FooBarPgbBaz` would include this flag.
-shortcodes: ["Pgb"]
+# The link `/FooBarRgbBaz` would include this flag in the third position.
+shortcodes: ["Rgb"]
 # Categories the flag appears in.
 categories: ["everyone"]
 flag:
@@ -71,7 +71,7 @@ flag:
     ]
   # This particular flag doesn't have any extra designs on it, so it doesn't have `additionalPaths`.
 background:
-  # Gradient colours are in OKLCH for easy editing/inspecting.
+  # Gradient colours are in OKLCH for easier editing/inspecting.
   # Note that within each array, both colours have the same lightness and chroma.
   light: ["oklch(80% 0.045 352)", "oklch(80% 0.045 288)"]
   dark: ["oklch(40% 0.065 352)", "oklch(40% 0.065 288)"]

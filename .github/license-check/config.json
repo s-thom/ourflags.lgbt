@@ -22,6 +22,12 @@
       "eachLine": {
         "prepend": " * "
       }
+    },
+    "yaml": {
+      "eachLine": {
+        "prepend": "# "
+      },
+      "append": ""
     }
   },
   "trailingWhitespace": "TRIM",

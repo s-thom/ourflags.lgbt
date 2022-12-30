@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [MyFlags.lgbt](https://myflags.lgbt/)
 
-## Getting Started
+[!["My Flags - Share your pride with the world" above a pattern of pride flags](./.github/media/banner.png)](https://myflags.lgbt/)
 
-First, run the development server:
+My Flags is a website to generate shareable links with information about pride flags. Members of the community aren't always defined by a single idea, and the ability to change the labels and symbols we use is a ley part of many people's discovery of who they are. This site aims to break down barriers and allow people outside of the rainbow community to learn about queer identities and symbols without the initial awkward questions.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+![The flag selection page, showing the URL generated when selecting two flags](./.github/media/url-builder.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Want to contribute to this project? Check out the [contributing guidelines](./docs/CONTRIBUTING.md) on where to get started.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Contributors
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+If you make changes to this project, add your name and a link to your GitHib profile here.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
+This repository has a mixed license. Code is made available under the [MPL-2.0 license](https://www.mozilla.org/en-US/MPL/2.0/), and text in the `content/` directory is made available under the [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A quick (non-lawyer) summary.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- You may reuse parts of the code for your own purposes as long as those parts continue to follow the MPL.
+  - This includes modifications, which must remain MPL.
+  - If the code is part of a larger work, the rest of the work does not have to be MPL.
+- You may reuse parts of the text content of the site as long as those parts are under the same license (CC BY-SA 4.0).
+  - You must provide attribution when doing so.
+  - A direct link back to [myflags.lgbt](https://myflags.lgbt/) would be very much appreciated.
 
-## Deploy on Vercel
+<div style="text-align: center">
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![The goose from Untitled Goose Game holding a Progress pride flag](./lib/components/client/Goose/goose.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+</div>
