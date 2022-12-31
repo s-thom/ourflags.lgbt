@@ -4,10 +4,31 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { formatHex, Oklch, oklch } from "culori";
+import { Color, formatHex, Oklch, oklch, parse } from "culori";
 import { CSSProperties, useMemo } from "react";
 
 const MAX_ANGLE_PER_STOP = 30;
+
+export function parseColor(color: string): Color {
+  // Culori doesn't support a parser for OKLch, so I've hacked this together a bit
+  const doOklchHack = color.startsWith("oklch(");
+
+  const parsed = parse(doOklchHack ? color.slice(2) : color);
+  if (!parsed) {
+    throw new Error(`Invalid color: ${color}`);
+  }
+
+  if (doOklchHack) {
+    parsed.mode = "oklch";
+    // For some reason the % sign is ignored if specified that way.
+    // I'm too tired to do anything other than hack it together again.
+    if (color.match(/\([0-9.]+%/)) {
+      (parsed as Oklch).l /= 100;
+    }
+  }
+
+  return parsed;
+}
 
 function getGradientStops(colors: string[]): string {
   if (colors.length === 0) {

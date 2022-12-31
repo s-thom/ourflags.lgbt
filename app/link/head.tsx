@@ -10,7 +10,7 @@ export default function Head() {
   return (
     <HeadTags
       title={undefined}
-      description="These are our flags, and we fly them with pride"
+      description="Select your flags and get a link to share who you are"
       path="/link"
       flags={[]}
       overrideFaviconFlags="default"

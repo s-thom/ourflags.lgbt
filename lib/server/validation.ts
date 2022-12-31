@@ -4,8 +4,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { formatHex, Oklch, parse } from "culori";
+import { formatHex } from "culori";
 import z from "zod";
+import { parseColor } from "../colors";
 
 // Adding fields to these validators automatically updates the types throughout the code,
 // so you'll get errors if the code isn't compatible with your change.
@@ -13,22 +14,7 @@ import z from "zod";
 // the template snippets in the `.vscode` folder.
 
 export const colorValidator = z.string().transform((color) => {
-  // Culori doesn't support a parser for OKLch, so I've hacked this together a bit
-  const doOklchHack = color.startsWith("oklch(");
-
-  const parsed = parse(doOklchHack ? color.slice(2) : color);
-  if (!parsed) {
-    throw new Error(`Invalid color: ${color}`);
-  }
-
-  if (doOklchHack) {
-    parsed.mode = "oklch";
-    // For some reason the % sign is ignored if specified that way.
-    // I'm too tired to do anything other than hack it together again.
-    if (color.match(/\([0-9.]+%/)) {
-      (parsed as Oklch).l /= 100;
-    }
-  }
+  const parsed = parseColor(color);
 
   const formatted = formatHex(parsed);
   if (!formatted) {

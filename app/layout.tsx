@@ -4,8 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { getThemedGradients } from "../lib/colors";
 import DarkModeListener from "../lib/components/client/DarkModeListener";
+import { GradientBackground } from "../lib/components/client/RainbowBackground";
 import { Footer } from "../lib/components/layout/Footer";
 import { Main } from "../lib/components/layout/Main";
 import { colorValidator } from "../lib/server/validation";
@@ -29,8 +29,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const style = getThemedGradients(BG_THEMES);
-
   return (
     <html lang="en">
       {/*
@@ -41,13 +39,12 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/dark.js" type="text/javascript" />
       </head>
-      <body
-        className={`gradient-light dark:gradient-dark flex min-h-screen flex-col bg-gradient-to-br font-body text-black dark:text-white`}
-        style={style}
-      >
-        <Main>{children}</Main>
-        <Footer />
-        <DarkModeListener />
+      <body className={`min-h-screen font-body text-black dark:text-white`}>
+        <GradientBackground colors={BG_THEMES} className="flex flex-col">
+          <Main>{children}</Main>
+          <Footer />
+          <DarkModeListener />
+        </GradientBackground>
       </body>
     </html>
   );

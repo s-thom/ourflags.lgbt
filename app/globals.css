@@ -45,4 +45,26 @@ body {
   .gradient-dark {
     --tw-gradient-stops: var(--gradient-dark);
   }
+
+  .flag-fan-item {
+    /* I'm so sorry. */
+    --flagRelativeIndex: 0;
+    --flagAbsoluteIndex: 0;
+    --flagXOffset: 0px;
+    --flagYOffset: 0px;
+    --flagYSlideDown: 0;
+    --flagRotatePerFlag: 5deg;
+
+    /* Flags should be closer together, which means a larger translation for ones further from the centre */
+    --flagX: calc(var(--flagRelativeIndex) * var(--flagXOffset));
+    /* Flags on the centre should be higher, with some extra maths for the entry/exit slide */
+    --flagY: calc(
+      (((var(--flagAbsoluteIndex) - 2)) * var(--flagYOffset)) +
+        (var(--flagYSlideDown) * (var(--flagYOffset) / 4))
+    );
+    /* Flags should have a larger rotation the further from the centre they are */
+    --flagRotate: calc(var(--flagRelativeIndex) * var(--flagRotatePerFlag));
+
+    transform: translate(var(--flagX), var(--flagY)) rotate(var(--flagRotate));
+  }
 }

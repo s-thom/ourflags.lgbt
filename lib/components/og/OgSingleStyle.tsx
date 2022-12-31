@@ -29,6 +29,7 @@ export function OgSingleStyle({ flag }: OgSingleStyleProps) {
         src={`data:image/svg+xml,${encodeURIComponent(
           getStripedFlagSvg(flag.flag.stripes, flag.flag.additionalPaths)
         )}`}
+        tw="shadow-xl"
         width={IMAGE_HEIGHT * FLAG_ASPECT_RATIO}
         height={IMAGE_HEIGHT}
       />

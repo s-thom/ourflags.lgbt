@@ -20,12 +20,12 @@ import { CATEGORIES } from "../../lib/data/categories/categories";
 import { FLAGS } from "../../lib/data/flags/flags";
 import { CategorySectionWithContent } from "./components";
 
-export default function LinkPage() {
+export default function LinkFormPage() {
   return (
     <div>
       <Section className="py-8 text-center sm:py-12 md:py-16">
         <PageHeading>Select your flags</PageHeading>
-        <MajorHeading>and get a link to share with the world</MajorHeading>
+        <MajorHeading>and get a link to share who you are</MajorHeading>
       </Section>
       <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
         <LinkFormContext>

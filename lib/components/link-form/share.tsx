@@ -6,9 +6,10 @@
 
 "use client";
 
-import { ClipboardCopy } from "lucide-react";
+import { Check, ClipboardCopy, Cross } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { trackEvent } from "../../analytics";
 import { BASE_URL } from "../../constants";
 import { buildShareString } from "../../shortcodes";
 import { useSelectedFlags } from "./context";
@@ -17,17 +18,28 @@ export function LinkFormShare() {
   const { selected: flags } = useSelectedFlags();
 
   const shareUrl = useMemo(
-    () => `${BASE_URL}/${buildShareString(flags)}`,
+    () => `${BASE_URL}/link/${buildShareString(flags)}`,
     [flags]
   );
-  const defaultUrl = useMemo(() => `${BASE_URL}/♡♡♡♡♡♡♡`, []);
+  const defaultUrl = useMemo(() => `${BASE_URL}/link/♡♡♡♡♡♡♡`, []);
 
-  const copyUrlToClipboard = useCallback(() => {
-    umami?.trackEvent("Copy URL", { type: "click" });
-    navigator.clipboard.writeText(shareUrl).catch(() => {
+  const [copyState, setCopyState] = useState<"ready" | "copied" | "error">(
+    "ready"
+  );
+  useEffect(() => {
+    setCopyState("ready");
+  }, [shareUrl]);
+
+  const copyUrlToClipboard = useCallback(async () => {
+    trackEvent("click", "Copy URL", {});
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopyState("copied");
+    } catch (err) {
       // eslint-disable-next-line no-console
       console.error("Failed to write to clipboard");
-    });
+      setCopyState("error");
+    }
   }, [shareUrl]);
 
   if (flags.length === 0) {
@@ -61,7 +73,9 @@ export function LinkFormShare() {
           aria-label="Copy share URL"
           onClick={copyUrlToClipboard}
         >
-          <ClipboardCopy />
+          {copyState === "ready" && <ClipboardCopy />}
+          {copyState === "copied" && <Check />}
+          {copyState === "error" && <Cross />}
         </button>
       </div>
       <div>
