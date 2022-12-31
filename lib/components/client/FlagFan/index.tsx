@@ -6,9 +6,11 @@
 
 "use client";
 
+import Image from "next/image";
 import { CSSProperties, useEffect, useState } from "react";
 import { useMedia } from "react-use";
 import useLatest from "react-use/lib/useLatest";
+import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FLAGS_BY_ID } from "../../../data/flags/flags";
 import { FlagMeta } from "../../../types";
 import { delay } from "../../../utils";
@@ -29,18 +31,38 @@ const FORCED_INITIAL_FLAG_IDS = [
   "nonbinary",
 ];
 
+function pickRandomOutOfArray<T>(array: T[]): { array: T[]; item: T } {
+  if (array.length === 0) {
+    throw new Error("Array must have items");
+  }
+
+  const index = Math.floor(Math.random() * array.length);
+  const arrayClone = array.slice();
+  const [item] = arrayClone.splice(index, 1);
+
+  return { array: arrayClone, item: item! };
+}
+
 export interface FlagFanProps {
   flags: FlagMeta[];
 }
 
 export function FlagFan({ flags }: FlagFanProps) {
-  const [{ current, available }, setFlagState] = useState(() => {
+  const [{ current, next, available }, setFlagState] = useState(() => {
     const initialFlags = FORCED_INITIAL_FLAG_IDS.map((id) => FLAGS_BY_ID[id]!);
-    const initialAvailableFlags = flags.filter(
+    // Remove flags that are currently visible
+    const flagsNotVisible = flags.filter(
       (flag) => FORCED_INITIAL_FLAG_IDS.indexOf(flag.id) === -1
     );
 
-    return { current: initialFlags, available: initialAvailableFlags };
+    const { array: initialAvailable, item: initialNext } =
+      pickRandomOutOfArray(flagsNotVisible);
+
+    return {
+      current: initialFlags,
+      available: initialAvailable,
+      next: initialNext,
+    };
   });
   const [activeIndex, setActiveIndex] = useState(1);
   const [focusIndex, setFocusIndex] = useState<number>();
@@ -56,8 +78,8 @@ export function FlagFan({ flags }: FlagFanProps) {
     }
 
     // Pick a random flag and remove it from the list of flags available to choose.
-    const nextFlagIndex = Math.floor(Math.random() * available.length);
-    const [nextFlag] = available.splice(nextFlagIndex, 1);
+    const { array: nextAvailable, item: nextNext } =
+      pickRandomOutOfArray(available);
 
     // Start fading out the old one.
     // Yes, a proper transition library would be better.
@@ -66,7 +88,7 @@ export function FlagFan({ flags }: FlagFanProps) {
 
     // Swap in the new flag in the same position as the old one.
     const nextCurrent = current.slice();
-    nextCurrent.splice(indexToSwap, 1, nextFlag!);
+    nextCurrent.splice(indexToSwap, 1, next);
 
     setFlagState({
       current: nextCurrent,
@@ -74,14 +96,15 @@ export function FlagFan({ flags }: FlagFanProps) {
         // If we've run out of flags to randomly choose from, start again.
         // The extra .findIndex() is to make sure we exclude the one we've
         // just swapped in, so it doesn't get shown twice this cycle.
-        available.length > 0
-          ? available
+        nextAvailable.length > 0
+          ? nextAvailable
           : flags.filter(
               (flag) =>
                 nextCurrent.findIndex(
                   (visibleFlag) => visibleFlag.id === flag.id
-                ) === -1
+                ) === -1 && flag.id !== nextNext.id
             ),
+      next: nextNext,
     });
     setActiveIndex((indexToSwap + 1) % 5);
 
@@ -105,6 +128,9 @@ export function FlagFan({ flags }: FlagFanProps) {
     const handle = setInterval(onInterval, 3000);
     return () => clearInterval(handle);
   }, [prefersReducedMotion, swapFlagRef]);
+
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
 
   return (
     <div className="relative flex pt-8">
@@ -138,6 +164,18 @@ export function FlagFan({ flags }: FlagFanProps) {
           </div>
         );
       })}
+      {/* This must not render on the server, or else there will be mismatches */}
+      {isMounted && (
+        <Image
+          src={`/images/flags/${next.id}_128.png`}
+          alt=""
+          height={128}
+          width={128 * FLAG_ASPECT_RATIO}
+          aria-hidden
+          className="hidden"
+          priority={false}
+        />
+      )}
     </div>
   );
 }
