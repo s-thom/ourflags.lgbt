@@ -1,16 +1,16 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { FlagExcerptSection } from "../../../lib/components/layout/FlagExcerptSection";
-import { FullWidthSection } from "../../../lib/components/layout/FullWidthSection";
-import { PageHeading } from "../../../lib/components/layout/Headings";
-import { Section } from "../../../lib/components/layout/Section";
-import { FLAGS } from "../../../lib/data/flags/flags";
-import { getFlagData } from "../../../lib/server/getData";
-import { renderMarkdownToReact } from "../../../lib/server/remark";
+import { FlagExcerptSection } from "../../../../lib/components/layout/FlagExcerptSection";
+import { FullWidthSection } from "../../../../lib/components/layout/FullWidthSection";
+import { PageHeading } from "../../../../lib/components/layout/Headings";
+import { Section } from "../../../../lib/components/layout/Section";
+import { FLAGS } from "../../../../lib/data/flags/flags";
+import { getFlagData } from "../../../../lib/server/getData";
+import { renderMarkdownToReact } from "../../../../lib/server/remark";
 
 export default async function FlagsIdPage({
   params,

@@ -1,13 +1,13 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { FlagFan } from "../../lib/components/client/FlagFan";
-import { PageHeading } from "../../lib/components/layout/Headings";
-import { Section } from "../../lib/components/layout/Section";
-import { FLAGS } from "../../lib/data/flags/flags";
+import { FlagFan } from "../../../lib/components/client/FlagFan";
+import { PageHeading } from "../../../lib/components/layout/Headings";
+import { Section } from "../../../lib/components/layout/Section";
+import { FLAGS } from "../../../lib/data/flags/flags";
 import { FlagSummary } from "./components";
 
 export default async function FlagsListPage() {

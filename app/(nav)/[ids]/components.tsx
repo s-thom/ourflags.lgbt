@@ -1,14 +1,14 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { PropsWithChildren } from "react";
-import { FlagExcerptSection } from "../../lib/components/layout/FlagExcerptSection";
-import { getFlagData } from "../../lib/server/getData";
-import { renderMarkdownToReact } from "../../lib/server/remark";
-import { FlagMeta } from "../../lib/types";
+import { FlagExcerptSection } from "../../../lib/components/layout/FlagExcerptSection";
+import { getFlagData } from "../../../lib/server/getData";
+import { renderMarkdownToReact } from "../../../lib/server/remark";
+import { FlagMeta } from "../../../lib/types";
 
 export interface FlagExcerptSectionProps extends PropsWithChildren {
   flag: FlagMeta;

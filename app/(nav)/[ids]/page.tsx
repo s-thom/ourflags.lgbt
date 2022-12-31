@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -6,10 +6,10 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FullWidthSection } from "../../lib/components/layout/FullWidthSection";
-import { PageHeading } from "../../lib/components/layout/Headings";
-import { Section } from "../../lib/components/layout/Section";
-import { parseShareString } from "../../lib/shortcodes";
+import { FullWidthSection } from "../../../lib/components/layout/FullWidthSection";
+import { PageHeading } from "../../../lib/components/layout/Headings";
+import { Section } from "../../../lib/components/layout/Section";
+import { parseShareString } from "../../../lib/shortcodes";
 import { FlagSectionWithContent } from "./components";
 
 export default async function IdsPage({ params }: { params: { ids: string } }) {

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -6,9 +6,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { getThemedGradients } from "../../lib/colors";
-import { FLAG_ASPECT_RATIO } from "../../lib/constants";
-import { FlagMeta } from "../../lib/types";
+import { getThemedGradients } from "../../../lib/colors";
+import { FLAG_ASPECT_RATIO } from "../../../lib/constants";
+import { FlagMeta } from "../../../lib/types";
 
 export interface FlagSummaryProps {
   flag: FlagMeta;

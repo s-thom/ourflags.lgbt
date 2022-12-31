@@ -19,6 +19,8 @@ const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_URL
 const fallbackUrl = isDev ? "http://localhost:3000" : "https://ourflags.lgbt";
 export const BASE_URL = environmentUrl ?? vercelUrl ?? fallbackUrl;
 
+export const GITHUB_URL = "https://github.com/s-thom/ourflags.lgbt";
+
 export const DEFAULT_FLAG_ID = "progress-intersex";
 // Least common multiple of 3, 5, 7, and 8 so we have integers when building paths
 export const FLAG_SVG_VIEWBOX_HEIGHT = 840;
