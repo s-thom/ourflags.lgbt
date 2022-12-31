@@ -4,8 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { HeadTags } from "../../../lib/components/head";
-import { buildShareString, parseShareString } from "../../../lib/shortcodes";
+import { HeadTags } from "../../lib/components/head";
+import { buildShareString, parseShareString } from "../../lib/shortcodes";
 
 export default async function FlagsIdHead({
   params,
@@ -19,7 +19,7 @@ export default async function FlagsIdHead({
       <HeadTags
         title={undefined}
         description="These are our flags, and we fly them with pride"
-        path={`/link/${buildShareString(flags)}`}
+        path={`/${buildShareString(flags)}`}
         flags={[]}
         overrideFaviconFlags="default"
         overrideOgFlags="all"
@@ -32,7 +32,7 @@ export default async function FlagsIdHead({
     <HeadTags
       title={`${flags.length} ${flags.length === 1 ? "flag" : "flags"}`}
       description="These are my flags"
-      path={`/link/${buildShareString(flags)}`}
+      path={`/${buildShareString(flags)}`}
       flags={flags}
       ogImageStyle="my-flags"
     />

@@ -40,7 +40,10 @@ export default function RootLayout({
         <script src="/dark.js" type="text/javascript" />
       </head>
       <body className={`min-h-screen font-body text-black dark:text-white`}>
-        <GradientBackground colors={BG_THEMES} className="flex flex-col">
+        <GradientBackground
+          colors={BG_THEMES}
+          className="flex min-h-screen flex-col"
+        >
           <Main>{children}</Main>
           <Footer />
           <DarkModeListener />

@@ -18,10 +18,10 @@ export function LinkFormShare() {
   const { selected: flags } = useSelectedFlags();
 
   const shareUrl = useMemo(
-    () => `${BASE_URL}/link/${buildShareString(flags)}`,
+    () => `${BASE_URL}/${buildShareString(flags)}`,
     [flags]
   );
-  const defaultUrl = useMemo(() => `${BASE_URL}/link/♡♡♡♡♡♡♡`, []);
+  const defaultUrl = useMemo(() => `${BASE_URL}/♡♡♡♡♡♡♡`, []);
 
   const [copyState, setCopyState] = useState<"ready" | "copied" | "error">(
     "ready"

@@ -49,7 +49,7 @@ export default function LinkFormPage() {
               </p>
             </div>
             <Link
-              href="/link"
+              href="/my-flags"
               className="inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 hover:bg-green-200 focus:bg-green-200 dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
             >
               Get started <ArrowRight />
