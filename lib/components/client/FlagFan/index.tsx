@@ -13,7 +13,7 @@ import useLatest from "react-use/lib/useLatest";
 import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FLAGS_BY_ID } from "../../../data/flags/flags";
 import { FlagMeta } from "../../../types";
-import { delay } from "../../../utils";
+import { delay, pickRandomOutOfArray } from "../../../utils";
 import { FlagFanItem } from "./FlagFanItem";
 
 // I sincerely apologise to whoever needs to read this code.
@@ -30,18 +30,6 @@ const FORCED_INITIAL_FLAG_IDS = [
   "transgender",
   "nonbinary",
 ];
-
-function pickRandomOutOfArray<T>(array: T[]): { array: T[]; item: T } {
-  if (array.length === 0) {
-    throw new Error("Array must have items");
-  }
-
-  const index = Math.floor(Math.random() * array.length);
-  const arrayClone = array.slice();
-  const [item] = arrayClone.splice(index, 1);
-
-  return { array: arrayClone, item: item! };
-}
 
 export interface FlagFanProps {
   flags: FlagMeta[];

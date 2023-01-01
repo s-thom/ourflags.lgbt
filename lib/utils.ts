@@ -40,3 +40,15 @@ export function delay(ms: number) {
     setTimeout(res, ms);
   });
 }
+
+export function pickRandomOutOfArray<T>(array: T[]): { array: T[]; item: T } {
+  if (array.length === 0) {
+    throw new Error("Array must have items");
+  }
+
+  const index = Math.floor(Math.random() * array.length);
+  const arrayClone = array.slice();
+  const [item] = arrayClone.splice(index, 1);
+
+  return { array: arrayClone, item: item! };
+}
