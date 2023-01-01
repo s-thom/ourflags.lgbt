@@ -83,6 +83,11 @@ export function LinkFormShare() {
         <Link
           href={shareUrl}
           className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+          onClick={() =>
+            trackEvent("click", "Link preview", {
+              flagIds: flags.map((flag) => flag.id),
+            })
+          }
         >
           Preview your page
         </Link>

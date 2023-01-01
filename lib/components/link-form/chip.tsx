@@ -44,16 +44,12 @@ export function FlagFormChip({
 
   const onAddClick = useCallback(() => {
     trackEvent("click", "Add flag", {
-      type: "click",
-      action: "add",
       flagId: flag.id,
     });
     onAdd?.();
   }, [flag.id, onAdd]);
   const onRemoveClick = useCallback(() => {
     trackEvent("click", "Remove flag", {
-      type: "click",
-      action: "remove",
       flagId: flag.id,
     });
     onRemove?.();

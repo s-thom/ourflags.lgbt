@@ -8,6 +8,7 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useCallback } from "react";
+import { trackEvent } from "../../../analytics";
 
 // If adding themes, remember to update `public/dark.js`
 
@@ -21,9 +22,11 @@ export function ThemeSelector() {
     if (isCurrentlyDark) {
       classes.remove("dark");
       localStorage.setItem(THEME_KEY, "light");
+      trackEvent("click", "Change theme", { theme: "light" });
     } else {
       classes.add("dark");
       localStorage.setItem(THEME_KEY, "dark");
+      trackEvent("click", "Change theme", { theme: "dark" });
     }
   }, []);
 

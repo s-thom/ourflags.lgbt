@@ -15,7 +15,7 @@ export function Footer() {
         <Link
           href="https://sthom.kiwi"
           rel="external"
-          className="underline decoration-dotted hover:decoration-solid"
+          className="umami--click--sthom underline decoration-dotted hover:decoration-solid"
         >
           Stuart Thomson
         </Link>

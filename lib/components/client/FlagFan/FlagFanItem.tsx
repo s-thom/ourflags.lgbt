@@ -6,6 +6,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { trackEvent } from "../../../analytics";
 import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FlagMeta } from "../../../types";
 
@@ -24,7 +25,10 @@ export function FlagFanItem({ flag, onFocusIn, onFocusOut }: FlagFanItemProps) {
       onMouseEnter={onFocusIn}
       onMouseLeave={onFocusOut}
     >
-      <Link href={`/flags/${flag.id}`}>
+      <Link
+        href={`/flags/${flag.id}`}
+        onClick={() => trackEvent("click", "Flag fan", { flagId: flag.id })}
+      >
         <Image
           src={`/images/flags/${flag.id}_128.png`}
           alt={flag.name}
