@@ -6,6 +6,7 @@
 
 "use client";
 
+import clsx from "clsx";
 import { Check, ClipboardCopy, Cross } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -69,7 +70,10 @@ export function LinkFormShare() {
           {shareUrl}
         </div>
         <button
-          className="rounded-lg bg-green-200 p-2 transition-transform focus-within:scale-105 hover:scale-105 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none dark:bg-green-700"
+          className={clsx(
+            "rounded-lg bg-green-200 p-2 dark:bg-green-700",
+            "custom-transition-hover focus-within:scale-105 hover:scale-105"
+          )}
           aria-label="Copy share URL"
           onClick={copyUrlToClipboard}
         >
@@ -82,7 +86,7 @@ export function LinkFormShare() {
         Or{" "}
         <Link
           href={shareUrl}
-          className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+          className="custom-link"
           onClick={() =>
             trackEvent("click", "Link preview", {
               flagIds: flags.map((flag) => flag.id),

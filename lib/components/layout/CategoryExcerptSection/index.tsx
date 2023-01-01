@@ -5,10 +5,9 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { PropsWithChildren } from "react";
-import { useGradientStops } from "../../../colors";
 import { CategoryMeta } from "../../../types";
+import { GradientBackgroundSection } from "../GradientBackgroundSection";
 import { MajorHeading } from "../Headings";
-import { Section } from "../Section";
 
 export interface CategoryExcerptSectionProps extends PropsWithChildren {
   category: CategoryMeta;
@@ -20,19 +19,14 @@ export function CategoryExcerptSection({
   children,
   showName,
 }: CategoryExcerptSectionProps) {
-  const { style } = useGradientStops(category.background);
-
   return (
-    <div
-      className={`gradient-light dark:gradient-dark bg-gradient-to-br p-4 shadow-inner`}
-      style={style}
+    <GradientBackgroundSection
+      className="flex flex-col items-center justify-center gap-8 lg:flex-row"
+      innerClassName="flex grow flex-col gap-1"
+      colors={category.background}
     >
-      <Section className="flex flex-col items-center justify-center gap-8 lg:flex-row">
-        <div className="flex w-full grow flex-col gap-1">
-          {showName && <MajorHeading>{category.name}</MajorHeading>}
-          {children && <div>{children}</div>}
-        </div>
-      </Section>
-    </div>
+      {showName && <MajorHeading>{category.name}</MajorHeading>}
+      {children && <div>{children}</div>}
+    </GradientBackgroundSection>
   );
 }

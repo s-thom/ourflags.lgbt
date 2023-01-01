@@ -4,6 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import clsx from "clsx";
 import { Github, Menu } from "lucide-react";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
@@ -13,7 +14,7 @@ import { Main } from "../../lib/components/layout/Main";
 import { GITHUB_URL } from "../../lib/constants";
 import { FLAGS } from "../../lib/data/flags/flags";
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function NavLayout({ children }: PropsWithChildren) {
   return (
     <>
       <header className="flex justify-between gap-4 py-2 px-3">
@@ -22,26 +23,30 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <ThemeSelector />
           <div className="group/nav relative">
             <button
-              className="flex items-center transition-transform focus-within:scale-110 hover:scale-110 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none sm:hidden"
+              className={clsx(
+                "flex items-center sm:hidden",
+                "custom-transition-hover focus-within:scale-110 hover:scale-110"
+              )}
               title="Navigation"
               aria-label="Navigation"
             >
               <Menu />
             </button>
-            <ul className="invisible absolute right-0 z-20 flex min-w-[12rem] flex-col gap-4 rounded-lg border border-neutral-400 bg-neutral-100 p-4 group-focus-within/nav:visible group-hover/nav:visible dark:border-neutral-800 dark:bg-neutral-900 sm:visible sm:relative sm:flex-row sm:border-none sm:bg-transparent sm:pl-0 sm:dark:border-none sm:dark:bg-transparent">
+            <ul
+              className={clsx(
+                "invisible absolute right-0 z-20 flex min-w-[12rem] flex-col gap-4 rounded-lg border p-4",
+                "border-neutral-400 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900",
+                "group-focus-within/nav:visible group-hover/nav:visible",
+                "sm:visible sm:relative sm:flex-row sm:border-none sm:bg-transparent sm:pl-0 sm:dark:border-none sm:dark:bg-transparent"
+              )}
+            >
               <li>
-                <Link
-                  href={"/flags"}
-                  className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
-                >
+                <Link href={"/flags"} className="custom-link">
                   All flags
                 </Link>
               </li>
               <li>
-                <Link
-                  href={"/my-flags"}
-                  className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
-                >
+                <Link href={"/my-flags"} className="custom-link">
                   Share your flags
                 </Link>
               </li>
@@ -52,10 +57,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
                 <Link
                   href={`${GITHUB_URL}/#readme`}
                   rel="external"
-                  className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+                  className="custom-link"
                 >
                   <span className="inline sm:hidden">Source code</span>
-                  <Github className="hidden transition-transform focus-within:scale-110 hover:scale-110 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none sm:inline">
+                  <Github
+                    className={clsx(
+                      "hidden sm:inline",
+                      "custom-transition-hover focus-within:scale-110 hover:scale-110"
+                    )}
+                  >
                     <title>View source code on GitHub</title>
                   </Github>
                 </Link>

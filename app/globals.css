@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Stuart Thomson.
+ * Copyright (c) 2023 Stuart Thomson.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -38,14 +38,16 @@ body {
   overflow-x: hidden;
 }
 
-@layer utilities {
+@layer base {
   .gradient-light {
     --tw-gradient-stops: var(--gradient-light);
   }
   .gradient-dark {
     --tw-gradient-stops: var(--gradient-dark);
   }
+}
 
+@layer components {
   .flag-fan-item {
     /* I'm so sorry. */
     --flagRelativeIndex: 0;
@@ -66,5 +68,27 @@ body {
     --flagRotate: calc(var(--flagRelativeIndex) * var(--flagRotatePerFlag));
 
     transform: translate(var(--flagX), var(--flagY)) rotate(var(--flagRotate));
+  }
+
+  .custom-gradient {
+    @apply gradient-light dark:gradient-dark bg-gradient-to-br;
+  }
+
+  .custom-prose {
+    @apply prose prose-neutral dark:prose-invert md:prose-lg lg:prose-xl;
+  }
+
+  .custom-link {
+    @apply underline decoration-dotted hover:decoration-solid focus:decoration-solid;
+  }
+}
+
+@layer utilities {
+  .custom-transition-hover {
+    @apply transition-transform motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none;
+  }
+
+  .custom-transition-hover-group {
+    @apply transition-transform motion-reduce:transition-none motion-reduce:group-focus-within:transform-none motion-reduce:group-hover:transform-none;
   }
 }

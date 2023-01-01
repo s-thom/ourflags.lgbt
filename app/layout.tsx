@@ -38,7 +38,7 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/dark.js" type="text/javascript" />
       </head>
-      <body className={`h-full font-body text-neutral-900 dark:text-white`}>
+      <body className="h-full font-body text-neutral-900 dark:text-white">
         <GradientBackground
           colors={BG_THEMES}
           className="flex h-full min-h-screen flex-col"

@@ -23,9 +23,7 @@ export async function FlagSectionWithContent({
 
   return (
     <FlagExcerptSection flag={flag} showFlag showName showReadMore>
-      <article className="prose prose-neutral dark:prose-invert md:prose-lg lg:prose-xl">
-        {excerpt}
-      </article>
+      <article className="custom-prose">{excerpt}</article>
       {children}
     </FlagExcerptSection>
   );

@@ -5,7 +5,6 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { FlagExcerptSection } from "../../../../lib/components/layout/FlagExcerptSection";
-import { FullWidthSection } from "../../../../lib/components/layout/FullWidthSection";
 import { PageHeading } from "../../../../lib/components/layout/Headings";
 import { Section } from "../../../../lib/components/layout/Section";
 import { FLAGS } from "../../../../lib/data/flags/flags";
@@ -23,15 +22,11 @@ export default async function FlagsIdPage({
 
   return (
     <div className="pt-8 sm:pt-12 md:pt-16">
-      <FullWidthSection className="pb-6 sm:pb-8 md:pb-12">
-        <FlagExcerptSection flag={data.meta} showFlag>
-          <PageHeading className="text-center">{data.meta.name}</PageHeading>
-        </FlagExcerptSection>
-      </FullWidthSection>
+      <FlagExcerptSection flag={data.meta} showFlag>
+        <PageHeading className="text-center">{data.meta.name}</PageHeading>
+      </FlagExcerptSection>
       <Section className="flex flex-col items-center">
-        <article className="prose prose-neutral dark:prose-invert md:prose-lg lg:prose-xl">
-          {pageContent}
-        </article>
+        <article className="custom-prose">{pageContent}</article>
       </Section>
     </div>
   );

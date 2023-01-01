@@ -4,6 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import clsx from "clsx";
 import { forwardRef, PropsWithChildren } from "react";
 import { getThemedGradients } from "../../../colors";
 
@@ -21,11 +22,7 @@ export const GradientBackground = forwardRef<
 >(function GradientBackground({ colors, className, children }, ref) {
   const style = getThemedGradients(colors);
   return (
-    <div
-      className={`gradient-light dark:gradient-dark bg-gradient-to-br ${className}`}
-      style={style}
-      ref={ref}
-    >
+    <div className={clsx(className, "custom-gradient")} style={style} ref={ref}>
       {children}
     </div>
   );

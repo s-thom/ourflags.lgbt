@@ -16,7 +16,7 @@ export function Footer() {
         <Link
           href="https://sthom.kiwi"
           rel="external"
-          className="umami--click--sthom underline decoration-dotted hover:decoration-solid"
+          className="umami--click--sthom custom-link"
         >
           Stuart Thomson
         </Link>{" "}
@@ -24,7 +24,7 @@ export function Footer() {
         <Link
           href={`${GITHUB_URL}/#contributors`}
           rel="external"
-          className="underline decoration-dotted hover:decoration-solid"
+          className="umami--click--contributors custom-link"
         >
           contributors
         </Link>

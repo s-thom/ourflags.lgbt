@@ -4,7 +4,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { FullWidthSection } from "../../../lib/components/layout/FullWidthSection";
 import { PageHeading } from "../../../lib/components/layout/Headings";
 import { Section } from "../../../lib/components/layout/Section";
 import {
@@ -35,18 +34,16 @@ export default function LinkFormPage() {
             <FlagFormReorder />
           </Section>
           {CATEGORIES.map((category) => (
-            <FullWidthSection key={category.id}>
-              {/* CategorySectionWithContent is an async server component, but
-                Typescript doesn't know that. */}
-              {/* @ts-expect-error */}
-              <CategorySectionWithContent category={category}>
-                <FlagFormList
-                  flags={FLAGS.filter((flag) =>
-                    flag.categories.includes(category.id)
-                  )}
-                />
-              </CategorySectionWithContent>
-            </FullWidthSection>
+            // CategorySectionWithContent is an async server component, but
+            // Typescript doesn't know that.
+            // @ts-expect-error
+            <CategorySectionWithContent key={category.id} category={category}>
+              <FlagFormList
+                flags={FLAGS.filter((flag) =>
+                  flag.categories.includes(category.id)
+                )}
+              />
+            </CategorySectionWithContent>
           ))}
           <Section className="text-center">
             <LinkFormShare />

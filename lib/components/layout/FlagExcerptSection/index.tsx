@@ -4,14 +4,14 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import { useGradientStops } from "../../../colors";
 import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FlagMeta } from "../../../types";
+import { GradientBackgroundSection } from "../GradientBackgroundSection";
 import { MajorHeading } from "../Headings";
-import { Section } from "../Section";
 
 export interface FlagExcerptSectionProps extends PropsWithChildren {
   flag: FlagMeta;
@@ -27,43 +27,42 @@ export function FlagExcerptSection({
   showName,
   showReadMore,
 }: FlagExcerptSectionProps) {
-  const { style } = useGradientStops(flag.background);
-
   return (
-    <div
-      className={`gradient-light dark:gradient-dark group/flag-excerpt bg-gradient-to-br p-4 shadow-inner`}
-      style={style}
+    <GradientBackgroundSection
+      colors={flag.background}
+      innerClassName="group flex flex-col items-center justify-center gap-8 lg:flex-row"
     >
-      <Section className="flex flex-col items-center justify-center gap-8 lg:flex-row">
-        {showFlag && (
-          <div className="shrink-0 lg:self-start">
-            <Link href={`/flags/${flag.id}`}>
-              <Image
-                src={`/images/flags/${flag.id}_128.png`}
-                alt={flag.name}
-                height={128}
-                width={128 * FLAG_ASPECT_RATIO}
-                className="rounded-xl transition-transform group-focus-within/flag-excerpt:scale-105 group-hover/flag-excerpt:scale-105 motion-reduce:transition-none motion-reduce:group-focus-within/flag-excerpt:transform-none motion-reduce:group-hover/flag-excerpt:transform-none"
-              />
+      {showFlag && (
+        <div className="shrink-0 lg:self-start">
+          <Link href={`/flags/${flag.id}`}>
+            <Image
+              src={`/images/flags/${flag.id}_128.png`}
+              alt={flag.name}
+              height={128}
+              width={128 * FLAG_ASPECT_RATIO}
+              className={clsx(
+                "rounded-xl",
+                "custom-transition-hover-group group-focus-within:scale-105 group-hover:scale-105"
+              )}
+            />
+          </Link>
+        </div>
+      )}
+      <div className="flex w-full grow flex-col gap-1">
+        {showName && <MajorHeading>{flag.name}</MajorHeading>}
+        {children && <div>{children}</div>}
+        {showReadMore && (
+          <div className="custom-prose">
+            <Link
+              href={`/flags/${flag.id}`}
+              className="custom-link"
+              aria-label={`Read more about the ${flag.name} flag`}
+            >
+              Read more…
             </Link>
           </div>
         )}
-        <div className="flex w-full grow flex-col gap-1">
-          {showName && <MajorHeading>{flag.name}</MajorHeading>}
-          {children && <div>{children}</div>}
-          {showReadMore && (
-            <div className="prose prose-neutral dark:prose-invert">
-              <Link
-                href={`/flags/${flag.id}`}
-                className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
-                aria-label={`Read more about the ${flag.name} flag`}
-              >
-                Read more…
-              </Link>
-            </div>
-          )}
-        </div>
-      </Section>
-    </div>
+      </div>
+    </GradientBackgroundSection>
   );
 }

@@ -4,6 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import clsx from "clsx";
 import { ArrowRight, BookOpen, Github } from "lucide-react";
 import Link from "next/link";
 import { FlagFan } from "../../lib/components/client/FlagFan";
@@ -38,7 +39,7 @@ export default function LinkFormPage() {
       <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
         <Section className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Card title={<MajorHeading>Find out more</MajorHeading>}>
-            <div className="prose prose-neutral py-8 dark:prose-invert">
+            <div className="custom-prose py-8">
               <p>Want to know what a particular flag means?</p>
               <p>
                 Have a look through a list of widely-used pride flags, and learn
@@ -47,14 +48,23 @@ export default function LinkFormPage() {
             </div>
             <Link
               href="/flags"
-              className="group/card-button inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 transition-transform focus-within:scale-105  hover:scale-105 hover:bg-green-200 focus:bg-green-200 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none dark:border-green-700 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
+              className={clsx(
+                "group inline-flex gap-2 rounded-lg border p-2",
+                "border-green-400 bg-green-100 hover:bg-green-200 focus:bg-green-200",
+                "dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800",
+                "custom-transition-hover focus-within:scale-105 hover:scale-105"
+              )}
             >
               See all flags{" "}
-              <BookOpen className="transition-transform group-focus-within/card-button:translate-y-0.5 group-focus-within/card-button:rotate-3 group-hover/card-button:translate-y-0.5 group-hover/card-button:rotate-3 motion-reduce:transition-none motion-reduce:group-focus-within/card-button:transform-none motion-reduce:group-hover/card-button:transform-none" />
+              <BookOpen
+                className={clsx(
+                  "custom-transition-hover-group group-focus-within:rotate-2 group-hover:rotate-2"
+                )}
+              />
             </Link>
           </Card>
           <Card title={<MajorHeading>Share your flags</MajorHeading>}>
-            <div className="prose prose-neutral py-8 dark:prose-invert">
+            <div className="custom-prose py-8">
               <p>
                 Show the world what makes you <em>you</em> with a link to a list
                 of your flags.
@@ -67,14 +77,23 @@ export default function LinkFormPage() {
             </div>
             <Link
               href="/my-flags"
-              className="group/card-button inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 transition-transform focus-within:scale-105 hover:scale-105 hover:bg-green-200 focus:bg-green-200 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
+              className={clsx(
+                "group inline-flex gap-2 rounded-lg border p-2",
+                "border-green-400 bg-green-100 hover:bg-green-200 focus:bg-green-200",
+                "dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800",
+                "custom-transition-hover focus-within:scale-105 hover:scale-105"
+              )}
             >
               Get started{" "}
-              <ArrowRight className="transition-transform group-focus-within/card-button:translate-x-0.5 group-hover/card-button:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-focus-within/card-button:transform-none motion-reduce:group-hover/card-button:transform-none" />
+              <ArrowRight
+                className={clsx(
+                  "custom-transition-hover-group group-focus-within:translate-x-0.5 group-hover:translate-x-0.5"
+                )}
+              />
             </Link>
           </Card>
           <Card title={<MajorHeading>Get involved</MajorHeading>}>
-            <div className="prose prose-neutral py-8 dark:prose-invert">
+            <div className="custom-prose py-8">
               <p>
                 This website is pretty new, and needs some updating to be a full
                 reference for pride flags. That&lsquo;s where you come in.
@@ -90,10 +109,20 @@ export default function LinkFormPage() {
             <Link
               href={`${GITHUB_URL}/#readme`}
               rel="external"
-              className="group/card-button inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 transition-transform focus-within:scale-105 hover:scale-105 hover:bg-green-200 focus:bg-green-200 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
+              className={clsx(
+                "group inline-flex gap-2 rounded-lg border p-2",
+                "border-green-400 bg-green-100 hover:bg-green-200 focus:bg-green-200",
+                "dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800",
+                "custom-transition-hover focus-within:scale-105 hover:scale-105"
+              )}
             >
               View on GitHub{" "}
-              <Github className="transition-transform group-focus-within/card-button:-rotate-3 group-focus-within/card-button:-skew-x-6 group-hover/card-button:-rotate-3 group-hover/card-button:-skew-x-6 motion-reduce:transition-none motion-reduce:group-focus-within/card-button:transform-none motion-reduce:group-hover/card-button:transform-none" />
+              <Github
+                className={clsx(
+                  "duration-500",
+                  "custom-transition-hover-group group-focus-within:rotate-[360deg] group-hover:rotate-[360deg]"
+                )}
+              />
             </Link>
           </Card>
         </Section>

@@ -6,6 +6,7 @@
 
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -68,7 +69,7 @@ export function SiteName({ flags }: SiteNameProps) {
 
   return (
     <Link
-      className="group/sitename flex items-center gap-4"
+      className="group flex items-center gap-4"
       href={"/"}
       onMouseEnter={onHover}
     >
@@ -77,7 +78,10 @@ export function SiteName({ flags }: SiteNameProps) {
         alt=""
         width={64 * FLAG_ASPECT_RATIO}
         height={64}
-        className="aspect-[3/2] h-6 w-9 rounded transition-transform group-focus-within/sitename:scale-105 group-hover/sitename:scale-105 motion-reduce:transition-none motion-reduce:group-focus-within/sitename:transform-none motion-reduce:group-hover/sitename:transform-none sm:h-8 sm:w-12"
+        className={clsx(
+          "aspect-[3/2] h-6 w-9 rounded sm:h-8 sm:w-12",
+          "custom-transition-hover-group group-focus-within:scale-105 group-hover:scale-105"
+        )}
       />
       {isMounted && (
         <Image
@@ -90,9 +94,7 @@ export function SiteName({ flags }: SiteNameProps) {
           priority={false}
         />
       )}
-      <MajorHeading className="underline decoration-dotted hover:decoration-solid focus:decoration-solid">
-        {SITE_NAME}
-      </MajorHeading>
+      <MajorHeading className="custom-link">{SITE_NAME}</MajorHeading>
     </Link>
   );
 }

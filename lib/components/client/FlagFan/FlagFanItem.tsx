@@ -4,6 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { trackEvent } from "../../../analytics";
@@ -19,7 +20,10 @@ export interface FlagFanItemProps {
 export function FlagFanItem({ flag, onFocusIn, onFocusOut }: FlagFanItemProps) {
   return (
     <div
-      className="relative transition-transform focus-within:-translate-y-3 hover:-translate-y-3 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none"
+      className={clsx(
+        "relative",
+        "custom-transition-hover focus-within:-translate-y-3 hover:-translate-y-3"
+      )}
       onFocus={onFocusIn}
       onBlur={onFocusOut}
       onMouseEnter={onFocusIn}

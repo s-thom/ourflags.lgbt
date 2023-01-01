@@ -8,6 +8,7 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import clsx from "clsx";
 import { GripVertical, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -62,7 +63,10 @@ export function FlagFormChip({
       title={flag.name}
       height={24}
       width={24 * FLAG_ASPECT_RATIO}
-      className="rounded transition-transform group-focus-within/flag-chip:scale-110 group-hover/flag-chip:scale-110 motion-reduce:transition-none motion-reduce:group-focus-within/flag-chip:transform-none motion-reduce:group-hover/flag-chip:transform-none"
+      className={clsx(
+        "rounded",
+        "custom-transition-hover-group group-focus-within:scale-110 group-hover:scale-110"
+      )}
     />
   );
   let imageButton: ReactNode;
@@ -84,7 +88,10 @@ export function FlagFormChip({
 
   return (
     <div
-      className="gradient-light dark:gradient-dark group/flag-chip inline-flex gap-2 rounded-lg border border-neutral-500 bg-gradient-to-br p-2 dark:border-neutral-200"
+      className={clsx(
+        "group inline-flex gap-2 rounded-lg border border-neutral-500 p-2 dark:border-neutral-200",
+        "custom-gradient"
+      )}
       style={{ ...dndStyles, ...gradientStyles }}
       ref={setNodeRef}
     >
@@ -101,7 +108,7 @@ export function FlagFormChip({
       <Link
         title={flag.name}
         href={`/flags/${flag.id}`}
-        className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+        className="custom-link"
       >
         {flag.shortName ?? flag.name}
       </Link>
