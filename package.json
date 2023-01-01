@@ -14,8 +14,8 @@
     "lint:next": "next lint",
     "lint:prettier": "prettier -c \"{app,pages,lib,scripts}/**/*.{ts,tsx}\"",
     "lint-fix": "run-p lint-fix:*",
-    "lint-fix:next": "prettier --write \"{app,pages,lib,scripts}/**/*.{ts,tsx}\" && next lint --fix",
-    "lint-fix:prettier": "prettier --write \"{app,pages,lib,scripts}/**/*.{ts,tsx}\" && next lint --fix",
+    "lint-fix:next": "next lint --fix",
+    "lint-fix:prettier": "prettier --write \"{app,pages,lib,scripts}/**/*.{ts,tsx}\"",
     "test": "jest",
     "test:dev": "jest --watch"
   },

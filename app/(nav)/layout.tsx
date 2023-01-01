@@ -4,10 +4,11 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { Github, Menu, Moon } from "lucide-react";
+import { Github, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
+import { ThemeSelector } from "../../lib/components/client/ThemeSelector";
 import { MajorHeading } from "../../lib/components/layout/Headings";
 import { FLAG_ASPECT_RATIO, GITHUB_URL, SITE_NAME } from "../../lib/constants";
 
@@ -30,14 +31,16 @@ export default function RootLayout({ children }: PropsWithChildren) {
           </MajorHeading>
         </Link>
         <div className="flex flex-row items-center gap-4">
-          <Moon />
+          <ThemeSelector />
           <div className="group/nav relative">
-            <button className="flex items-center sm:hidden">
-              <Menu>
-                <title>Navigation</title>
-              </Menu>
+            <button
+              className="flex items-center sm:hidden"
+              title="Navigation"
+              aria-label="Navigation"
+            >
+              <Menu />
             </button>
-            <ul className="invisible absolute right-0 flex min-w-[12rem] flex-col gap-4 rounded-lg border border-neutral-400 bg-neutral-100 p-4 group-focus-within/nav:visible group-hover/nav:visible dark:border-neutral-800 dark:bg-neutral-900 sm:visible sm:relative sm:flex-row sm:border-none sm:bg-none sm:pl-0 sm:dark:border-none sm:dark:bg-transparent">
+            <ul className="invisible absolute right-0 z-20 flex min-w-[12rem] flex-col gap-4 rounded-lg border border-neutral-400 bg-neutral-100 p-4 group-focus-within/nav:visible group-hover/nav:visible dark:border-neutral-800 dark:bg-neutral-900 sm:visible sm:relative sm:flex-row sm:border-none sm:bg-none sm:pl-0 sm:dark:border-none sm:dark:bg-transparent">
               <li>
                 <Link
                   href={"/flags"}
