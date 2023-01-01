@@ -22,7 +22,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <ThemeSelector />
           <div className="group/nav relative">
             <button
-              className="flex items-center sm:hidden"
+              className="flex items-center transition-transform focus-within:scale-110 hover:scale-110 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none sm:hidden"
               title="Navigation"
               aria-label="Navigation"
             >
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                   className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
                 >
                   <span className="inline sm:hidden">Source code</span>
-                  <Github className="hidden sm:inline">
+                  <Github className="hidden transition-transform focus-within:scale-110 hover:scale-110 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none sm:inline">
                     <title>View source code on GitHub</title>
                   </Github>
                 </Link>

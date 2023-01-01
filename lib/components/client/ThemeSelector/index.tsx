@@ -32,6 +32,7 @@ export function ThemeSelector() {
 
   return (
     <button
+      className="transition-transform focus-within:scale-110 hover:scale-110 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none"
       onClick={toggleTheme}
       title="Change theme"
       aria-label="Change theme"

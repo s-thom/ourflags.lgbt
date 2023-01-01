@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,7 +19,7 @@ export interface FlagFanItemProps {
 export function FlagFanItem({ flag, onFocusIn, onFocusOut }: FlagFanItemProps) {
   return (
     <div
-      className="relative transition-transform focus-within:-translate-y-3 hover:-translate-y-3"
+      className="relative transition-transform focus-within:-translate-y-3 hover:-translate-y-3 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none"
       onFocus={onFocusIn}
       onBlur={onFocusOut}
       onMouseEnter={onFocusIn}

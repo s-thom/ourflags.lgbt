@@ -19,7 +19,7 @@ export async function FlagSummary({ flag }: FlagSummaryProps) {
 
   return (
     <div
-      className="gradient-light dark:gradient-dark flex items-center gap-4 rounded-xl bg-gradient-to-br p-2"
+      className="gradient-light dark:gradient-dark flex items-center gap-4 rounded-xl bg-gradient-to-br p-2 transition-transform focus-within:scale-105 hover:scale-105 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none"
       style={style}
     >
       <div className="shrink-0">

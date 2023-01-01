@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -31,19 +31,21 @@ export function FlagExcerptSection({
 
   return (
     <div
-      className={`gradient-light dark:gradient-dark bg-gradient-to-br p-4 shadow-inner`}
+      className={`gradient-light dark:gradient-dark group/flag-excerpt bg-gradient-to-br p-4 shadow-inner`}
       style={style}
     >
       <Section className="flex flex-col items-center justify-center gap-8 lg:flex-row">
         {showFlag && (
           <div className="shrink-0 lg:self-start">
-            <Image
-              src={`/images/flags/${flag.id}_128.png`}
-              alt={flag.name}
-              height={128}
-              width={128 * FLAG_ASPECT_RATIO}
-              className="rounded-xl"
-            />
+            <Link href={`/flags/${flag.id}`}>
+              <Image
+                src={`/images/flags/${flag.id}_128.png`}
+                alt={flag.name}
+                height={128}
+                width={128 * FLAG_ASPECT_RATIO}
+                className="rounded-xl transition-transform group-focus-within/flag-excerpt:scale-105 group-hover/flag-excerpt:scale-105 motion-reduce:transition-none motion-reduce:group-focus-within/flag-excerpt:transform-none motion-reduce:group-hover/flag-excerpt:transform-none"
+              />
+            </Link>
           </div>
         )}
         <div className="flex w-full grow flex-col gap-1">
@@ -54,6 +56,7 @@ export function FlagExcerptSection({
               <Link
                 href={`/flags/${flag.id}`}
                 className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
+                aria-label={`Read more about the ${flag.name} flag`}
               >
                 Read more…
               </Link>

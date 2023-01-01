@@ -47,9 +47,10 @@ export default function LinkFormPage() {
             </div>
             <Link
               href="/flags"
-              className="inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 hover:bg-green-200 focus:bg-green-200 dark:border-green-700 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
+              className="group/card-button inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 transition-transform focus-within:scale-105  hover:scale-105 hover:bg-green-200 focus:bg-green-200 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none dark:border-green-700 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
             >
-              See all flags <BookOpen />
+              See all flags{" "}
+              <BookOpen className="transition-transform group-focus-within/card-button:translate-y-0.5 group-focus-within/card-button:rotate-3 group-hover/card-button:translate-y-0.5 group-hover/card-button:rotate-3 motion-reduce:transition-none motion-reduce:group-focus-within/card-button:transform-none motion-reduce:group-hover/card-button:transform-none" />
             </Link>
           </Card>
           <Card title={<MajorHeading>Share your flags</MajorHeading>}>
@@ -66,9 +67,10 @@ export default function LinkFormPage() {
             </div>
             <Link
               href="/my-flags"
-              className="inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 hover:bg-green-200 focus:bg-green-200 dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
+              className="group/card-button inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 transition-transform focus-within:scale-105 hover:scale-105 hover:bg-green-200 focus:bg-green-200 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
             >
-              Get started <ArrowRight />
+              Get started{" "}
+              <ArrowRight className="transition-transform group-focus-within/card-button:translate-x-0.5 group-hover/card-button:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-focus-within/card-button:transform-none motion-reduce:group-hover/card-button:transform-none" />
             </Link>
           </Card>
           <Card title={<MajorHeading>Get involved</MajorHeading>}>
@@ -88,9 +90,10 @@ export default function LinkFormPage() {
             <Link
               href={`${GITHUB_URL}/#readme`}
               rel="external"
-              className="inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 hover:bg-green-200 focus:bg-green-200 dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
+              className="group/card-button inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 transition-transform focus-within:scale-105 hover:scale-105 hover:bg-green-200 focus:bg-green-200 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
             >
-              View on GitHub <Github />
+              View on GitHub{" "}
+              <Github className="transition-transform group-focus-within/card-button:-rotate-3 group-focus-within/card-button:-skew-x-6 group-hover/card-button:-rotate-3 group-hover/card-button:-skew-x-6 motion-reduce:transition-none motion-reduce:group-focus-within/card-button:transform-none motion-reduce:group-hover/card-button:transform-none" />
             </Link>
           </Card>
         </Section>

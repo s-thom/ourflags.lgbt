@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -69,7 +69,7 @@ export function LinkFormShare() {
           {shareUrl}
         </div>
         <button
-          className="rounded-lg bg-green-200 p-2 dark:bg-green-700"
+          className="rounded-lg bg-green-200 p-2 transition-transform focus-within:scale-105 hover:scale-105 motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none dark:bg-green-700"
           aria-label="Copy share URL"
           onClick={copyUrlToClipboard}
         >

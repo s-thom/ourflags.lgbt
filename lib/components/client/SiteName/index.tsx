@@ -77,7 +77,7 @@ export function SiteName({ flags }: SiteNameProps) {
         alt=""
         width={64 * FLAG_ASPECT_RATIO}
         height={64}
-        className="aspect-[3/2] h-6 w-9 rounded transition-transform group-focus-within/sitename:scale-105 group-hover/sitename:scale-105 sm:h-8 sm:w-12"
+        className="aspect-[3/2] h-6 w-9 rounded transition-transform group-focus-within/sitename:scale-105 group-hover/sitename:scale-105 motion-reduce:transition-none motion-reduce:group-focus-within/sitename:transform-none motion-reduce:group-hover/sitename:transform-none sm:h-8 sm:w-12"
       />
       {isMounted && (
         <Image
