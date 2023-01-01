@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -7,7 +7,6 @@
 import DarkModeListener from "../lib/components/client/DarkModeListener";
 import { GradientBackground } from "../lib/components/client/RainbowBackground";
 import { Footer } from "../lib/components/layout/Footer";
-import { Main } from "../lib/components/layout/Main";
 import { colorValidator } from "../lib/server/validation";
 import "./globals.css";
 
@@ -39,12 +38,9 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/dark.js" type="text/javascript" />
       </head>
-      <body className={`min-h-screen font-body text-black dark:text-white`}>
-        <GradientBackground
-          colors={BG_THEMES}
-          className="flex min-h-screen flex-col"
-        >
-          <Main>{children}</Main>
+      <body className={`h-full font-body text-neutral-900 dark:text-white`}>
+        <GradientBackground colors={BG_THEMES} className="flex h-full flex-col">
+          {children}
           <Footer />
           <DarkModeListener />
         </GradientBackground>

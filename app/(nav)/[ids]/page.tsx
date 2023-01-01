@@ -24,7 +24,7 @@ export default async function IdsPage({ params }: { params: { ids: string } }) {
       <Section className="py-8 sm:py-12 md:py-16">
         <PageHeading className="text-center">
           <Link
-            href="/"
+            href="/my-flags"
             className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
           >
             My flags

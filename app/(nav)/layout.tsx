@@ -10,6 +10,7 @@ import Link from "next/link";
 import { PropsWithChildren } from "react";
 import { ThemeSelector } from "../../lib/components/client/ThemeSelector";
 import { MajorHeading } from "../../lib/components/layout/Headings";
+import { Main } from "../../lib/components/layout/Main";
 import { FLAG_ASPECT_RATIO, GITHUB_URL, SITE_NAME } from "../../lib/constants";
 
 const ICON_ID = "progress-intersex";
@@ -40,7 +41,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             >
               <Menu />
             </button>
-            <ul className="invisible absolute right-0 z-20 flex min-w-[12rem] flex-col gap-4 rounded-lg border border-neutral-400 bg-neutral-100 p-4 group-focus-within/nav:visible group-hover/nav:visible dark:border-neutral-800 dark:bg-neutral-900 sm:visible sm:relative sm:flex-row sm:border-none sm:bg-none sm:pl-0 sm:dark:border-none sm:dark:bg-transparent">
+            <ul className="invisible absolute right-0 z-20 flex min-w-[12rem] flex-col gap-4 rounded-lg border border-neutral-400 bg-neutral-100 p-4 group-focus-within/nav:visible group-hover/nav:visible dark:border-neutral-800 dark:bg-neutral-900 sm:visible sm:relative sm:flex-row sm:border-none sm:bg-transparent sm:pl-0 sm:dark:border-none sm:dark:bg-transparent">
               <li>
                 <Link
                   href={"/flags"}
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
               <li className="sm:order-[-1]">
                 <Link
                   href={`${GITHUB_URL}/#readme`}
+                  rel="external"
                   className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
                 >
                   <span className="inline sm:hidden">Source code</span>
@@ -75,7 +77,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           </div>
         </div>
       </header>
-      {children}
+      <Main>{children}</Main>
     </>
   );
 }

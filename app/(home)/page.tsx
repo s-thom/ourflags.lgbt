@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -7,7 +7,7 @@
 import { ArrowRight, BookOpen, Github } from "lucide-react";
 import Link from "next/link";
 import { FlagFan } from "../../lib/components/client/FlagFan";
-import { ThemeSelector } from "../../lib/components/client/ThemeSelector";
+import { Card } from "../../lib/components/layout/Card";
 import {
   MajorHeading,
   PageHeading,
@@ -18,10 +18,7 @@ import { FLAGS } from "../../lib/data/flags/flags";
 
 export default function LinkFormPage() {
   return (
-    <div className="relative">
-      <div className="absolute top-2 right-2">
-        <ThemeSelector />
-      </div>
+    <div>
       <Section className="flex flex-col items-center py-8 text-center sm:py-12 md:py-16">
         <div>
           <PageHeading>
@@ -40,8 +37,7 @@ export default function LinkFormPage() {
       </Section>
       <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
         <Section className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div className="rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
-            <MajorHeading>Find out more</MajorHeading>
+          <Card title={<MajorHeading>Find out more</MajorHeading>}>
             <div className="prose prose-neutral py-8 dark:prose-invert">
               <p>Want to know what a particular flag means?</p>
               <p>
@@ -55,9 +51,8 @@ export default function LinkFormPage() {
             >
               See all flags <BookOpen />
             </Link>
-          </div>
-          <div className="rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
-            <MajorHeading>Share your flags</MajorHeading>
+          </Card>
+          <Card title={<MajorHeading>Share your flags</MajorHeading>}>
             <div className="prose prose-neutral py-8 dark:prose-invert">
               <p>
                 Show the world what makes you <em>you</em> with a link to a list
@@ -75,9 +70,8 @@ export default function LinkFormPage() {
             >
               Get started <ArrowRight />
             </Link>
-          </div>
-          <div className="rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
-            <MajorHeading>Get involved</MajorHeading>
+          </Card>
+          <Card title={<MajorHeading>Get involved</MajorHeading>}>
             <div className="prose prose-neutral py-8 dark:prose-invert">
               <p>
                 This website is pretty new, and needs some updating to be a full
@@ -93,11 +87,12 @@ export default function LinkFormPage() {
             </div>
             <Link
               href={`${GITHUB_URL}/#readme`}
+              rel="external"
               className="inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 hover:bg-green-200 focus:bg-green-200 dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
             >
               View on GitHub <Github />
             </Link>
-          </div>
+          </Card>
         </Section>
       </div>
     </div>

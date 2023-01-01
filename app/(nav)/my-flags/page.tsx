@@ -5,10 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { FullWidthSection } from "../../../lib/components/layout/FullWidthSection";
-import {
-  MajorHeading,
-  PageHeading,
-} from "../../../lib/components/layout/Headings";
+import { PageHeading } from "../../../lib/components/layout/Headings";
 import { Section } from "../../../lib/components/layout/Section";
 import {
   FlagFormList,
@@ -25,7 +22,9 @@ export default function LinkFormPage() {
     <div>
       <Section className="py-8 text-center sm:py-12 md:py-16">
         <PageHeading>Select your flags</PageHeading>
-        <MajorHeading>and get a link to share who you are</MajorHeading>
+        <p className="font-body text-2xl sm:text-3xl md:text-4xl">
+          and get a link to share who you are
+        </p>
       </Section>
       <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
         <LinkFormContext>
