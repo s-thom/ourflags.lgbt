@@ -62,7 +62,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
               </li>
               <li className="sm:order-[-1]">
                 <Link
-                  href={GITHUB_URL}
+                  href={`${GITHUB_URL}/#readme`}
                   className="underline decoration-dotted hover:decoration-solid focus:decoration-solid"
                 >
                   <span className="inline sm:hidden">Source code</span>

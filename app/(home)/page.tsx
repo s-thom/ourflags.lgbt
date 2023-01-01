@@ -4,19 +4,24 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen, Github } from "lucide-react";
 import Link from "next/link";
 import { FlagFan } from "../../lib/components/client/FlagFan";
+import { ThemeSelector } from "../../lib/components/client/ThemeSelector";
 import {
   MajorHeading,
   PageHeading,
 } from "../../lib/components/layout/Headings";
 import { Section } from "../../lib/components/layout/Section";
+import { GITHUB_URL } from "../../lib/constants";
 import { FLAGS } from "../../lib/data/flags/flags";
 
 export default function LinkFormPage() {
   return (
-    <div>
+    <div className="relative">
+      <div className="absolute top-2 right-2">
+        <ThemeSelector />
+      </div>
       <Section className="flex flex-col items-center py-8 text-center sm:py-12 md:py-16">
         <div>
           <PageHeading>
@@ -34,8 +39,24 @@ export default function LinkFormPage() {
         </div>
       </Section>
       <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
-        <Section className="flex flex-col gap-4 sm:flex-row">
-          <div className="grow rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
+        <Section className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
+            <MajorHeading>Find out more</MajorHeading>
+            <div className="prose prose-neutral py-8 dark:prose-invert">
+              <p>Want to know what a particular flag means?</p>
+              <p>
+                Have a look through a list of widely-used pride flags, and learn
+                more about their history and who they represent.
+              </p>
+            </div>
+            <Link
+              href="/flags"
+              className="inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 hover:bg-green-200 focus:bg-green-200 dark:border-green-700 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
+            >
+              See all flags <BookOpen />
+            </Link>
+          </div>
+          <div className="rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
             <MajorHeading>Share your flags</MajorHeading>
             <div className="prose prose-neutral py-8 dark:prose-invert">
               <p>
@@ -44,7 +65,7 @@ export default function LinkFormPage() {
               </p>
               <p>
                 Share your link wherever you feel is appropriate. This could be
-                as a status, or in a profile description where you can&apos;t
+                as a status, or in a profile description where you can&lsquo;t
                 use custom emoji.
               </p>
             </div>
@@ -55,20 +76,26 @@ export default function LinkFormPage() {
               Get started <ArrowRight />
             </Link>
           </div>
-          <div className="grow rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
-            <MajorHeading>Find out more</MajorHeading>
+          <div className="rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
+            <MajorHeading>Get involved</MajorHeading>
             <div className="prose prose-neutral py-8 dark:prose-invert">
-              <p>Want to what a particular flag means?</p>
               <p>
-                Have a look through a list of widely-used pride flags, and learn
-                more about their history and who they represent.
+                This website is pretty new, and needs some updating to be a full
+                reference for pride flags. That&lsquo;s where you come in.
+              </p>
+              <p>
+                This project is open source, and contributions are welcome. If
+                there&lsquo;s a flag that you wish to be added, or text content
+                that needs to be updated, you can create an issue in the issue
+                tracker. If you&lsquo;re able to, contributing those changes
+                yourself is even better!
               </p>
             </div>
             <Link
-              href="/flags"
-              className="inline-flex gap-2 rounded-lg border border-neutral-400 bg-neutral-100 p-2 hover:bg-neutral-200 focus:bg-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+              href={`${GITHUB_URL}/#readme`}
+              className="inline-flex gap-2 rounded-lg border border-green-400 bg-green-100 p-2 hover:bg-green-200 focus:bg-green-200 dark:border-green-800 dark:bg-green-900 dark:hover:bg-green-800 dark:focus:bg-green-800"
             >
-              See all flags <BookOpen />
+              View on GitHub <Github />
             </Link>
           </div>
         </Section>
