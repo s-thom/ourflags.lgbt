@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -6,7 +6,10 @@
 
 "use client";
 
+import clsx from "clsx";
+import { Plus } from "lucide-react";
 import { useMemo } from "react";
+import { trackEvent } from "../../analytics";
 import { FlagMeta } from "../../types";
 import { FlagFormChip } from "./chip";
 import { useLinkFormState, useSelectedFlags } from "./context";
@@ -23,10 +26,14 @@ export function FlagFormList({ flags }: FlagFormListProps) {
     return allUnselected.filter((flag) => allowedFlagIds.includes(flag.id));
   }, [allUnselected, flags]);
 
-  const addFlag = (id: string) =>
+  const addFlag = (id: string) => {
     setLinkFormState((current) =>
       current.includes(id) ? current : [...current, id]
     );
+    trackEvent("click", "Add flag", {
+      flagId: id,
+    });
+  };
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -34,7 +41,18 @@ export function FlagFormList({ flags }: FlagFormListProps) {
         <FlagFormChip
           key={flag.id}
           flag={flag}
-          onAdd={() => addFlag(flag.id)}
+          onFlagClick={() => addFlag(flag.id)}
+          after={
+            <button
+              className={clsx(
+                "custom-transition-hover focus-within:scale-110 hover:scale-110"
+              )}
+              aria-label={`Add ${flag.name}`}
+              onClick={() => addFlag(flag.id)}
+            >
+              <Plus />
+            </button>
+          }
         />
       ))}
     </div>

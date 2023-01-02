@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import clsx from "clsx";
-import { HTMLAttributes, useMemo } from "react";
+import { HTMLAttributes } from "react";
 import { GradientBackground } from "../client/RainbowBackground";
 import { Section } from "./Section";
 
@@ -24,10 +24,7 @@ export function GradientBackgroundSection({
   return (
     <GradientBackground
       className={clsx(className, "p-4")}
-      colors={useMemo(
-        () => ({ light: colors.light, dark: colors.dark ?? colors.light }),
-        [colors]
-      )}
+      colors={colors}
       {...rest}
     >
       <Section className={innerClassName}>{children}</Section>

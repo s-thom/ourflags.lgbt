@@ -6,122 +6,68 @@
 
 "use client";
 
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
-import { GripVertical, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode, useCallback } from "react";
-import { trackEvent } from "../../analytics";
-import { useGradientStops } from "../../colors";
+import { CSSProperties, forwardRef, ReactNode } from "react";
 import { FLAG_ASPECT_RATIO } from "../../constants";
 import { FlagMeta } from "../../types";
+import { GradientBackground } from "../client/RainbowBackground";
 
 export interface FlagFormChipProps {
   flag: FlagMeta;
-  hasDragHandle?: boolean;
-  onAdd?: () => void;
-  onRemove?: () => void;
+  className?: string;
+  style?: CSSProperties;
+  before?: ReactNode;
+  after?: ReactNode;
+  onFlagClick?: () => void;
 }
 
-export function FlagFormChip({
-  flag,
-  hasDragHandle,
-  onAdd,
-  onRemove,
-}: FlagFormChipProps) {
-  const hasAdditionalActions = !!(hasDragHandle || onRemove || onAdd);
-
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: flag.id, disabled: !hasAdditionalActions });
-
-  const { style: gradientStyles } = useGradientStops(flag.background);
-
-  const dndStyles = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
-  const onAddClick = useCallback(() => {
-    trackEvent("click", "Add flag", {
-      flagId: flag.id,
-    });
-    onAdd?.();
-  }, [flag.id, onAdd]);
-  const onRemoveClick = useCallback(() => {
-    trackEvent("click", "Remove flag", {
-      flagId: flag.id,
-    });
-    onRemove?.();
-  }, [flag.id, onRemove]);
-
-  const image = (
-    <Image
-      src={`/images/flags/${flag.id}_24.png`}
-      alt={flag.name}
-      title={flag.name}
-      height={24}
-      width={24 * FLAG_ASPECT_RATIO}
-      className={clsx(
-        "rounded",
-        "custom-transition-hover-group group-focus-within:scale-110 group-hover:scale-110"
-      )}
-    />
-  );
-  let imageButton: ReactNode;
-  if (onAdd) {
-    imageButton = (
-      <button aria-label={`Add: ${flag.name}`} onClick={onAddClick}>
-        {image}
-      </button>
-    );
-  } else if (onRemove) {
-    imageButton = (
-      <button aria-label={`Remove: ${flag.name}`} onClick={onRemoveClick}>
-        {image}
-      </button>
-    );
-  } else {
-    imageButton = image;
-  }
-
-  return (
-    <div
-      className={clsx(
-        "group inline-flex gap-2 rounded-lg border border-neutral-500 p-2 dark:border-neutral-200",
-        "custom-gradient"
-      )}
-      style={{ ...dndStyles, ...gradientStyles }}
-      ref={setNodeRef}
-    >
-      {hasDragHandle && (
-        <button
-          aria-label={`Move: ${flag.name}`}
-          {...listeners}
-          {...attributes}
-        >
-          <GripVertical />
-        </button>
-      )}
-      {imageButton}
-      <Link
+export const FlagFormChip = forwardRef<HTMLDivElement, FlagFormChipProps>(
+  function FlagFormChip(
+    { flag, className, style, before, after, onFlagClick },
+    ref
+  ) {
+    const image = (
+      <Image
+        src={`/images/flags/${flag.id}_24.png`}
+        alt={flag.name}
         title={flag.name}
-        href={`/flags/${flag.id}`}
-        className="custom-link"
+        height={24}
+        width={24 * FLAG_ASPECT_RATIO}
+        className="rounded"
+      />
+    );
+    let imageButton: ReactNode;
+    if (onFlagClick) {
+      imageButton = <button onClick={onFlagClick}>{image}</button>;
+    } else {
+      imageButton = image;
+    }
+
+    return (
+      <GradientBackground
+        className={clsx(
+          className,
+          "inline-flex items-center gap-3 rounded-lg border border-neutral-500 p-3 dark:border-neutral-200 md:gap-3 md:p-2"
+        )}
+        colors={flag.background}
+        style={style}
+        ref={ref}
       >
-        {flag.shortName ?? flag.name}
-      </Link>
-      {onAdd && (
-        <button aria-label={`Add: ${flag.name}`} onClick={onAddClick}>
-          <Plus />
-        </button>
-      )}
-      {onRemove && (
-        <button aria-label={`Remove: ${flag.name}`} onClick={onRemoveClick}>
-          <Trash2 />
-        </button>
-      )}
-    </div>
-  );
-}
+        {before}
+        <div className={clsx("inline-flex grow items-center gap-2")}>
+          {imageButton}
+          <Link
+            title={flag.name}
+            href={`/flags/${flag.id}`}
+            className="custom-link"
+          >
+            {flag.shortName ?? flag.name}
+          </Link>
+        </div>
+        {after}
+      </GradientBackground>
+    );
+  }
+);
