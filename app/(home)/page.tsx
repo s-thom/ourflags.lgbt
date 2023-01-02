@@ -54,12 +54,8 @@ export default function HomePage() {
               </p>
             </div>
             <Link href="/flags" className={buttonClassNames}>
-              See all flags{" "}
-              <BookOpen
-                className={clsx(
-                  "custom-transition-hover-group group-focus-within:rotate-2 group-hover:rotate-2"
-                )}
-              />
+              <span>See all flags</span>
+              <BookOpen />
             </Link>
           </Card>
           <Card title={<MajorHeading>Share your flags</MajorHeading>}>
@@ -75,12 +71,8 @@ export default function HomePage() {
               </p>
             </div>
             <Link href="/my-flags" className={buttonClassNames}>
-              Get started{" "}
-              <ArrowRight
-                className={clsx(
-                  "custom-transition-hover-group group-focus-within:translate-x-0.5 group-hover:translate-x-0.5"
-                )}
-              />
+              <span>Get started</span>
+              <ArrowRight />
             </Link>
           </Card>
           <Card title={<MajorHeading>Get involved</MajorHeading>}>
@@ -102,13 +94,8 @@ export default function HomePage() {
               rel="external"
               className={buttonClassNames}
             >
-              View on GitHub{" "}
-              <Github
-                className={clsx(
-                  "duration-500",
-                  "custom-transition-hover-group group-focus-within:rotate-[360deg] group-hover:rotate-[360deg]"
-                )}
-              />
+              <span>View on GitHub</span>
+              <Github />
             </Link>
           </Card>
         </Section>

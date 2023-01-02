@@ -24,6 +24,7 @@ export default async function FlagsIdHead({
         overrideFaviconFlags="default"
         overrideOgFlags="all"
         ogImageStyle="title"
+        noIndex
       />
     );
   }
@@ -35,6 +36,7 @@ export default async function FlagsIdHead({
       path={`/${buildShareString(flags)}`}
       flags={flags}
       ogImageStyle="my-flags"
+      noIndex
     />
   );
 }

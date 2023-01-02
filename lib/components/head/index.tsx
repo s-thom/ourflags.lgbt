@@ -54,6 +54,7 @@ export interface HeadTagsProps {
   overrideFaviconFlags?: "default";
   overrideOgFlags?: "all";
   ogImageStyle?: string;
+  noIndex?: boolean;
 }
 
 export function HeadTags({
@@ -64,6 +65,7 @@ export function HeadTags({
   overrideFaviconFlags,
   overrideOgFlags,
   ogImageStyle,
+  noIndex,
 }: HeadTagsProps) {
   const canonicalUrl = new URL(path, BASE_URL).toString();
 
@@ -112,6 +114,7 @@ export function HeadTags({
             : undefined,
         }}
         twitter={{ cardType: "summary_large_image" }}
+        noindex={noIndex}
       />
       <script
         async

@@ -5,6 +5,7 @@
     ".vscode/",
     "content/",
     "docs/",
+    "public/robots.txt",
     ".github/ISSUE_TEMPLATE",
     ".github/PULL_REQUEST_TEMPLATE",
     ".github/license-check/header-MPLv2.txt"
