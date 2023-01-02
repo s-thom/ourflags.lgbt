@@ -10,9 +10,9 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { CSSProperties, forwardRef, ReactNode } from "react";
-import { FLAG_ASPECT_RATIO } from "../../constants";
-import { FlagMeta } from "../../types";
-import { GradientBackground } from "../client/RainbowBackground";
+import { FLAG_ASPECT_RATIO } from "../../../constants";
+import { FlagMeta } from "../../../types";
+import { GradientBackground } from "../RainbowBackground";
 
 export interface FlagFormChipProps {
   flag: FlagMeta;

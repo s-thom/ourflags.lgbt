@@ -31,4 +31,4 @@ A quick (non-lawyer) summary.
 
 ---
 
-![The goose from Untitled Goose Game holding a Progress pride flag](./lib/components/client/Goose/goose.png)
+![The goose from Untitled Goose Game holding a Progress pride flag](./lib/components/client-only/Goose/goose.png)

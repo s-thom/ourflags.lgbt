@@ -6,8 +6,8 @@
 
 import { PropsWithChildren } from "react";
 import { CategoryMeta } from "../../../types";
-import { GradientBackgroundSection } from "../GradientBackgroundSection";
-import { MajorHeading } from "../Headings";
+import { GradientBackgroundSection } from "../../layout/GradientBackgroundSection";
+import { MajorHeading } from "../../layout/Headings";
 
 export interface CategoryExcerptSectionProps extends PropsWithChildren {
   category: CategoryMeta;

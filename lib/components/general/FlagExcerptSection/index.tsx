@@ -10,8 +10,8 @@ import Link from "next/link";
 import { PropsWithChildren } from "react";
 import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FlagMeta } from "../../../types";
-import { GradientBackgroundSection } from "../GradientBackgroundSection";
-import { MajorHeading } from "../Headings";
+import { GradientBackgroundSection } from "../../layout/GradientBackgroundSection";
+import { MajorHeading } from "../../layout/Headings";
 
 export interface FlagExcerptSectionProps extends PropsWithChildren {
   flag: FlagMeta;

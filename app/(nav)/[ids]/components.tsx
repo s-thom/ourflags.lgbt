@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { PropsWithChildren } from "react";
-import { FlagExcerptSection } from "../../../lib/components/layout/FlagExcerptSection";
+import { FlagExcerptSection } from "../../../lib/components/general/FlagExcerptSection";
 import { getFlagData } from "../../../lib/server/getData";
 import { renderMarkdownToReact } from "../../../lib/server/remark";
 import { FlagMeta } from "../../../lib/types";

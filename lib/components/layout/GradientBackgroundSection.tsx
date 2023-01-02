@@ -6,7 +6,7 @@
 
 import clsx from "clsx";
 import { HTMLAttributes } from "react";
-import { GradientBackground } from "../client/RainbowBackground";
+import { GradientBackground } from "../client-only/RainbowBackground";
 import { Section } from "./Section";
 
 interface GradientBackgroundSectionProps extends HTMLAttributes<HTMLElement> {

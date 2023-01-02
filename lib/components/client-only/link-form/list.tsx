@@ -9,8 +9,8 @@
 import clsx from "clsx";
 import { Plus } from "lucide-react";
 import { useMemo } from "react";
-import { trackEvent } from "../../analytics";
-import { FlagMeta } from "../../types";
+import { trackEvent } from "../../../analytics";
+import { FlagMeta } from "../../../types";
 import { FlagFormChip } from "./chip";
 import { useLinkFormState, useSelectedFlags } from "./context";
 

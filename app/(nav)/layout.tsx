@@ -8,8 +8,8 @@ import clsx from "clsx";
 import { Github, Menu } from "lucide-react";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import { SiteName } from "../../lib/components/client/SiteName";
-import { ThemeSelector } from "../../lib/components/client/ThemeSelector";
+import { SiteName } from "../../lib/components/client-only/SiteName";
+import { ThemeSelector } from "../../lib/components/client-only/ThemeSelector";
 import { Main } from "../../lib/components/layout/Main";
 import { GITHUB_URL } from "../../lib/constants";
 import { FLAGS } from "../../lib/data/flags/flags";
@@ -40,20 +40,7 @@ export default function NavLayout({ children }: PropsWithChildren) {
                 "sm:visible sm:relative sm:flex-row sm:border-none sm:bg-transparent sm:pl-0 sm:dark:border-none sm:dark:bg-transparent"
               )}
             >
-              <li>
-                <Link href={"/flags"} className="custom-link">
-                  All flags
-                </Link>
-              </li>
-              <li>
-                <Link href={"/my-flags"} className="custom-link">
-                  Share your flags
-                </Link>
-              </li>
-              <li className="sm:hidden">
-                <hr />
-              </li>
-              <li className="sm:order-[-1]">
+              <li className="order-10 sm:order-none">
                 <Link
                   href={`${GITHUB_URL}/#readme`}
                   rel="external"
@@ -68,6 +55,19 @@ export default function NavLayout({ children }: PropsWithChildren) {
                   >
                     <title>View source code on GitHub</title>
                   </Github>
+                </Link>
+              </li>
+              <li className="order-11 sm:order-none sm:hidden">
+                <hr />
+              </li>
+              <li>
+                <Link href={"/flags"} className="custom-link">
+                  All flags
+                </Link>
+              </li>
+              <li>
+                <Link href={"/my-flags"} className="custom-link">
+                  Share your flags
                 </Link>
               </li>
             </ul>

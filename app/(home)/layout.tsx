@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { PropsWithChildren } from "react";
-import { ThemeSelector } from "../../lib/components/client/ThemeSelector";
+import { ThemeSelector } from "../../lib/components/client-only/ThemeSelector";
 import { Main } from "../../lib/components/layout/Main";
 
 export default function HomeLayout({ children }: PropsWithChildren) {

@@ -6,7 +6,7 @@
 
 import Link from "next/link";
 import { GITHUB_URL } from "../../constants";
-import { Goose } from "../client/Goose";
+import { Goose } from "../client-only/Goose";
 
 export function Footer() {
   return (

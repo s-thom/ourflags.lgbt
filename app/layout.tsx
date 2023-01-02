@@ -4,8 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import DarkModeListener from "../lib/components/client/DarkModeListener";
-import { GradientBackground } from "../lib/components/client/RainbowBackground";
+import DarkModeListener from "../lib/components/client-only/DarkModeListener";
+import { GradientBackground } from "../lib/components/client-only/RainbowBackground";
 import { Footer } from "../lib/components/layout/Footer";
 import { colorValidator } from "../lib/server/validation";
 import "./globals.css";

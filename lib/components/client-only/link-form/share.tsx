@@ -10,9 +10,9 @@ import clsx from "clsx";
 import { ClipboardCheck, ClipboardCopy, ClipboardX } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { trackEvent } from "../../analytics";
-import { BASE_URL } from "../../constants";
-import { buildShareString } from "../../shortcodes";
+import { trackEvent } from "../../../analytics";
+import { BASE_URL } from "../../../constants";
+import { buildShareString } from "../../../shortcodes";
 import { useSelectedFlags } from "./context";
 
 export function LinkFormShare() {

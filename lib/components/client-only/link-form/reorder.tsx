@@ -27,7 +27,7 @@ import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
 import { ArrowDown, ArrowUp, GripVertical, Trash2 } from "lucide-react";
 import { CSSProperties, useCallback } from "react";
-import { trackEvent } from "../../analytics";
+import { trackEvent } from "../../../analytics";
 import { FlagFormChip, FlagFormChipProps } from "./chip";
 import { useLinkFormState, useSelectedFlags } from "./context";
 

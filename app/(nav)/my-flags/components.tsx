@@ -5,7 +5,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import { PropsWithChildren } from "react";
-import { CategoryExcerptSection } from "../../../lib/components/layout/CategoryExcerptSection";
+import { CategoryExcerptSection } from "../../../lib/components/general/CategoryExcerptSection";
 import { getCategoryData } from "../../../lib/server/getData";
 import { renderMarkdownToReact } from "../../../lib/server/remark";
 import { CategoryMeta } from "../../../lib/types";
