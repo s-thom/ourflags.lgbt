@@ -7,7 +7,7 @@
 "use client";
 
 import clsx from "clsx";
-import { Check, ClipboardCopy, Cross } from "lucide-react";
+import { ClipboardCheck, ClipboardCopy, ClipboardX } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { trackEvent } from "../../analytics";
@@ -65,21 +65,34 @@ export function LinkFormShare() {
   }
   return (
     <div>
-      <div className="m-2 inline-flex min-w-[24rem] max-w-full gap-2 rounded-xl border border-green-400 bg-green-100 p-2 dark:border-green-800 dark:bg-green-900">
-        <div className="grow select-all overflow-auto rounded-lg bg-green-200 p-2 px-3 dark:bg-green-700">
+      <div className="m-2 inline-flex min-w-[24rem] max-w-full gap-2 rounded-xl border border-green-400 bg-green-200 p-2 dark:border-green-800 dark:bg-green-900">
+        <div
+          className={clsx(
+            "grow select-all overflow-auto rounded-lg p-2 px-3",
+            "bg-green-300 focus-within:bg-green-400 hover:bg-green-400",
+            "dark:bg-green-800 dark:focus-within:bg-green-700 dark:hover:bg-green-700",
+            "custom-transition-hover"
+          )}
+        >
           {shareUrl}
         </div>
         <button
           className={clsx(
-            "rounded-lg bg-green-200 p-2 dark:bg-green-700",
+            "rounded-lg p-2",
+            copyState !== "error"
+              ? "bg-green-300 focus-within:bg-green-400 hover:bg-green-400"
+              : "bg-amber-300 focus-within:bg-amber-400 hover:bg-amber-400",
+            copyState !== "error"
+              ? "dark:bg-green-800 dark:focus-within:bg-green-700 dark:hover:bg-green-700"
+              : "dark:bg-amber-800 dark:focus-within:bg-amber-700 dark:hover:bg-amber-700",
             "custom-transition-hover focus-within:scale-105 hover:scale-105"
           )}
           aria-label="Copy share URL"
           onClick={copyUrlToClipboard}
         >
           {copyState === "ready" && <ClipboardCopy />}
-          {copyState === "copied" && <Check />}
-          {copyState === "error" && <Cross />}
+          {copyState === "copied" && <ClipboardCheck />}
+          {copyState === "error" && <ClipboardX />}
         </button>
       </div>
       <div>

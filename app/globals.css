@@ -79,16 +79,16 @@ body {
   }
 
   .custom-link {
-    @apply underline decoration-dotted hover:decoration-solid focus:decoration-solid;
+    @apply underline decoration-dotted focus-within:decoration-solid hover:decoration-solid;
   }
 }
 
 @layer utilities {
   .custom-transition-hover {
-    @apply transition-transform motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none;
+    @apply transition-all motion-reduce:transition-none motion-reduce:focus-within:transform-none motion-reduce:hover:transform-none;
   }
 
   .custom-transition-hover-group {
-    @apply transition-transform motion-reduce:transition-none motion-reduce:group-focus-within:transform-none motion-reduce:group-hover:transform-none;
+    @apply transition-all motion-reduce:transition-none motion-reduce:group-focus-within:transform-none motion-reduce:group-hover:transform-none;
   }
 }
