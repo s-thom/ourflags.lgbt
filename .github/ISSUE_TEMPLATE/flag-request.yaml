@@ -1,7 +1,7 @@
 name: Flag Request
 description: Request a new flag to be added
 title: "[Flag Request]: "
-labels: ["enhancement"]
+labels: ["enhancement", "flag request"]
 body:
   - type: markdown
     attributes:

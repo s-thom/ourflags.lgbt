@@ -26,8 +26,8 @@ export default function HomePage() {
   );
 
   return (
-    <div>
-      <Section className="flex flex-col items-center py-4 text-center sm:py-12 md:py-16">
+    <>
+      <Section className="flex flex-col items-center py-8 text-center sm:py-12 md:py-16">
         <div>
           <PageHeading>
             <span className="font-body font-normal">These are </span>
@@ -43,63 +43,61 @@ export default function HomePage() {
           <FlagFan flags={FLAGS} />
         </div>
       </Section>
-      <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
-        <Section className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Card title={<MajorHeading>Find out more</MajorHeading>}>
-            <div className="custom-prose">
-              <p>Want to know what a particular flag means?</p>
-              <p>
-                Have a look through a list of widely-used pride flags, and learn
-                more about their history and who they represent.
-              </p>
-            </div>
-            <Link href="/flags" className={buttonClassNames}>
-              <span>See all flags</span>
-              <BookOpen />
-            </Link>
-          </Card>
-          <Card title={<MajorHeading>Share your flags</MajorHeading>}>
-            <div className="custom-prose">
-              <p>
-                Show the world what makes you <em>you</em> with a link to a list
-                of your flags.
-              </p>
-              <p>
-                Share your link wherever you feel is appropriate. This could be
-                as a status, or in a profile description where you can&lsquo;t
-                use custom emoji.
-              </p>
-            </div>
-            <Link href="/my-flags" className={buttonClassNames}>
-              <span>Get started</span>
-              <ArrowRight />
-            </Link>
-          </Card>
-          <Card title={<MajorHeading>Get involved</MajorHeading>}>
-            <div className="custom-prose">
-              <p>
-                This website is pretty new, and needs some updating to be a full
-                reference for pride flags. That&lsquo;s where you come in.
-              </p>
-              <p>
-                This project is open source, and contributions are welcome. If
-                there&lsquo;s a flag that you wish to be added, or text content
-                that needs to be updated, you can create an issue in the issue
-                tracker. If you&lsquo;re able to, contributing those changes
-                yourself is even better!
-              </p>
-            </div>
-            <Link
-              href={`${GITHUB_URL}/#readme`}
-              rel="external"
-              className={buttonClassNames}
-            >
-              <span>View on GitHub</span>
-              <Github />
-            </Link>
-          </Card>
-        </Section>
-      </div>
-    </div>
+      <Section className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <Card title={<MajorHeading>Find out more</MajorHeading>}>
+          <div className="custom-prose">
+            <p>Want to know what a particular flag means?</p>
+            <p>
+              Have a look through a list of widely-used pride flags, and learn
+              more about their history and who they represent.
+            </p>
+          </div>
+          <Link href="/flags" className={buttonClassNames}>
+            <span>See all flags</span>
+            <BookOpen />
+          </Link>
+        </Card>
+        <Card title={<MajorHeading>Share your flags</MajorHeading>}>
+          <div className="custom-prose">
+            <p>
+              Show the world what makes you <em>you</em> with a link to a list
+              of your flags.
+            </p>
+            <p>
+              Share your link wherever you feel is appropriate. This could be as
+              a status, or in a profile description where you can&lsquo;t use
+              custom emoji.
+            </p>
+          </div>
+          <Link href="/my-flags" className={buttonClassNames}>
+            <span>Get started</span>
+            <ArrowRight />
+          </Link>
+        </Card>
+        <Card title={<MajorHeading>Get involved</MajorHeading>}>
+          <div className="custom-prose">
+            <p>
+              This website is pretty new, and needs some updating to be a full
+              reference for pride flags. That&lsquo;s where you come in.
+            </p>
+            <p>
+              This project is open source, and contributions are welcome. If
+              there&lsquo;s a flag that you wish to be added, or text content
+              that needs to be updated, you can create an issue in the issue
+              tracker. If you&lsquo;re able to, contributing those changes
+              yourself is even better!
+            </p>
+          </div>
+          <Link
+            href={`${GITHUB_URL}/#readme`}
+            rel="external"
+            className={buttonClassNames}
+          >
+            <span>View on GitHub</span>
+            <Github />
+          </Link>
+        </Card>
+      </Section>
+    </>
   );
 }

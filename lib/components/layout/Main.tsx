@@ -8,7 +8,10 @@ import { PropsWithChildren } from "react";
 
 export function Main({ children, ...rest }: PropsWithChildren) {
   return (
-    <main className="grow overflow-hidden pb-10 md:pb-20" {...rest}>
+    <main
+      className="flex grow flex-col gap-4 overflow-hidden pb-10 md:gap-6 md:pb-20 lg:gap-8"
+      {...rest}
+    >
       {children}
     </main>
   );

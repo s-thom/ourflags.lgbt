@@ -18,38 +18,36 @@ import { CategorySectionWithContent } from "./components";
 
 export default function LinkFormPage() {
   return (
-    <div>
+    <>
       <Section className="py-8 text-center sm:py-12 md:py-16">
         <PageHeading>Select your flags</PageHeading>
         <p className="font-body text-2xl sm:text-3xl md:text-4xl">
           and get a link to share who you are
         </p>
       </Section>
-      <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
-        <LinkFormContext>
-          <Section className="text-center">
-            <LinkFormShare />
-          </Section>
-          <Section className="text-center">
-            <FlagFormReorder />
-          </Section>
-          {CATEGORIES.map((category) => (
-            // CategorySectionWithContent is an async server component, but
-            // Typescript doesn't know that.
-            // @ts-expect-error
-            <CategorySectionWithContent key={category.id} category={category}>
-              <FlagFormList
-                flags={FLAGS.filter((flag) =>
-                  flag.categories.includes(category.id)
-                )}
-              />
-            </CategorySectionWithContent>
-          ))}
-          <Section className="text-center">
-            <LinkFormShare />
-          </Section>
-        </LinkFormContext>
-      </div>
-    </div>
+      <LinkFormContext>
+        <Section className="text-center">
+          <LinkFormShare />
+        </Section>
+        <Section className="text-center">
+          <FlagFormReorder />
+        </Section>
+        {CATEGORIES.map((category) => (
+          // CategorySectionWithContent is an async server component, but
+          // Typescript doesn't know that.
+          // @ts-expect-error
+          <CategorySectionWithContent key={category.id} category={category}>
+            <FlagFormList
+              flags={FLAGS.filter((flag) =>
+                flag.categories.includes(category.id)
+              )}
+            />
+          </CategorySectionWithContent>
+        ))}
+        <Section className="text-center">
+          <LinkFormShare />
+        </Section>
+      </LinkFormContext>
+    </>
   );
 }

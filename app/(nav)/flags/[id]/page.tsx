@@ -21,14 +21,16 @@ export default async function FlagsIdPage({
   const pageContent = await renderMarkdownToReact(data.content);
 
   return (
-    <div className="pt-8 sm:pt-12 md:pt-16">
-      <FlagExcerptSection flag={data.meta} showFlag>
-        <PageHeading className="text-center">{data.meta.name}</PageHeading>
-      </FlagExcerptSection>
+    <>
+      <div className="py-8 sm:py-12 md:py-16">
+        <FlagExcerptSection flag={data.meta} showFlag>
+          <PageHeading className="text-center">{data.meta.name}</PageHeading>
+        </FlagExcerptSection>
+      </div>
       <Section className="flex flex-col items-center">
         <article className="custom-prose">{pageContent}</article>
       </Section>
-    </div>
+    </>
   );
 }
 

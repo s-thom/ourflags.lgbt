@@ -88,7 +88,7 @@ export function SiteName({ flags }: SiteNameProps) {
           alt=""
           height={64}
           aria-hidden
-          className="hidden"
+          pictureClassName="hidden"
           priority={false}
         />
       )}

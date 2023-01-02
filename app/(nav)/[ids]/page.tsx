@@ -28,14 +28,12 @@ export default async function IdsPage({ params }: { params: { ids: string } }) {
           <span className="font-body">are</span>
         </PageHeading>
       </Section>
-      <div className="flex flex-col gap-4 pb-2 md:gap-6 md:pb-4 lg:gap-8">
-        {flags.map((flag) => (
-          // FlagSectionWithContent is an async server component, but
-          // Typescript doesn't know that.
-          // @ts-expect-error
-          <FlagSectionWithContent key={flag.id} flag={flag} />
-        ))}
-      </div>
+      {flags.map((flag) => (
+        // FlagSectionWithContent is an async server component, but
+        // Typescript doesn't know that.
+        // @ts-expect-error
+        <FlagSectionWithContent key={flag.id} flag={flag} />
+      ))}
     </>
   );
 }

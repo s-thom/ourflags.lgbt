@@ -18,6 +18,7 @@ export interface FlagImageProps extends Omit<ImageProps, "src" | "width"> {
   flag: FlagMeta;
   height: number;
   alt: string;
+  pictureClassName?: string;
 }
 
 export function FlagImage({
@@ -25,23 +26,20 @@ export function FlagImage({
   height,
   alt,
   className,
+  pictureClassName,
   ...rest
 }: FlagImageProps) {
   return (
-    <>
-      <picture>
-        <source
-          srcSet={`/images/flags/${flag.id}_${getNextSize(height)}.webp`}
-        />
-        <Image
-          src={`/images/flags/${flag.id}_${getNextSize(height)}.png`}
-          alt={alt}
-          className={className}
-          height={height}
-          width={height * FLAG_ASPECT_RATIO}
-          {...rest}
-        />
-      </picture>
-    </>
+    <picture className={pictureClassName}>
+      <source srcSet={`/images/flags/${flag.id}_${getNextSize(height)}.webp`} />
+      <Image
+        src={`/images/flags/${flag.id}_${getNextSize(height)}.png`}
+        alt={alt}
+        height={height}
+        width={height * FLAG_ASPECT_RATIO}
+        className={className}
+        {...rest}
+      />
+    </picture>
   );
 }
