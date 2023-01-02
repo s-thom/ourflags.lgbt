@@ -5,11 +5,10 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 import { trackEvent } from "../../../analytics";
-import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FlagMeta } from "../../../types";
+import { FlagImage } from "../../general/FlagImage";
 
 export interface FlagFanItemProps {
   flag: FlagMeta;
@@ -33,12 +32,11 @@ export function FlagFanItem({ flag, onFocusIn, onFocusOut }: FlagFanItemProps) {
         href={`/flags/${flag.id}`}
         onClick={() => trackEvent("click", "Flag fan", { flagId: flag.id })}
       >
-        <Image
-          src={`/images/flags/${flag.id}_128.png`}
+        <FlagImage
+          flag={flag}
           alt={flag.name}
           title={flag.name}
           height={128}
-          width={128 * FLAG_ASPECT_RATIO}
           className="rounded shadow-md sm:rounded-lg md:rounded-xl"
         />
       </Link>

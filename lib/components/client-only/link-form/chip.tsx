@@ -7,11 +7,10 @@
 "use client";
 
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 import { CSSProperties, forwardRef, ReactNode } from "react";
-import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FlagMeta } from "../../../types";
+import { FlagImage } from "../../general/FlagImage";
 import { GradientBackground } from "../RainbowBackground";
 
 export interface FlagFormChipProps {
@@ -29,12 +28,11 @@ export const FlagFormChip = forwardRef<HTMLDivElement, FlagFormChipProps>(
     ref
   ) {
     const image = (
-      <Image
-        src={`/images/flags/${flag.id}_24.png`}
+      <FlagImage
+        flag={flag}
         alt={flag.name}
         title={flag.name}
         height={24}
-        width={24 * FLAG_ASPECT_RATIO}
         className="rounded"
       />
     );

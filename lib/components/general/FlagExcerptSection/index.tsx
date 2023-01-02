@@ -5,13 +5,12 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FlagMeta } from "../../../types";
 import { GradientBackgroundSection } from "../../layout/GradientBackgroundSection";
 import { MajorHeading } from "../../layout/Headings";
+import { FlagImage } from "../FlagImage";
 
 export interface FlagExcerptSectionProps extends PropsWithChildren {
   flag: FlagMeta;
@@ -35,11 +34,10 @@ export function FlagExcerptSection({
       {showFlag && (
         <div className="shrink-0 lg:self-start">
           <Link href={`/flags/${flag.id}`}>
-            <Image
-              src={`/images/flags/${flag.id}_128.png`}
+            <FlagImage
+              flag={flag}
               alt={flag.name}
               height={128}
-              width={128 * FLAG_ASPECT_RATIO}
               className={clsx(
                 "rounded-xl",
                 "custom-transition-hover-group group-focus-within:scale-105 group-hover:scale-105"

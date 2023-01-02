@@ -7,14 +7,14 @@
 "use client";
 
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { useLatest, useMedia } from "react-use";
-import { FLAG_ASPECT_RATIO, SITE_NAME } from "../../../constants";
+import { SITE_NAME } from "../../../constants";
 import { FLAGS_BY_ID } from "../../../data/flags/flags";
 import { FlagMeta } from "../../../types";
 import { pickRandomOutOfArray } from "../../../utils";
+import { FlagImage } from "../../general/FlagImage";
 import { MajorHeading } from "../../layout/Headings";
 
 const INITIAL_ICON_ID = "progress-intersex";
@@ -73,10 +73,9 @@ export function SiteName({ flags }: SiteNameProps) {
       href={"/"}
       onMouseEnter={onHover}
     >
-      <Image
-        src={`/images/flags/${current.id}_64.png`}
+      <FlagImage
+        flag={current}
         alt=""
-        width={64 * FLAG_ASPECT_RATIO}
         height={64}
         className={clsx(
           "aspect-[3/2] h-6 w-9 rounded sm:h-8 sm:w-12",
@@ -84,10 +83,9 @@ export function SiteName({ flags }: SiteNameProps) {
         )}
       />
       {isMounted && (
-        <Image
-          src={`/images/flags/${next.id}_64.png`}
+        <FlagImage
+          flag={next}
           alt=""
-          width={64 * FLAG_ASPECT_RATIO}
           height={64}
           aria-hidden
           className="hidden"

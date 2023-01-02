@@ -6,14 +6,13 @@
 
 "use client";
 
-import Image from "next/image";
 import { CSSProperties, useEffect, useState } from "react";
 import { useMedia } from "react-use";
 import useLatest from "react-use/lib/useLatest";
-import { FLAG_ASPECT_RATIO } from "../../../constants";
 import { FLAGS_BY_ID } from "../../../data/flags/flags";
 import { FlagMeta } from "../../../types";
 import { delay, pickRandomOutOfArray } from "../../../utils";
+import { FlagImage } from "../../general/FlagImage";
 import { FlagFanItem } from "./FlagFanItem";
 
 // I sincerely apologise to whoever needs to read this code.
@@ -154,14 +153,12 @@ export function FlagFan({ flags }: FlagFanProps) {
       })}
       {/* This must not render on the server, or else there will be mismatches */}
       {isMounted && (
-        <Image
-          src={`/images/flags/${next.id}_128.png`}
+        <FlagImage
+          flag={next}
           alt=""
           height={128}
-          width={128 * FLAG_ASPECT_RATIO}
           aria-hidden
           className="hidden"
-          priority={false}
         />
       )}
     </div>

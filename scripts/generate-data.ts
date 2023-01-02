@@ -10,7 +10,9 @@ import { exec } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { promisify } from "node:util";
+import PQueue from "p-queue";
 import rimrafCb from "rimraf";
+import sharp, { Sharp } from "sharp";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { FAVICON_SIZES, PNG_SIZES } from "../lib/constants";
@@ -47,6 +49,88 @@ function sortMeta<T extends { name: string; order?: number }>(
   }
 
   return a.name.localeCompare(z.name);
+}
+
+// Image exports need to be queued to prevent fighting over the CPU.
+// It wasn't really running into memory issues (due to CPU fighting),
+// but I guess it would solve that if it was a problem.
+const exportQueue = new PQueue({ concurrency: 6 });
+
+async function exportSvg(filename: string, svg: string) {
+  await writeFile(filename, svg);
+}
+
+async function exportPng(filename: string, data: Sharp) {
+  const buffer = await data.png({ colors: 256 }).toBuffer();
+  await writeFile(filename, buffer);
+}
+
+async function exportWebP(filename: string, data: Sharp) {
+  const buffer = await data.webp({ lossless: true }).toBuffer();
+  await writeFile(filename, buffer);
+}
+
+async function exportAvif(filename: string, data: Sharp) {
+  const buffer = await data.avif({ lossless: true }).toBuffer();
+  await writeFile(filename, buffer);
+}
+
+type ImageFormat = "svg" | "png" | "webp" | "avif";
+
+interface ImageExportOptions {
+  directory: string;
+  name: string;
+  svg: string;
+  heights: number[];
+  formats: ImageFormat[];
+}
+
+async function exportSvgImageFormatVariants({
+  directory,
+  name,
+  svg,
+  heights,
+  formats,
+}: ImageExportOptions) {
+  const promises: Promise<unknown>[] = [];
+
+  const hasFormat: {
+    [key in ImageFormat]?: boolean | undefined;
+  } = {};
+  for (const format of formats) {
+    hasFormat[format] = true;
+  }
+
+  const addJob = (fn: () => Promise<any>) => promises.push(exportQueue.add(fn));
+
+  if (hasFormat.svg) {
+    addJob(() => exportSvg(join(directory, `${name}.svg`), svg));
+  }
+
+  if (hasFormat.png || hasFormat.webp || hasFormat.avif) {
+    for (const height of heights) {
+      const png = svgToPng(svg, height);
+      const data = sharp(png);
+
+      if (hasFormat.png) {
+        addJob(() =>
+          exportPng(join(directory, `${name}_${height}.png`), data.clone())
+        );
+      }
+      if (hasFormat.webp) {
+        addJob(() =>
+          exportWebP(join(directory, `${name}_${height}.webp`), data.clone())
+        );
+      }
+      if (hasFormat.avif) {
+        addJob(() =>
+          exportAvif(join(directory, `${name}_${height}.avif`), data.clone())
+        );
+      }
+    }
+  }
+
+  return Promise.all(promises);
 }
 
 // #region Flags
@@ -154,31 +238,26 @@ async function writeFlagPublicImage(file: FlagData) {
     file.meta.flag.stripes,
     file.meta.flag.additionalPaths
   );
-  await writeFile(join(PUBLIC_IMAGES_FLAGS, `${file.meta.id}.svg`), svg);
 
-  trace("About to write PNGs");
-  await pmap(PNG_SIZES, async (height) => {
-    let png: Buffer;
-
-    try {
-      png = svgToPng(svg, height);
-    } catch (err) {
-      throw new Error("Failed to convert flag SVG to PNG", {
-        cause: err,
-      });
-    }
-
-    try {
-      await writeFile(
-        join(PUBLIC_IMAGES_FLAGS, `${file.meta.id}_${height}.png`),
-        png
-      );
-    } catch (err) {
-      throw new Error("Failed to write image for flag", {
-        cause: err,
-      });
-    }
-  });
+  trace("About to write images");
+  try {
+    await exportSvgImageFormatVariants({
+      directory: PUBLIC_IMAGES_FLAGS,
+      name: file.meta.id,
+      svg,
+      heights: PNG_SIZES,
+      // AVIF is actually creating larger images than an unoptimised PNG, so
+      // I've disabled it here.
+      // What would be preferable to all of this is if Next's built-in image
+      // optimisation has a lossless option. Then we could output a single
+      // large image and have next take care of it.
+      formats: ["svg", "png", "webp" /* , "avif" */],
+    });
+  } catch (err) {
+    throw new Error("Failed to write images", {
+      cause: err,
+    });
+  }
 
   trace("Finished writing images for flag");
 }
@@ -197,13 +276,19 @@ async function writeFlagFavicon(file: FlagData) {
   const svg = getFaviconSvg([file.meta]);
 
   trace("Writing favicons");
-  await pmap(FAVICON_SIZES, async (height) => {
-    const png = svgToPng(svg, height);
-    await writeFile(
-      join(PUBLIC_IMAGES_FAVICONS, `${file.meta.id}_${height}.png`),
-      png
-    );
-  });
+  try {
+    await exportSvgImageFormatVariants({
+      directory: PUBLIC_IMAGES_FAVICONS,
+      name: file.meta.id,
+      svg,
+      heights: FAVICON_SIZES,
+      formats: ["png"],
+    });
+  } catch (err) {
+    throw new Error("Failed to write images", {
+      cause: err,
+    });
+  }
 
   trace("Finished generating favicons for flag");
 }

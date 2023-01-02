@@ -5,10 +5,9 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 import { getThemedGradients } from "../../../lib/colors";
-import { FLAG_ASPECT_RATIO } from "../../../lib/constants";
+import { FlagImage } from "../../../lib/components/general/FlagImage";
 import { FlagMeta } from "../../../lib/types";
 
 export interface FlagSummaryProps {
@@ -28,11 +27,10 @@ export async function FlagSummary({ flag }: FlagSummaryProps) {
       style={style}
     >
       <div className="shrink-0">
-        <Image
-          src={`/images/flags/${flag.id}_64.png`}
+        <FlagImage
+          flag={flag}
           alt={flag.name}
           height={64}
-          width={64 * FLAG_ASPECT_RATIO}
           className="rounded-lg"
         />
       </div>
