@@ -18,10 +18,10 @@ import { DragEndEvent } from "@dnd-kit/core/dist/types";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import {
   arrayMove,
+  rectSortingStrategy,
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
-  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
@@ -73,7 +73,7 @@ function DraggableChip(
   return (
     <FlagFormChip
       {...props}
-      className={clsx("basis-full md:basis-auto")}
+      className={clsx("basis-full touch-none md:basis-auto")}
       style={style}
       ref={setNodeRef}
       before={
@@ -171,11 +171,14 @@ export function FlagFormReorder() {
       onDragOver={handleDragEnd}
       modifiers={[restrictToParentElement]}
     >
-      <SortableContext
-        items={selectedFlagIds}
-        strategy={verticalListSortingStrategy}
-      >
-        <div className="flex min-w-[24rem] max-w-full flex-wrap gap-2 rounded-xl border border-dashed border-neutral-400 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900">
+      <SortableContext items={selectedFlagIds} strategy={rectSortingStrategy}>
+        <div
+          className={clsx(
+            "inline-flex flex-wrap gap-2 rounded-xl",
+            "border border-dashed border-neutral-400 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
+            "w-[24rem] max-w-full md:w-auto md:min-w-[24rem]"
+          )}
+        >
           <div className="basis-full text-center text-neutral-700 dark:text-neutral-400">
             Reorder your flags
           </div>

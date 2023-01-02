@@ -36,10 +36,15 @@ export function FlagFormList({ flags }: FlagFormListProps) {
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex w-full flex-wrap gap-2">
       {unselected.map((flag) => (
         <FlagFormChip
           key={flag.id}
+          className={clsx(
+            // The 0.25rem is half of the gap defined above.
+            // flex-basis doesn't take the gap into account.
+            "basis-full sm:basis-[calc(50%-0.25rem)] md:basis-auto"
+          )}
           flag={flag}
           onFlagClick={() => addFlag(flag.id)}
           after={

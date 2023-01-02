@@ -30,7 +30,7 @@ export default function LinkFormPage() {
           <Section className="text-center">
             <LinkFormShare />
           </Section>
-          <Section>
+          <Section className="text-center">
             <FlagFormReorder />
           </Section>
           {CATEGORIES.map((category) => (
