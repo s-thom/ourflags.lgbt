@@ -11,7 +11,7 @@ import { Main } from "../../lib/components/layout/Main";
 export default function HomeLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <header className="absolute top-2 right-2">
+      <header className="absolute top-2 right-2 z-10">
         <ThemeSelector />
       </header>
       <Main>{children}</Main>
