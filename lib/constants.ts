@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -30,10 +30,9 @@ export const FLAG_SVG_VIEWBOX_HEIGHT = 840;
  * - 24:   Used inline in chips for link form
  * - 64:   Used in all flags list
  * - 128:  Used on shared pages and detail pages
- * - 840:
- * - 1080: For anyone who wants a larger image and types the URL themselves
  */
-export const PNG_SIZES = [24, 64, 128, 840, 1080];
+export const FLAG_IMAGE_SIZES = [24, 64, 128];
+export const FLAG_IMAGE_SCALES = [1, 1.5, 2];
 export const FAVICON_SIZES = [32, 128, 192];
 export const OG_IMAGE_SIZES: Size[] = [{ width: 1200, height: 630 }];
 

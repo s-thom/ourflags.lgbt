@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Stuart Thomson.
+// Copyright (c) 2023 Stuart Thomson.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,12 +10,17 @@ import { exec } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { promisify } from "node:util";
+import ora from "ora";
 import PQueue from "p-queue";
 import rimrafCb from "rimraf";
 import sharp, { Sharp } from "sharp";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
-import { FAVICON_SIZES, PNG_SIZES } from "../lib/constants";
+import {
+  FAVICON_SIZES,
+  FLAG_IMAGE_SCALES,
+  FLAG_IMAGE_SIZES,
+} from "../lib/constants";
 import { getFaviconSvg, getStripedFlagSvg } from "../lib/server/flagSvg";
 import {
   CONTENT_CATEGORIES,
@@ -31,12 +36,8 @@ import {
   flagMetaValidator,
 } from "../lib/server/validation";
 import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../lib/types";
-import { pmap } from "../lib/utils";
 
 const rimraf = promisify(rimrafCb);
-
-const I_REALLY_LIKE_LOG_SPAM = false;
-const trace = (s: string) => I_REALLY_LIKE_LOG_SPAM && console.trace(s);
 
 let numErrors = 0;
 
@@ -51,10 +52,23 @@ function sortMeta<T extends { name: string; order?: number }>(
   return a.name.localeCompare(z.name);
 }
 
+/** Includes scaled sizes */
+const ALL_FLAG_IMAGE_SIZES = Array.from(
+  new Set(
+    FLAG_IMAGE_SIZES.flatMap((size) =>
+      FLAG_IMAGE_SCALES.map((scale) => scale * size)
+    )
+  )
+);
+
+// Flag processing is limited mostly for aesthetic reasons, but also
+// because of the amount of work that needs to be done.
+const outerProcessingQueue = new PQueue({ concurrency: 4 });
+
 // Image exports need to be queued to prevent fighting over the CPU.
 // It wasn't really running into memory issues (due to CPU fighting),
 // but I guess it would solve that if it was a problem.
-const exportQueue = new PQueue({ concurrency: 6 });
+const imageExportQueue = new PQueue({ concurrency: 4 });
 
 async function exportSvg(filename: string, svg: string) {
   await writeFile(filename, svg);
@@ -101,7 +115,8 @@ async function exportSvgImageFormatVariants({
     hasFormat[format] = true;
   }
 
-  const addJob = (fn: () => Promise<any>) => promises.push(exportQueue.add(fn));
+  const addJob = (fn: () => Promise<any>) =>
+    promises.push(imageExportQueue.add(fn));
 
   if (hasFormat.svg) {
     addJob(() => exportSvg(join(directory, `${name}.svg`), svg));
@@ -135,9 +150,6 @@ async function exportSvgImageFormatVariants({
 
 // #region Flags
 async function parseFlagMeta(path: string): Promise<FlagData> {
-  trace("Parsing flag metadata");
-
-  trace("Reading file");
   let fileContent: Buffer;
   try {
     fileContent = await readFile(path);
@@ -147,7 +159,6 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
     });
   }
 
-  trace("Extracting frontmatter from markdown");
   let rawMatter: matter.GrayMatterFile<Buffer>;
   try {
     rawMatter = matter(fileContent, { excerpt: true });
@@ -157,7 +168,6 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
     });
   }
 
-  trace("Validating frontmatter");
   let validated: FlagMeta;
   try {
     validated = flagMetaValidator.parse(rawMatter.data);
@@ -174,7 +184,6 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
         .trim()
     : rawMatter.content.trim();
 
-  trace("Finished parsing flag metadata");
   return {
     meta: validated,
     excerpt: rawMatter.excerpt?.trim(),
@@ -183,7 +192,6 @@ async function parseFlagMeta(path: string): Promise<FlagData> {
 }
 
 async function writeFlagContentFile(file: FlagData) {
-  trace("Writing flag content");
   try {
     await writeFile(
       join(DATA_FLAGS, `${file.meta.id}.json`),
@@ -194,8 +202,6 @@ async function writeFlagContentFile(file: FlagData) {
       cause: err,
     });
   }
-
-  trace("Finished writing flag content");
 }
 
 async function writeFlagMetaCollection(files: FlagData[]) {
@@ -207,7 +213,6 @@ async function writeFlagMetaCollection(files: FlagData[]) {
     flagMap[flag.id] = flag;
   });
 
-  trace("Writing flag collection");
   try {
     await writeFile(
       join(DATA_FLAGS, "flags.ts"),
@@ -220,12 +225,9 @@ async function writeFlagMetaCollection(files: FlagData[]) {
       cause: err,
     });
   }
-
-  trace("Finished writing flag collection");
 }
 
 async function writeFlagPublicImage(file: FlagData) {
-  trace("Generating images for flag");
   if (!file.meta.flag) {
     console.warn("Flag has no flag data, so no image can be generated", {
       flagId: file.meta.id,
@@ -233,19 +235,17 @@ async function writeFlagPublicImage(file: FlagData) {
     return;
   }
 
-  trace("About to generate SVG for flag");
   const svg = getStripedFlagSvg(
     file.meta.flag.stripes,
     file.meta.flag.additionalPaths
   );
 
-  trace("About to write images");
   try {
     await exportSvgImageFormatVariants({
       directory: PUBLIC_IMAGES_FLAGS,
       name: file.meta.id,
       svg,
-      heights: PNG_SIZES,
+      heights: ALL_FLAG_IMAGE_SIZES,
       // AVIF is actually creating larger images than an unoptimised PNG, so
       // I've disabled it here.
       // What would be preferable to all of this is if Next's built-in image
@@ -258,13 +258,9 @@ async function writeFlagPublicImage(file: FlagData) {
       cause: err,
     });
   }
-
-  trace("Finished writing images for flag");
 }
 
 async function writeFlagFavicon(file: FlagData) {
-  trace("Generating favicons for flag");
-
   if (!file.meta.flag) {
     console.warn("Flag has no flag data, so no favicon can be generated", {
       flagId: file.meta.id,
@@ -272,10 +268,8 @@ async function writeFlagFavicon(file: FlagData) {
     return;
   }
 
-  trace("Generating SVG for favicons");
   const svg = getFaviconSvg([file.meta]);
 
-  trace("Writing favicons");
   try {
     await exportSvgImageFormatVariants({
       directory: PUBLIC_IMAGES_FAVICONS,
@@ -289,29 +283,36 @@ async function writeFlagFavicon(file: FlagData) {
       cause: err,
     });
   }
-
-  trace("Finished generating favicons for flag");
 }
 
 async function runFlagTasks() {
-  trace("Listing files in content directory");
   const filenames = await readdir(CONTENT_FLAGS);
 
-  trace("Parsing frontmatter from Markdown files");
-  const data: FlagData[] = [];
+  const allFlagData: FlagData[] = [];
   const failedFiles: [string, unknown][] = [];
-  await pmap(filenames, (file) =>
-    parseFlagMeta(join(CONTENT_FLAGS, file)).then(
-      (d) => data.push(d),
-      (err) => {
-        const cause = err?.cause ?? err;
+
+  const queuePromise = outerProcessingQueue.addAll(
+    filenames.map((filename) => async () => {
+      let data: FlagData;
+      try {
+        data = await parseFlagMeta(join(CONTENT_FLAGS, filename));
+      } catch (err) {
+        const cause = (err as Error)?.cause ?? err;
         if (cause instanceof ZodError) {
-          failedFiles.push([file, fromZodError(cause).message]);
+          failedFiles.push([filename, fromZodError(cause).message]);
         } else {
-          failedFiles.push([file, err?.message]);
+          failedFiles.push([filename, (err as Error)?.message]);
         }
+
+        return;
       }
-    )
+
+      allFlagData.push(data);
+
+      await writeFlagContentFile(data);
+      await writeFlagFavicon(data);
+      await writeFlagPublicImage(data);
+    })
   );
 
   if (failedFiles.length > 0) {
@@ -322,33 +323,17 @@ async function runFlagTasks() {
     numErrors += failedFiles.length;
   }
 
-  trace("Starting tasks. Prepare for log spam");
-  const individualWritePromises = data.map((file) =>
-    writeFlagContentFile(file)
-  );
-  const imagePromises = data.map((file) => writeFlagPublicImage(file));
-  const faviconPromises = data.map((file) => writeFlagFavicon(file));
-  const metaWritePromise = writeFlagMetaCollection(data);
-
   try {
-    await Promise.all([
-      metaWritePromise,
-      ...individualWritePromises,
-      ...imagePromises,
-      ...faviconPromises,
-    ]);
+    await queuePromise;
+    await writeFlagMetaCollection(allFlagData);
   } catch (err) {
     throw new Error("Failed to run all tasks", { cause: err });
   }
-  trace("Finished tasks");
 }
 // #endregion
 
 // #region Categories
 async function parseCategoryMeta(path: string): Promise<CategoryData> {
-  trace("Parsing category metadata");
-
-  trace("Reading file");
   let fileContent: Buffer;
   try {
     fileContent = await readFile(path);
@@ -358,7 +343,6 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
     });
   }
 
-  trace("Extracting frontmatter from markdown");
   let rawMatter: matter.GrayMatterFile<Buffer>;
   try {
     rawMatter = matter(fileContent, { excerpt: true });
@@ -368,7 +352,6 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
     });
   }
 
-  trace("Validating frontmatter");
   let validated: CategoryMeta;
   try {
     validated = categoryMetaValidator.parse(rawMatter.data);
@@ -385,7 +368,6 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
         .trim()
     : rawMatter.content.trim();
 
-  trace("Finished parsing category metadata");
   return {
     meta: validated,
     excerpt: rawMatter.excerpt?.trim(),
@@ -394,7 +376,6 @@ async function parseCategoryMeta(path: string): Promise<CategoryData> {
 }
 
 async function writeCategoryContentFile(file: CategoryData) {
-  trace("Writing category content");
   try {
     await writeFile(
       join(DATA_CATEGORIES, `${file.meta.id}.json`),
@@ -405,8 +386,6 @@ async function writeCategoryContentFile(file: CategoryData) {
       cause: err,
     });
   }
-
-  trace("Finished writing category content");
 }
 
 async function writeCategoryMetaCollection(files: CategoryData[]) {
@@ -418,7 +397,6 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
     categoryMap[category.id] = category;
   });
 
-  trace("Writing category collection");
   try {
     await writeFile(
       join(DATA_CATEGORIES, "categories.ts"),
@@ -431,29 +409,34 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
       cause: err,
     });
   }
-
-  trace("Finished writing category collection");
 }
 
 async function runCategoryTasks() {
-  trace("Listing files in content directory");
   const filenames = await readdir(CONTENT_CATEGORIES);
 
-  trace("Parsing frontmatter from Markdown files");
-  const data: CategoryData[] = [];
+  const allCategoryData: CategoryData[] = [];
   const failedFiles: [string, unknown][] = [];
-  await pmap(filenames, (file) =>
-    parseCategoryMeta(join(CONTENT_CATEGORIES, file)).then(
-      (d) => data.push(d),
-      (err) => {
-        const cause = err?.cause ?? err;
+
+  const queuePromise = outerProcessingQueue.addAll(
+    filenames.map((filename) => async () => {
+      let data: CategoryData;
+      try {
+        data = await parseCategoryMeta(join(CONTENT_CATEGORIES, filename));
+      } catch (err) {
+        const cause = (err as Error)?.cause ?? err;
         if (cause instanceof ZodError) {
-          failedFiles.push([file, fromZodError(cause).message]);
+          failedFiles.push([filename, fromZodError(cause).message]);
         } else {
-          failedFiles.push([file, err?.message]);
+          failedFiles.push([filename, (err as Error)?.message]);
         }
+
+        return;
       }
-    )
+
+      allCategoryData.push(data);
+
+      await writeCategoryContentFile(data);
+    })
   );
 
   if (failedFiles.length > 0) {
@@ -464,65 +447,109 @@ async function runCategoryTasks() {
     numErrors += failedFiles.length;
   }
 
-  trace("Starting tasks. Prepare for log spam");
-  const individualWritePromises = data.map((file) =>
-    writeCategoryContentFile(file)
-  );
-  const metaWritePromise = writeCategoryMetaCollection(data);
-
   try {
-    await Promise.all([metaWritePromise, ...individualWritePromises]);
+    await queuePromise;
+    await writeCategoryMetaCollection(allCategoryData);
   } catch (err) {
     throw new Error("Failed to run all tasks", { cause: err });
   }
-  trace("Finished tasks");
 }
 // #endregion
 
 async function formatOutput() {
-  trace("Formatting generated files");
   await new Promise((res, rej) => {
     const task = exec("npx next lint --dir lib/data --fix");
     task.on("error", rej);
     task.on("close", res);
   });
-
-  trace("Finished formatting generated files");
 }
 
 async function run() {
-  console.log("Creating output directories");
-  trace("Cleaning directories");
-  await Promise.all([
-    rimraf(DATA_FLAGS),
-    rimraf(DATA_CATEGORIES),
-    rimraf(PUBLIC_IMAGES_FLAGS),
-    rimraf(PUBLIC_IMAGES_FAVICONS),
-  ]);
-  trace("Creating output directories");
-  await Promise.all([
-    mkdir(DATA_FLAGS, { recursive: true }),
-    mkdir(DATA_CATEGORIES, { recursive: true }),
-    mkdir(PUBLIC_IMAGES_FLAGS, { recursive: true }),
-    mkdir(PUBLIC_IMAGES_FAVICONS, { recursive: true }),
-  ]);
-
-  console.log("Running generation tasks");
-  trace("Starting tasks. Prepare for log spam");
+  let currentSpinner = ora("Creating output directories").start();
   try {
-    await Promise.all([runFlagTasks(), runCategoryTasks()]);
+    await Promise.all([
+      rimraf(DATA_FLAGS),
+      rimraf(DATA_CATEGORIES),
+      rimraf(PUBLIC_IMAGES_FLAGS),
+      rimraf(PUBLIC_IMAGES_FAVICONS),
+    ]);
+
+    await Promise.all([
+      mkdir(DATA_FLAGS, { recursive: true }),
+      mkdir(DATA_CATEGORIES, { recursive: true }),
+      mkdir(PUBLIC_IMAGES_FLAGS, { recursive: true }),
+      mkdir(PUBLIC_IMAGES_FAVICONS, { recursive: true }),
+    ]);
   } catch (err) {
+    currentSpinner.fail();
     throw new Error("Failed to run all tasks", { cause: err });
   }
+  currentSpinner.succeed();
 
-  console.log("Formatting generated files");
+  currentSpinner = ora("Running generation tasks - categories").start();
+  try {
+    let countAll = 0;
+    let countDone = 0;
+    outerProcessingQueue.on("add", () => {
+      countAll++;
+      currentSpinner.text = `Running generation tasks - categories [${countDone}/${countAll}]`;
+    });
+    outerProcessingQueue.on("completed", () => {
+      countDone++;
+      currentSpinner.text = `Running generation tasks - categories [${countDone}/${countAll}]`;
+    });
+    await runCategoryTasks();
+  } catch (err) {
+    currentSpinner.fail();
+    throw new Error("Failed to run category tasks", { cause: err });
+  }
+  if (numErrors > 0) {
+    currentSpinner.warn(
+      `Running generation tasks - categories: ${numErrors} warnings`
+    );
+  } else {
+    currentSpinner.succeed();
+  }
+  // For better error reporting, remove the category errors until after the flag tasks.
+  const tmpCategoryErrors = numErrors;
+  numErrors = 0;
+
+  currentSpinner = ora("Running generation tasks - flags").start();
+  try {
+    let countAll = 0;
+    let countDone = 0;
+    outerProcessingQueue.on("add", () => {
+      countAll++;
+      currentSpinner.text = `Running generation tasks - flags [${countDone}/${countAll}]`;
+    });
+    outerProcessingQueue.on("completed", () => {
+      countDone++;
+      currentSpinner.text = `Running generation tasks - flags [${countDone}/${countAll}]`;
+    });
+    await runFlagTasks();
+  } catch (err) {
+    currentSpinner.fail();
+    throw new Error("Failed to run flag tasks", { cause: err });
+  }
+  if (numErrors > 0) {
+    currentSpinner.warn(
+      `Running generation tasks - flags: ${numErrors} warnings`
+    );
+  } else {
+    currentSpinner.succeed();
+  }
+  numErrors += tmpCategoryErrors;
+
+  currentSpinner = ora("Formatting generated files").start();
   try {
     await formatOutput();
   } catch (err) {
+    currentSpinner.fail();
     throw new Error("Failed to format files. Check for corruption", {
       cause: err,
     });
   }
+  currentSpinner.succeed();
 }
 
 process.on("unhandledRejection", (err) => {
