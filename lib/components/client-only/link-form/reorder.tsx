@@ -73,7 +73,7 @@ function DraggableChip(
   return (
     <FlagFormChip
       {...props}
-      className={clsx("basis-full touch-none md:basis-auto")}
+      className={clsx("basis-full md:basis-auto md:touch-none")}
       style={style}
       ref={setNodeRef}
       before={
