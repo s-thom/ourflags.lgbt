@@ -7,6 +7,8 @@ background:
   dark: ["oklch(30% 0.045 352)", "oklch(30% 0.045 295)"]
 ---
 
-Attraction, both sexual and romantic, is expressed through three ideas: Identity, or how people view themselves; Orientation, or what they want/desire; and Behaviour, what they do.
+Attraction, both sexual and romantic, is expressed through three ideas:
+Identity, or how people view themselves; Orientation, or what they want/desire;
+and Behaviour, what they do.
 
 ---
