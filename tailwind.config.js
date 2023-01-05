@@ -30,6 +30,14 @@ module.exports = {
                 "text-decoration-style": "solid",
               },
             },
+            p: {
+              "&:first-child": {
+                "margin-top": 0,
+              },
+              "&:last-child": {
+                "margin-bottom": 0,
+              },
+            },
           },
         },
       },

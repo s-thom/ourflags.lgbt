@@ -26,7 +26,7 @@ export function CategoryExcerptSection({
       colors={category.background}
     >
       {showName && <MajorHeading>{category.name}</MajorHeading>}
-      {children && <div>{children}</div>}
+      {children && <div className="py-4">{children}</div>}
     </GradientBackgroundSection>
   );
 }

@@ -48,7 +48,7 @@ export function FlagExcerptSection({
       )}
       <div className="flex w-full grow flex-col gap-1">
         {showName && <MajorHeading>{flag.name}</MajorHeading>}
-        {children && <div>{children}</div>}
+        {children && <div className="py-4">{children}</div>}
         {showReadMore && (
           <div className="custom-prose">
             <Link
