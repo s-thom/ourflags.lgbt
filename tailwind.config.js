@@ -17,6 +17,22 @@ module.exports = {
           "sans-serif",
         ],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            a: {
+              "text-decoration-line": "underline",
+              "text-decoration-style": "dotted",
+              "&:hover": {
+                "text-decoration-style": "solid",
+              },
+              "&:focus-within": {
+                "text-decoration-style": "solid",
+              },
+            },
+          },
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],

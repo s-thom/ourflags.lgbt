@@ -75,7 +75,7 @@ body {
   }
 
   .custom-prose {
-    @apply prose prose-neutral dark:prose-invert md:prose-lg lg:prose-xl;
+    @apply prose prose-neutral marker:text-neutral-800 dark:prose-invert dark:marker:text-neutral-100 md:prose-lg lg:prose-xl;
   }
 
   .custom-link {
