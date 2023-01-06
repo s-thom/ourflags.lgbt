@@ -17,7 +17,7 @@ does not match with the one they were assigned at birth.
 
 Transgender is an umbrella term for people whose gender identity or expression
 do not match with the one they were assigned at birth. Gender identity is one's
-own ides of who they are, whereas expression is how they choose to appear
+own ideas of who they are, whereas expression is how they choose to appear
 externally.
 
 # Flag history
@@ -28,9 +28,9 @@ design a flag for the transgender community. She completed the design in August
 1999, and flew it in the Phoenix Pride Parade the next year.
 
 The blue and pink stripes represent the colors generally given to baby boys and
-girls, respectively, with the white stripe representing those who do not
-identify with the gender binary. The flag's colors are mirrored vertically so
-that it is correct no matter which way it is flown.
+girls, respectively, with the white stripe representing those who are
+transitioning or do not identify with the gender binary. The flag's colors are
+mirrored vertically so that it is correct no matter which way it is flown.
 
 ## Variations
 

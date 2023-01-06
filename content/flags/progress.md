@@ -52,6 +52,7 @@ Intersex Equality Rights UK to create [a new design](./progress-intersex).
 
 - [quasar.digital | designs by daniel quasar](https://progress.gay/)
 - [Rainbow Flag Refresh: An Interview With Daniel Quasar, The Designer Behind “Progress: A Pride Flag Reboot” - RISE Life Science](https://web.archive.org/web/20210624203514/http://riselifescience.com/2018/06/29/rainbow-flag-refresh-an-interview-with-daniel-quasar-the-designer-behind-progress-a-pride-flag-reboot/)
+  _archive_
 
 The Progress flag design by [Daniel Quasar](https://quasar.digital) is used here
 under a [CC (BY-NC-SA)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
