@@ -4,12 +4,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { createElement, Fragment } from "react";
+import { ComponentType, createElement, Fragment } from "react";
 import rehypeReact from "rehype-react";
 import rehypeSanitize from "rehype-sanitize";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import { LinkWithIcon } from "../components/general/LinkWithIcon";
 
 export async function renderMarkdownToReact(
   text: string
@@ -18,7 +19,13 @@ export async function renderMarkdownToReact(
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypeSanitize)
-    .use(rehypeReact, { createElement, Fragment })
+    .use(rehypeReact, {
+      createElement,
+      Fragment,
+      components: {
+        a: LinkWithIcon as ComponentType<unknown>,
+      },
+    })
     .process(text);
 
   return result.result;
