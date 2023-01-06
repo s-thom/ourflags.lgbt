@@ -67,7 +67,7 @@ The design would again change in 1979, where the street lamps along the parade
 route would be adorned with the flag. The decision was made to split the design
 into two banners of three stripes, so that one side of the street would be red,
 orange, and yellow, while the other would be green, blue, and purple. This led
-to the familiar [6-stripe](./rainbow) flag.
+to the familiar [6-stripe](/flags/rainbow) flag.
 
 # Sources and acknowledgements
 

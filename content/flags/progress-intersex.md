@@ -27,10 +27,10 @@ flag.
 # Flag History
 
 In 2021, intersex rights activist and founder of Intersex Equality Rights UK,
-Valentino Vecchietti, made a variation of the [Progress Pride Flag](./progress)
-by including the motif of the [Intersex flag](./intersex). The Intersex flag
-itself was designed in 2013 by Morgan Carpenter, Executive Director of Intersex
-Human Rights Australia.
+Valentino Vecchietti, made a variation of the
+[Progress Pride Flag](/flags/progress) by including the motif of the
+[Intersex flag](/flags/intersex). The Intersex flag itself was designed in 2013
+by Morgan Carpenter, Executive Director of Intersex Human Rights Australia.
 
 The inclusion of the Intersex flag into the Progress flag highlights that the
 rights and bodily autonomy of intersex people has a long way to go, with most

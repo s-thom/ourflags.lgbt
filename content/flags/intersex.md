@@ -31,14 +31,15 @@ of Intersex Human Rights Australia. Morgan sought to create a flag that wasn't
 derivative of existing pride flags, but to instead create something new but
 still grounded in meaning. The colors yellow and purple are often used in other
 pride flags to represent those outside of gender norms, such as in the
-[Non-binary flag](./nonbinary). The circle in the centre is unbroken and
+[Non-binary flag](/flags/nonbinary). The circle in the centre is unbroken and
 unornamented, complete as it is. It's a statement of who intersex people are,
 and who they intend to be.
 
 ## Variations
 
-In 2021, the intersex flag was added to the [Progress pride flag](./progress) by
-Intersex Equality Rights UK to create [a new design](./progress-intersex).
+In 2021, the intersex flag was added to the
+[Progress pride flag](/flags/progress) by Intersex Equality Rights UK to create
+[a new design](/flags/progress-intersex).
 
 # Sources and acknowledgements
 

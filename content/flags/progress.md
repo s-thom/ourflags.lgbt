@@ -28,8 +28,8 @@ still a lot to go.
 The Progress flag was designed in 2018 by Daniel Quasar, a graphic designer
 living in Portland, Oregon. After seeing some other changes being made to the
 pride flag to highlight certain issues, such as people of color in the
-[Philadelphia design](./rainbow-philadelphia), Daniel thought to create a new
-design incorporating multiple identities.
+[Philadelphia design](/flags/rainbow-philadelphia), Daniel thought to create a
+new design incorporating multiple identities.
 
 The end result, after many discarded attempts, was adding a chevron to the hoist
 edge of the flag. When viewing the obverse side (hoist on the left), the chevron
@@ -40,13 +40,15 @@ Each of the new colors have a specific meaning:
 
 - Black: Remembering those lost to the AIDS epidemic, from the Victory over AIDS
   flag.
-- Brown: People of color, from the [Philadelphia flag](./rainbow-philadelphia).
-- Blue, pink, and white: The colors of the [Transgender flag](./transgender).
+- Brown: People of color, from the
+  [Philadelphia flag](/flags/rainbow-philadelphia).
+- Blue, pink, and white: The colors of the
+  [Transgender flag](/flags/transgender).
 
 ## Variants
 
-In 2021, the [Intersex flag](./intersex) was added to the inner triangle by
-Intersex Equality Rights UK to create [a new design](./progress-intersex).
+In 2021, the [Intersex flag](/flags/intersex) was added to the inner triangle by
+Intersex Equality Rights UK to create [a new design](/flags/progress-intersex).
 
 # Sources and acknowledgements
 

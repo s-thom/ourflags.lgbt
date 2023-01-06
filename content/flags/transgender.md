@@ -23,9 +23,9 @@ externally.
 # Flag history
 
 In 1999 Monica Helms was talking with Michael Page (designer of the
-[Bisexual Flag](./bisexual) the previous year), when she got the suggestion to
-design a flag for the transgender community. She completed the design in August
-1999, and flew it in the Phoenix Pride Parade the next year.
+[Bisexual Flag](/flags/bisexual) the previous year), when she got the suggestion
+to design a flag for the transgender community. She completed the design in
+August 1999, and flew it in the Phoenix Pride Parade the next year.
 
 The blue and pink stripes represent the colors generally given to baby boys and
 girls, respectively, with the white stripe representing those who are
@@ -36,7 +36,7 @@ mirrored vertically so that it is correct no matter which way it is flown.
 
 The transgender flag's colors have been included in other flags to highlight the
 issues that transgender people still face in the world today. A notable example
-is its inclusion in the [Progress Pride Flag](./progress) in 2018.
+is its inclusion in the [Progress Pride Flag](/flags/progress) in 2018.
 
 # Sources and acknowledgements
 

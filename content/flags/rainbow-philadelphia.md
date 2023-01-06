@@ -44,8 +44,8 @@ cases, this includes issuing cease-operations orders to the business.
 
 While there aren't and major flags that continue to include the black and brown
 stripes along the top of the flag, the inclusion of these colors has continued
-in later flag designs. Most notably, the [Progress flag](./progress) has them
-prominently placed on the chevron.
+in later flag designs. Most notably, the [Progress flag](/flags/progress) has
+them prominently placed on the chevron.
 
 A previous variation of the rainbow flag had included a black stripe along the
 bottom of the flag for those lost in the AIDS epidemic. The black stripe in the
