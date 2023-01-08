@@ -119,7 +119,7 @@ export function HeadTags({
       <script
         async
         data-do-not-track="true"
-        data-domains={new URL(BASE_URL).host}
+        data-domains="ourflags.lgbt"
         data-website-id="2c8c87ed-a27f-4f12-9619-f56d2c121ec1"
         src="https://analytics.sthom.kiwi/umami.js"
       ></script>
