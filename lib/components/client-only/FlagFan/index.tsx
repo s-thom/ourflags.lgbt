@@ -24,7 +24,7 @@ import { FlagFanItem } from "./FlagFanItem";
 const ORDER_MAP = [3, 2, 4, 1, 5, 8, 6, 7, 9];
 const FORCED_INITIAL_FLAG_IDS = [
   "rainbow",
-  "gay-men",
+  "gay-man",
   "lesbian",
   "transgender",
   "nonbinary",

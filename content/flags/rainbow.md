@@ -42,14 +42,7 @@ The rainbow flag emoji 🏳️‍🌈 was added to the Unicode standard in 2016.
 it was the third most popular flag emoji, according to data collected by
 Unicode.
 
-The emoji is implemented as a zero-width joiner sequence made up of four
-characters: a waving white flag 🏳, variation selector 16 (an invisible character
-that turns the flag into the emoji 🏳️), a zero-width joiner (an invisible
-character used in Arabic and Indic texts to modify how adjacent characters
-join), and a rainbow 🌈. This means that sending a 🏳️‍🌈 would gracefully show 🏳️🌈
-on a device that hadn't been updated to support the latest emoji, instead of
-showing a missing character. This same idea was used when the transgender flag
-emoji 🏳️‍⚧️ was added in 2020.
+The only other pride flag in the Unicode standard is the transgender flag 🏳️‍⚧️.
 
 # Sources and acknowledgements
 

@@ -38,9 +38,19 @@ The transgender flag's colors have been included in other flags to highlight the
 issues that transgender people still face in the world today. A notable example
 is its inclusion in the [Progress Pride Flag](/flags/progress) in 2018.
 
+## Emoji
+
+The transgender flag emoji 🏳️‍⚧️ was added to the Unicode standard in 2020. It is
+the last pride flag to be accepted by the Emoji Subcommittee before closing off
+any future submissions for any flag emoji (country flags are automatically
+added).
+
+The only other pride flag in the Unicode standard is the rainbow flag 🏳‍🌈.
+
 # Sources and acknowledgements
 
 - [TG Pride Flag History](https://web.archive.org/web/20210308005146/http://transgendersociety.yolasite.com/tg-pride-flag-history-timeline.php)
   _archive_
 - [Trans Universe » Blog Archive » These Colors Don’t Run](https://web.archive.org/web/20120315082507/http://www.monicahelms.com/blog/transgender/these-colors-don%E2%80%99t-run.htm)
   _archive. warning: harsh background_
+- [Emoji Versions, v15.0](https://unicode.org/emoji/charts/emoji-versions.html)

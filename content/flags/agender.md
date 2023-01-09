@@ -19,7 +19,7 @@ background:
   dark: ["oklch(40% 0 131)", "oklch(40% 0.065 131)", "oklch(40% 0 131)"]
 ---
 
-Agender is literally translates as "without gender", and refers to people whose
+Agender is literally translated as "without gender", and refers to people whose
 identity simply doesn't include the social ideas of gender, and feel more
 defined by the absence of those ideas.
 
