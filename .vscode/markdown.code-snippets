@@ -22,10 +22,17 @@
       "  dark: [\"oklch(40% 0.065 HUE)\"]",
       "---",
       "",
-      "$0",
+      "${0:<!-- Replace with a summary -->}",
       "",
       "---",
       "",
+      "<!-- If this flag is an identity then replace with a description. Otherwise, remove -->",
+      "",
+      "# Flag history",
+      "",
+      "<!-- Replace with information about the creation of the flag, and what it represents -->",
+      "",
+      "# Sources and acknowledgements",
       ""
     ],
     "description": "Template for a new flag"

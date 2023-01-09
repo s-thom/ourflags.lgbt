@@ -14,11 +14,17 @@ metadata:
   see: below for more details
 ---
 
-A short summary shown on the shared page, along with a link to a page that contains the full content below.
+A short summary shown on the shared page, along with a link to a page that contains the full content below. This should be somewhere between 200-300 characters. For flags about specific identities, describe those identities. For flags about more general concepts (e.g. the rainbow flag), give a brief history.
 
 ---
 
 Full content. Shown on each flags' detail page.
+
+Pages about identities should start with a more thorough description of that identity and the people it represents.
+
+Include a heading for the flag history (`# Flag history`), and provide information about its creation. If relevant, include directly related variants.
+
+Include a heading for sources (`# Sources and acknowledgements`), and be sure to list the places that information was retrieved. If linking to the web archive, include an `_archive_` label.
 ```
 
 ## Metadata
