@@ -13,8 +13,9 @@ body:
     id: in-use
     attributes:
       label: Is this flag suitable for the website?
-      description: This question is a quick filter to remove meme flags and the like. If your flag doesn't meet these criteria, it may still be considered
+      description: This question is a quick filter to remove meme flags and the like. Don't worry if your flag doesn't meet some of these, it may still be considered
       options:
+        - label: This flag is part of pride history
         - label: This flag is in-use today
         - label: This flag is widely recognised by the queer community
   - type: textarea
