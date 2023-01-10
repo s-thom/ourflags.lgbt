@@ -30,7 +30,9 @@ export function FlagFanItem({ flag, onFocusIn, onFocusOut }: FlagFanItemProps) {
     >
       <Link
         href={`/flags/${flag.id}`}
-        onClick={() => trackEvent("click", "Flag fan", { flagId: flag.id })}
+        onClick={() =>
+          trackEvent("click", "flag-fan-item", { flagId: flag.id })
+        }
       >
         <FlagImage
           flag={flag}

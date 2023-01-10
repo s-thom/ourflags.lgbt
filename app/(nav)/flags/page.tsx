@@ -38,7 +38,7 @@ export default async function FlagsListPage() {
               <Link
                 href={`${GITHUB_URL}/labels/flag request`}
                 rel="external"
-                className="custom-link"
+                className="custom-link umami--click--all-flags-github"
               >
                 submit a request on GitHub
               </Link>

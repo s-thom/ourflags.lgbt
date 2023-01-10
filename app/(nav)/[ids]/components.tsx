@@ -37,7 +37,7 @@ export async function FlagSectionWithContent({
               <Link
                 href={`${GITHUB_URL}/issues`}
                 rel="external"
-                className="custom-link"
+                className="custom-link umami--click--flag-content-missing-github"
               >
                 the project on GitHub
               </Link>

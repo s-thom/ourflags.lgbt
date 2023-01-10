@@ -52,7 +52,10 @@ export default function HomePage() {
               more about their history and who they represent.
             </p>
           </div>
-          <Link href="/flags" className={buttonClassNames}>
+          <Link
+            href="/flags"
+            className={clsx("umami--click--home-all-flags", buttonClassNames)}
+          >
             <span>See all flags</span>
             <BookOpen />
           </Link>
@@ -69,7 +72,10 @@ export default function HomePage() {
               custom emoji.
             </p>
           </div>
-          <Link href="/my-flags" className={buttonClassNames}>
+          <Link
+            href="/my-flags"
+            className={clsx("umami--click--home-share", buttonClassNames)}
+          >
             <span>Get started</span>
             <ArrowRight />
           </Link>
@@ -91,7 +97,7 @@ export default function HomePage() {
           <Link
             href={`${GITHUB_URL}/#readme`}
             rel="external"
-            className={buttonClassNames}
+            className={clsx("umami--click--home-github", buttonClassNames)}
           >
             <span>View on GitHub</span>
             <Github />

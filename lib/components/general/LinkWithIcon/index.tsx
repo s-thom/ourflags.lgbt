@@ -56,6 +56,7 @@ export function LinkWithIcon({
 }: LinkWithIconProps) {
   let beforeIcon: ReactNode = null;
   let afterIcon: ReactNode = null;
+  let umamiClassName: string | undefined;
 
   if (isLikelyFlagLink(href)) {
     // This is getting the last segment of any relative path, not just those for flags.
@@ -76,17 +77,18 @@ export function LinkWithIcon({
             alt={`${flag.name} flag icon`}
           />
         );
+        umamiClassName = "umami--click--flag-link";
       }
     }
   }
 
   const url = isExternalLink(href);
-  if (isExternalLink(href)) {
+  if (url) {
     beforeIcon = (
       <span className="not-prose self-center pr-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`https://icons.duckduckgo.com/ip3/${(url as URL).hostname}.ico`}
+          src={`https://icons.duckduckgo.com/ip3/${url.hostname}.ico`}
           height={24}
           width={24}
           className={clsx(
@@ -97,6 +99,7 @@ export function LinkWithIcon({
         />
       </span>
     );
+    umamiClassName = "umami--click--external-link";
   }
 
   return (
@@ -104,6 +107,7 @@ export function LinkWithIcon({
       href={href}
       className={clsx(
         className,
+        umamiClassName,
         "group/link-icon inline-flex items-baseline gap-1"
       )}
       {...rest}
