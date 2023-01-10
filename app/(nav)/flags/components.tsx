@@ -37,7 +37,10 @@ export async function FlagSummary({ flag }: FlagSummaryProps) {
       <div>
         <h2 className="font-headings text-3xl">{flag.name}</h2>
         <div className="custom-prose">
-          <Link href={`/flags/${flag.id}`} className="custom-link">
+          <Link
+            href={`/flags/${flag.id}`}
+            className="custom-link umami--click--flag-read-more"
+          >
             Read more…
           </Link>
         </div>

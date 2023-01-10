@@ -17,7 +17,7 @@ export interface NavHeaderProps {}
 export function NavHeader() {
   return (
     <header className="flex justify-between gap-4 py-2 px-3">
-      <SiteName flags={FLAGS} />
+      <SiteName flags={FLAGS} className="umami--click-nav-home" />
       <div className="flex flex-row items-center gap-4">
         <ThemeSelector />
         <div className="group/nav relative">
@@ -43,7 +43,7 @@ export function NavHeader() {
               <Link
                 href={`${GITHUB_URL}/#readme`}
                 rel="external"
-                className="custom-link"
+                className="custom-link umami--click--nav-github"
               >
                 <span className="inline sm:hidden">Source code</span>
                 <Github
@@ -60,12 +60,18 @@ export function NavHeader() {
               <hr />
             </li>
             <li>
-              <Link href={"/flags"} className="custom-link">
+              <Link
+                href={"/flags"}
+                className="custom-link umami--click--nav-all-flags"
+              >
                 All flags
               </Link>
             </li>
             <li>
-              <Link href={"/my-flags"} className="custom-link">
+              <Link
+                href={"/my-flags"}
+                className="custom-link umami--click--nav-share"
+              >
                 Share your flags
               </Link>
             </li>

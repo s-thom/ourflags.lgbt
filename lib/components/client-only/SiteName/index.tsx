@@ -20,10 +20,11 @@ import { MajorHeading } from "../../layout/Headings";
 const INITIAL_ICON_ID = "progress-intersex";
 
 export interface SiteNameProps {
+  className?: string;
   flags: FlagMeta[];
 }
 
-export function SiteName({ flags }: SiteNameProps) {
+export function SiteName({ className, flags }: SiteNameProps) {
   const [{ current, next, available }, setFlagState] = useState(() => {
     const initialFlag = FLAGS_BY_ID[INITIAL_ICON_ID]!;
     // Remove flags that are currently visible
@@ -69,7 +70,7 @@ export function SiteName({ flags }: SiteNameProps) {
 
   return (
     <Link
-      className="group flex items-center gap-4"
+      className={clsx(className, "group flex items-center gap-4")}
       href={"/"}
       onMouseEnter={onHover}
     >

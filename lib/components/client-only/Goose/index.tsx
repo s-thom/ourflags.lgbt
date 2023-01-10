@@ -40,7 +40,7 @@ function createNote(index: number, count: number) {
   const heart = document.createElement("a");
   heart.href = "https://goose.sthom.kiwi";
   heart.rel = "external";
-  heart.classList.add(styles["goose-heart"]!);
+  heart.classList.add(styles["goose-heart"]!, "umami--click--goose-note");
   heart.textContent = NOTES[index]!;
   heart.ariaHidden = "true";
 

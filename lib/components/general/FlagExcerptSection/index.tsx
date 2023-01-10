@@ -53,7 +53,7 @@ export function FlagExcerptSection({
           <div className="custom-prose">
             <Link
               href={`/flags/${flag.id}`}
-              className="custom-link"
+              className="custom-link umami--click--flag-read-more"
               aria-label={`Read more about the ${flag.name} flag`}
             >
               Read more…
