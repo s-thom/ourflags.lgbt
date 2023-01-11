@@ -29,6 +29,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://sthom.kiwi"><img src="https://avatars.githubusercontent.com/u/7552536?v=4?s=100" width="100px;" alt="Stuart Thomson"/><br /><sub><b>Stuart Thomson</b></sub></a><br /><a href="https://github.com/s-thom/ourflags.lgbt/commits?author=s-thom" title="Code">💻</a> <a href="#content-s-thom" title="Content">🖋</a> <a href="https://github.com/s-thom/ourflags.lgbt/commits?author=s-thom" title="Documentation">📖</a> <a href="#design-s-thom" title="Design">🎨</a> <a href="#ideas-s-thom" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://allcontributors.org"><img src="https://avatars.githubusercontent.com/u/46410174?v=4?s=100" width="100px;" alt="All Contributors"/><br /><sub><b>All Contributors</b></sub></a><br /><a href="#tool-all-contributors" title="Tools">🔧</a></td>
     </tr>
   </tbody>
 </table>
