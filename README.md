@@ -14,7 +14,14 @@ Want to contribute to this project? Check out the [contributing guidelines](./do
 
 ### Contributors
 
-If you make changes to this project, add your name and a link to your GitHub profile here.
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
