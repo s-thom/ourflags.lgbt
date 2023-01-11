@@ -17,7 +17,7 @@ body:
       options:
         - label: This flag is part of pride history
         - label: This flag is in-use today
-        - label: This flag is widely recognised by the queer community
+        - label: This flag is widely recognised by the rainbow community
   - type: textarea
     id: flag
     attributes:

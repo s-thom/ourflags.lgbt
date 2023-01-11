@@ -105,7 +105,7 @@ Lynn Segerblom moved to San Francisco when she was 18, eventually joining The
 Angels of Light Theater Company, a troupe of artists that lived an alternative
 lifestyle. Falling in love with rainbows, colors, and tie-dyed fabrics, the
 troupe gave her the name "Faerie Argyle Rainbow". She would even get this name
-printed on hew drivers' license.
+printed on her drivers' license.
 
 In an account released after the death of Gilbert Baker (who is often attributed
 to the creation of [the first rainbow flag](/flags/rainbow-gilbert-baker)),

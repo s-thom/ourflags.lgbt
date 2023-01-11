@@ -20,6 +20,12 @@ Issues should be used to report problems with the site, request a new feature, o
 
 If you find an existing Issue that addresses the problem you're having, please add your own reproduction information to the existing issue rather than creating a new one. [Adding a reaction](https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) can also help us know that a particular problem is affecting more than just the original reporter.
 
+### Commit messages
+
+There isn't a specific format required by this project at this time.
+
+Keep your commit messages descriptive, so people would know what has changed by reading it.
+
 ### Pull Requests
 
 PRs to our libraries are always welcome and can be a quick way to get your fix or improvement added to the site. In general, PRs should:

@@ -2,7 +2,7 @@
 
 [!["These are Our Flags, and we fly them with pride" above a pattern of pride flags](./.github/media/banner.png)](https://ourflags.lgbt/)
 
-Our Flags is a reference website for the flags used by the queer community. This site aims to break down barriers and allow people outside of the rainbow community to learn about queer identities and symbols without the initial awkward questions.
+Our Flags is a reference website for the flags used by the rainbow community. This site aims to break down barriers and allow people outside of the rainbow community to learn about identities and symbols without the initial awkward questions.
 
 People can also select flags that represent themselves to get a link to a page summarising those flags. Members of the community often aren't defined by a single idea, so the links generated can have any combination of flags in any order.
 
@@ -14,7 +14,14 @@ Want to contribute to this project? Check out the [contributing guidelines](./do
 
 ### Contributors
 
-If you make changes to this project, add your name and a link to your GitHub profile here.
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
@@ -24,10 +31,11 @@ A quick (non-lawyer) summary.
 
 - You may reuse parts of the code for your own purposes as long as those parts continue to follow the MPL.
   - This includes modifications, which must remain MPL.
+  - You must provide attribution when doing so.
   - If the code is part of a larger work, the rest of the work does not have to be MPL.
 - You may reuse parts of the text content of the site as long as those parts are under the same license (CC BY-SA 4.0).
   - You must provide attribution when doing so.
-  - A direct link back to [ourflags.lgbt](https://ourflags.lgbt/) would be very much appreciated.
+  - A direct link back to [ourflags.lgbt](https://ourflags.lgbt/) would be preferred.
 
 ---
 

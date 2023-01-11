@@ -30,8 +30,8 @@ universal today.
 ## Variants
 
 Due to its universality, the rainbow flag has become the starting point for many
-designs. Some variants focus on areas of the queer community that generally
-don't see as much recognition in the public eye – such as people of color in
+designs. Some variants focus on areas of the community that generally don't see
+as much recognition in the public eye – such as people of color in
 [Philadelphia's 2017 design](/flags/rainbow-philadelphia), transgender people in
 the [Progress flag](/flags/progress), and even national variants such as a South
 African flag with the colours replaced.

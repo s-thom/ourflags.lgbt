@@ -44,7 +44,18 @@ export default function HomePage() {
         </div>
       </Section>
       <Section className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <Card title={<MajorHeading>Find out more</MajorHeading>}>
+        <Card
+          header={<MajorHeading>Find out more</MajorHeading>}
+          footer={
+            <Link
+              href="/flags"
+              className={clsx("umami--click--home-all-flags", buttonClassNames)}
+            >
+              <span>See all flags</span>
+              <BookOpen />
+            </Link>
+          }
+        >
           <div className="custom-prose">
             <p>Want to know what a particular flag means?</p>
             <p>
@@ -52,15 +63,19 @@ export default function HomePage() {
               more about their history and who they represent.
             </p>
           </div>
-          <Link
-            href="/flags"
-            className={clsx("umami--click--home-all-flags", buttonClassNames)}
-          >
-            <span>See all flags</span>
-            <BookOpen />
-          </Link>
         </Card>
-        <Card title={<MajorHeading>Share your flags</MajorHeading>}>
+        <Card
+          header={<MajorHeading>Share your flags</MajorHeading>}
+          footer={
+            <Link
+              href="/my-flags"
+              className={clsx("umami--click--home-share", buttonClassNames)}
+            >
+              <span>Get started</span>
+              <ArrowRight />
+            </Link>
+          }
+        >
           <div className="custom-prose">
             <p>
               Show the world what makes you <em>you</em> with a link to a list
@@ -72,15 +87,20 @@ export default function HomePage() {
               custom emoji.
             </p>
           </div>
-          <Link
-            href="/my-flags"
-            className={clsx("umami--click--home-share", buttonClassNames)}
-          >
-            <span>Get started</span>
-            <ArrowRight />
-          </Link>
         </Card>
-        <Card title={<MajorHeading>Get involved</MajorHeading>}>
+        <Card
+          header={<MajorHeading>Get involved</MajorHeading>}
+          footer={
+            <Link
+              href={`${GITHUB_URL}/#readme`}
+              rel="external"
+              className={clsx("umami--click--home-github", buttonClassNames)}
+            >
+              <span>View on GitHub</span>
+              <Github />
+            </Link>
+          }
+        >
           <div className="custom-prose">
             <p>
               This website is pretty new, and needs some updating to be a full
@@ -94,14 +114,6 @@ export default function HomePage() {
               yourself is even better!
             </p>
           </div>
-          <Link
-            href={`${GITHUB_URL}/#readme`}
-            rel="external"
-            className={clsx("umami--click--home-github", buttonClassNames)}
-          >
-            <span>View on GitHub</span>
-            <Github />
-          </Link>
         </Card>
       </Section>
     </>

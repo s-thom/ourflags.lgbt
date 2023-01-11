@@ -21,17 +21,17 @@ background:
 ---
 
 In 2017, the city of Philadelphia celebrated the place that people of color have
-within queer spaces with a new flag. The new flag adds a black and a brown
+within rainbow spaces with a new flag. The new flag adds a black and a brown
 stripe above the common rainbow flag to bring visibility to the discrimination
-and other issues that queer people of color face.
+and other issues that people of color face within the community.
 
 ---
 
 # Flag History
 
 For its 2017 pride month celebrations, Philadelphia's Office of LGBT Affairs
-sought to create a flag design that recognised queer people of color explicitly.
-This came after racial discrimination in the city's "gayborhood", including a
+sought to create a flag design that recognised people of color explicitly. This
+came after racial discrimination in the city's "gayborhood", including a
 nightclub owner using racial slurs and banning specific items of clothing to
 target people of color. The new flag, and accompanying marketing campaign, set
 out to make these issues public.

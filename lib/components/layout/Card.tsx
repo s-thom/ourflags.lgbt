@@ -9,10 +9,11 @@ import { PropsWithChildren, ReactNode } from "react";
 
 export interface CardProps extends PropsWithChildren {
   className?: string;
-  title?: ReactNode;
+  header?: ReactNode;
+  footer?: ReactNode;
 }
 
-export function Card({ className, title, children }: CardProps) {
+export function Card({ className, header, footer, children }: CardProps) {
   return (
     <div
       className={clsx(
@@ -20,8 +21,9 @@ export function Card({ className, title, children }: CardProps) {
         "rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900"
       )}
     >
-      {title}
+      {header && <div className="pb-4">{header}</div>}
       {children}
+      {footer && <div className="pt-4">{footer}</div>}
     </div>
   );
 }
