@@ -24,10 +24,11 @@ A quick (non-lawyer) summary.
 
 - You may reuse parts of the code for your own purposes as long as those parts continue to follow the MPL.
   - This includes modifications, which must remain MPL.
+  - You must provide attribution when doing so.
   - If the code is part of a larger work, the rest of the work does not have to be MPL.
 - You may reuse parts of the text content of the site as long as those parts are under the same license (CC BY-SA 4.0).
   - You must provide attribution when doing so.
-  - A direct link back to [ourflags.lgbt](https://ourflags.lgbt/) would be very much appreciated.
+  - A direct link back to [ourflags.lgbt](https://ourflags.lgbt/) would be preferred.
 
 ---
 
