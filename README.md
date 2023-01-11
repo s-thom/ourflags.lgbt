@@ -1,7 +1,10 @@
 # [OurFlags.lgbt](https://ourflags.lgbt/)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+[![Website](https://img.shields.io/badge/Website-Live!-c6575f?style=for-the-badge)](https://ourflags.lgbt/)
+![GitHub Repo stars](https://img.shields.io/github/stars/s-thom/ourflags.lgbt?color=ba7f1d&style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/s-thom/ourflags.lgbt?color=3c9557&style=for-the-badge)
+![License](https://img.shields.io/github/license/s-thom/ourflags.lgbt?color=3087c7&style=for-the-badge)
+[![GitHub contributors](https://img.shields.io/github/contributors-anon/s-thom/ourflags.lgbt?color=896ec3&style=for-the-badge)](#contributors)
 
 [!["These are Our Flags, and we fly them with pride" above a pattern of pride flags](./.github/media/banner.png)](https://ourflags.lgbt/)
 
@@ -16,6 +19,8 @@ People can also select flags that represent themselves to get a link to a page s
 Want to contribute to this project? Check out the [contributing guidelines](./docs/CONTRIBUTING.md) on where to get started.
 
 ### Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -32,6 +37,8 @@ Want to contribute to this project? Check out the [contributing guidelines](./do
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## License
 
@@ -50,16 +57,3 @@ A quick (non-lawyer) summary.
 ---
 
 ![The goose from Untitled Goose Game holding a Progress pride flag](./lib/components/client-only/Goose/goose.png)
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
