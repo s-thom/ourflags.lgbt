@@ -1,4 +1,7 @@
 # [OurFlags.lgbt](https://ourflags.lgbt/)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [!["These are Our Flags, and we fly them with pride" above a pattern of pride flags](./.github/media/banner.png)](https://ourflags.lgbt/)
 
@@ -17,6 +20,13 @@ Want to contribute to this project? Check out the [contributing guidelines](./do
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://sthom.kiwi"><img src="https://avatars.githubusercontent.com/u/7552536?v=4?s=100" width="100px;" alt="Stuart Thomson"/><br /><sub><b>Stuart Thomson</b></sub></a><br /><a href="https://github.com/s-thom/ourflags.lgbt/commits?author=s-thom" title="Code">💻</a> <a href="#content-s-thom" title="Content">🖋</a> <a href="https://github.com/s-thom/ourflags.lgbt/commits?author=s-thom" title="Documentation">📖</a> <a href="#design-s-thom" title="Design">🎨</a> <a href="#ideas-s-thom" title="Ideas, Planning, & Feedback">🤔</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
@@ -40,3 +50,16 @@ A quick (non-lawyer) summary.
 ---
 
 ![The goose from Untitled Goose Game holding a Progress pride flag](./lib/components/client-only/Goose/goose.png)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
