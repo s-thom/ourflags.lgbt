@@ -2,7 +2,7 @@
 
 [!["These are Our Flags, and we fly them with pride" above a pattern of pride flags](./.github/media/banner.png)](https://ourflags.lgbt/)
 
-Our Flags is a reference website for the flags used by the queer community. This site aims to break down barriers and allow people outside of the rainbow community to learn about queer identities and symbols without the initial awkward questions.
+Our Flags is a reference website for the flags used by the rainbow community. This site aims to break down barriers and allow people outside of the rainbow community to learn about identities and symbols without the initial awkward questions.
 
 People can also select flags that represent themselves to get a link to a page summarising those flags. Members of the community often aren't defined by a single idea, so the links generated can have any combination of flags in any order.
 

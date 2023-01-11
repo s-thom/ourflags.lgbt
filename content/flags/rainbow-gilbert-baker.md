@@ -22,9 +22,9 @@ background:
 ---
 
 Designed and flown in 1978, the 8-stripe rainbow flag was a new symbol for the
-queer community; one not borne of darkness, but of light and joy. Put together
-by a team of around 30 volunteers, the design is usually attributed to the late
-gay rights activist Gilbert Baker.
+gay community; one not borne of darkness, but of light and joy. Put together by
+a team of around 30 volunteers, the design is usually attributed to the late gay
+rights activist Gilbert Baker.
 
 ---
 
