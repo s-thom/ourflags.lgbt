@@ -1,0 +1,29 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "s-thom",
+      "name": "Stuart Thomson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7552536?v=4",
+      "profile": "https://sthom.kiwi",
+      "contributions": [
+        "code",
+        "content",
+        "doc",
+        "design",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "ourflags.lgbt",
+  "projectOwner": "s-thom"
+}
