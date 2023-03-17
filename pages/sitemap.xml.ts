@@ -29,7 +29,6 @@ function generateSitemap(): string {
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
       ${urls.map((url) => generateUrl(url)).join("\n")}
     </urlset>
-    </xml>
   `;
 }
 
