@@ -27,7 +27,6 @@ import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
 import { ArrowDown, ArrowUp, GripVertical, Trash2 } from "lucide-react";
 import { CSSProperties, useCallback } from "react";
-import { trackEvent } from "../../../analytics";
 import { FlagFormChip, FlagFormChipProps } from "./chip";
 import { useLinkFormState, useSelectedFlags } from "./context";
 
@@ -131,9 +130,6 @@ export function FlagFormReorder() {
     setSelectedFlagIds((current) =>
       current.includes(id) ? current.filter((i) => i !== id) : current
     );
-    trackEvent("click", "Remove flag", {
-      flagId: id,
-    });
   };
 
   const sensors = useSensors(
@@ -194,6 +190,8 @@ export function FlagFormReorder() {
                   )}
                   aria-label={`Remove ${flag.name}`}
                   onClick={() => removeFlag(flag.id)}
+                  data-umami-event="remove-flag"
+                  data-umami-event-flagid={flag.id}
                 >
                   <Trash2 />
                 </button>

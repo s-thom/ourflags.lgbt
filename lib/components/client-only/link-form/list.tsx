@@ -9,7 +9,6 @@
 import clsx from "clsx";
 import { Plus } from "lucide-react";
 import { useMemo } from "react";
-import { trackEvent } from "../../../analytics";
 import { FlagMeta } from "../../../types";
 import { FlagFormChip } from "./chip";
 import { useLinkFormState, useSelectedFlags } from "./context";
@@ -30,9 +29,6 @@ export function FlagFormList({ flags }: FlagFormListProps) {
     setLinkFormState((current) =>
       current.includes(id) ? current : [...current, id]
     );
-    trackEvent("click", "Add flag", {
-      flagId: id,
-    });
   };
 
   return (
@@ -54,6 +50,8 @@ export function FlagFormList({ flags }: FlagFormListProps) {
               )}
               aria-label={`Add ${flag.name}`}
               onClick={() => addFlag(flag.id)}
+              data-umami-event="add-flag"
+              data-umami-event-flagid={flag.id}
             >
               <Plus />
             </button>

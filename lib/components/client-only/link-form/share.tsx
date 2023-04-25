@@ -10,7 +10,6 @@ import clsx from "clsx";
 import { ClipboardCheck, ClipboardCopy, ClipboardX } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { trackEvent } from "../../../analytics";
 import { BASE_URL } from "../../../constants";
 import { buildShareString } from "../../../shortcodes";
 import { useSelectedFlags } from "./context";
@@ -32,7 +31,6 @@ export function LinkFormShare() {
   }, [shareUrl]);
 
   const copyUrlToClipboard = useCallback(async () => {
-    trackEvent("click", "Copy URL", {});
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopyState("copied");
@@ -55,6 +53,7 @@ export function LinkFormShare() {
             className="rounded-lg bg-neutral-200 p-2 dark:bg-neutral-800"
             aria-label="Copy URL to clipboard"
             onClick={copyUrlToClipboard}
+            data-umami-event="copy-share-url"
           >
             <ClipboardCopy />
           </button>
@@ -100,11 +99,7 @@ export function LinkFormShare() {
         <Link
           href={shareUrl}
           className="custom-link"
-          onClick={() =>
-            trackEvent("click", "Link preview", {
-              flagIds: flags.map((flag) => flag.id),
-            })
-          }
+          data-umami-event="preview-share-url"
         >
           Preview your page
         </Link>

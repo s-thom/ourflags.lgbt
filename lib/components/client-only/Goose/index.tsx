@@ -8,7 +8,6 @@
 
 import Image from "next/image";
 import { useCallback, useRef } from "react";
-import { trackEvent } from "../../../analytics";
 import { delay } from "../../../utils";
 
 import styles from "./Goose.module.css";
@@ -79,13 +78,6 @@ export function Goose() {
     }
 
     parent.appendChild(child);
-    if (
-      settings.count === 1 ||
-      settings.count === 5 ||
-      settings.count % 10 === 0
-    ) {
-      trackEvent("click", "goose", { count: settings.count });
-    }
 
     await delay(TOOLTIP_TIMEOUT);
     child.classList.add(styles["goose-heart-exit"]!);
@@ -101,6 +93,7 @@ export function Goose() {
       aria-label="Goose"
       onClick={onClick}
       ref={ref}
+      data-umami-event="goose"
     >
       <Image src={goose} alt="" width={48} height={48} loading="eager" />
     </button>

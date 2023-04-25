@@ -120,8 +120,8 @@ export function HeadTags({
         async
         data-do-not-track="true"
         data-domains="ourflags.lgbt"
-        data-website-id="2c8c87ed-a27f-4f12-9619-f56d2c121ec1"
-        src="https://analytics.sthom.kiwi/umami.js"
+        data-website-id="d66d58a6-dbad-43f5-b34e-982d398ce58d"
+        src="https://umami.sthom.kiwi/script.js"
       ></script>
     </>
   );

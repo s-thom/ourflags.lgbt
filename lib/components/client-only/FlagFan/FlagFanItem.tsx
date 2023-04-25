@@ -6,7 +6,6 @@
 
 import clsx from "clsx";
 import Link from "next/link";
-import { trackEvent } from "../../../analytics";
 import { FlagMeta } from "../../../types";
 import { FlagImage } from "../../general/FlagImage";
 
@@ -30,9 +29,8 @@ export function FlagFanItem({ flag, onFocusIn, onFocusOut }: FlagFanItemProps) {
     >
       <Link
         href={`/flags/${flag.id}`}
-        onClick={() =>
-          trackEvent("click", "flag-fan-item", { flagId: flag.id })
-        }
+        data-umami-event="flag-fan-item"
+        data-umami-event-flagid={flag.id}
       >
         <FlagImage
           flag={flag}

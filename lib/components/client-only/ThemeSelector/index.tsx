@@ -9,7 +9,6 @@
 import clsx from "clsx";
 import { Moon, Sun } from "lucide-react";
 import { useCallback } from "react";
-import { trackEvent } from "../../../analytics";
 
 // If adding themes, remember to update `public/dark.js`
 
@@ -23,11 +22,9 @@ export function ThemeSelector() {
     if (isCurrentlyDark) {
       classes.remove("dark");
       localStorage.setItem(THEME_KEY, "light");
-      trackEvent("click", "Change theme", { theme: "light" });
     } else {
       classes.add("dark");
       localStorage.setItem(THEME_KEY, "dark");
-      trackEvent("click", "Change theme", { theme: "dark" });
     }
   }, []);
 
@@ -40,8 +37,18 @@ export function ThemeSelector() {
       title="Change theme"
       aria-label="Change theme"
     >
-      <Moon className="hidden dark:inline" aria-label="Dark theme" />
-      <Sun className="inline dark:hidden" aria-label="Light theme" />
+      <Moon
+        className="hidden dark:inline"
+        aria-label="Dark theme"
+        data-umami-event="theme-change"
+        data-umami-event-theme="dark"
+      />
+      <Sun
+        className="inline dark:hidden"
+        aria-label="Light theme"
+        data-umami-event="theme-change"
+        data-umami-event-theme="light"
+      />
     </button>
   );
 }
