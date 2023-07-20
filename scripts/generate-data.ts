@@ -9,10 +9,9 @@ import matter from "gray-matter";
 import { exec } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { promisify } from "node:util";
 import ora from "ora";
 import PQueue from "p-queue";
-import rimrafCb from "rimraf";
+import { rimraf } from "rimraf";
 import sharp, { Sharp } from "sharp";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -36,8 +35,6 @@ import {
   flagMetaValidator,
 } from "../lib/server/validation";
 import { CategoryData, CategoryMeta, FlagData, FlagMeta } from "../lib/types";
-
-const rimraf = promisify(rimrafCb);
 
 let numErrors = 0;
 
