@@ -15,6 +15,7 @@ import { parseShareString } from "../../../../../../lib/shortcodes";
 
 const bodyFontPromise = fetch(
   new URL(
+    // This *must* reference a non-variable version of the font
     "@fontsource/inter/files/inter-latin-400-normal.woff",
     import.meta.url,
   ),

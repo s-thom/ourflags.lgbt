@@ -4,6 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import { Metadata } from "next";
 import {
   FlagFormList,
   FlagFormReorder,
@@ -14,7 +15,19 @@ import { PageHeading } from "../../../lib/components/layout/Headings";
 import { Section } from "../../../lib/components/layout/Section";
 import { CATEGORIES } from "../../../lib/data/categories/categories";
 import { FLAGS } from "../../../lib/data/flags/flags";
+import { getHeadMetadata } from "../../../lib/server/head";
 import { CategorySectionWithContent } from "./components";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getHeadMetadata({
+    description: "These are our flags, and we fly them with pride",
+    path: "/my-flags",
+    flags: [],
+    overrideFaviconFlags: "default",
+    overrideOgFlags: "all",
+    ogImageStyle: "title",
+  });
+}
 
 export default function LinkFormPage() {
   return (
@@ -33,9 +46,6 @@ export default function LinkFormPage() {
           <FlagFormReorder />
         </Section>
         {CATEGORIES.map((category) => (
-          // CategorySectionWithContent is an async server component, but
-          // Typescript doesn't know that.
-          // @ts-expect-error
           <CategorySectionWithContent key={category.id} category={category}>
             <FlagFormList
               flags={FLAGS.filter((flag) =>

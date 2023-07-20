@@ -4,6 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import { Metadata } from "next";
 import Link from "next/link";
 import { FlagFan } from "../../../lib/components/client-only/FlagFan";
 import { Card } from "../../../lib/components/layout/Card";
@@ -11,7 +12,20 @@ import { PageHeading } from "../../../lib/components/layout/Headings";
 import { Section } from "../../../lib/components/layout/Section";
 import { GITHUB_URL } from "../../../lib/constants";
 import { FLAGS } from "../../../lib/data/flags/flags";
+import { getHeadMetadata } from "../../../lib/server/head";
 import { FlagSummary } from "./components";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getHeadMetadata({
+    title: "All flags",
+    description: "These are our flags, and we fly them with pride",
+    path: "/flags",
+    flags: [],
+    overrideFaviconFlags: "default",
+    overrideOgFlags: "all",
+    ogImageStyle: "title",
+  });
+}
 
 export default async function FlagsListPage() {
   // TODO: Some form of simple search
@@ -51,9 +65,6 @@ export default async function FlagsListPage() {
         <div className="grid grid-cols-1 grid-rows-[masonry] gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {sortedByName.map((flag) => (
             <div key={flag.id}>
-              {/* FlagSummary is an async server component, but
-                Typescript doesn't know that. */}
-              {/* @ts-expect-error */}
               <FlagSummary flag={flag} />
             </div>
           ))}
