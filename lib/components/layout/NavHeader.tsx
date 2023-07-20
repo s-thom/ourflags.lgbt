@@ -24,7 +24,7 @@ export function NavHeader() {
           <button
             className={clsx(
               "flex items-center sm:hidden",
-              "custom-transition-hover focus-within:scale-110 hover:scale-110"
+              "custom-transition-hover focus-within:scale-110 hover:scale-110",
             )}
             title="Navigation"
             aria-label="Navigation"
@@ -36,7 +36,7 @@ export function NavHeader() {
               "invisible absolute right-0 z-20 flex min-w-[12rem] flex-col gap-4 rounded-lg border p-4",
               "border-neutral-400 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900",
               "group-focus-within/nav:visible group-hover/nav:visible",
-              "sm:visible sm:relative sm:flex-row sm:border-none sm:bg-transparent sm:pl-0 sm:dark:border-none sm:dark:bg-transparent"
+              "sm:visible sm:relative sm:flex-row sm:border-none sm:bg-transparent sm:pl-0 sm:dark:border-none sm:dark:bg-transparent",
             )}
           >
             <li className="order-11 sm:order-none">
@@ -49,7 +49,7 @@ export function NavHeader() {
                 <Github
                   className={clsx(
                     "hidden sm:inline",
-                    "custom-transition-hover focus-within:scale-110 hover:scale-110"
+                    "custom-transition-hover focus-within:scale-110 hover:scale-110",
                   )}
                 >
                   <title>View source code on GitHub</title>

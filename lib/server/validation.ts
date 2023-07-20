@@ -28,7 +28,7 @@ export const flagMetaValidator = z.object({
     .string()
     .regex(
       /^[a-z][a-z0-9-]*$/,
-      "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter"
+      "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter",
     ),
   name: z.string(),
   shortName: z.string().optional(),
@@ -39,8 +39,8 @@ export const flagMetaValidator = z.object({
         .string()
         .regex(
           /^[A-Z][a-z0-9]+$/,
-          "Shortcodes must start with a capital letter, and then have at least one more lowercase alphanumeric character"
-        )
+          "Shortcodes must start with a capital letter, and then have at least one more lowercase alphanumeric character",
+        ),
     )
     .min(1),
   flag: z.object({
@@ -66,7 +66,7 @@ export const categoryMetaValidator = z.object({
     .string()
     .regex(
       /^[a-z][a-z0-9-]*$/,
-      "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter"
+      "IDs must only contain lowercase letters, numbers, or dashes, and must start with a letter",
     ),
   name: z.string(),
   order: z.number().optional(),

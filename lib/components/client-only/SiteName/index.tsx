@@ -52,7 +52,7 @@ export function SiteName({ className, flags }: SiteNameProps) {
         nextAvailable.length > 0
           ? nextAvailable
           : flags.filter(
-              (flag) => flag.id !== next.id && flag.id !== nextNext.id
+              (flag) => flag.id !== next.id && flag.id !== nextNext.id,
             ),
       next: nextNext,
     });
@@ -80,7 +80,7 @@ export function SiteName({ className, flags }: SiteNameProps) {
         height={64}
         className={clsx(
           "aspect-[3/2] h-6 w-9 rounded sm:h-8 sm:w-12",
-          "custom-transition-hover-group group-focus-within:scale-105 group-hover:scale-105"
+          "custom-transition-hover-group group-focus-within:scale-105 group-hover:scale-105",
         )}
       />
       {isMounted && (

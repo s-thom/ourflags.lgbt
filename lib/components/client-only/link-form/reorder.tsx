@@ -35,7 +35,7 @@ function DraggableChip(
     onMovePlaces?: (places: number) => void;
     canMoveUp?: boolean;
     canMoveDown?: boolean;
-  }
+  },
 ) {
   const { flag, style: baseStyle, before } = props;
 
@@ -53,14 +53,14 @@ function DraggableChip(
 
       const newIndex = Math.max(
         Math.min(currentIndex + places, selectedFlagIds.length - 1),
-        0
+        0,
       );
       const newIds = selectedFlagIds.filter((id) => flag.id !== id);
       newIds.splice(newIndex, 0, flag.id);
 
       setSelectedFlagIds(newIds);
     },
-    [currentIndex, flag.id, selectedFlagIds, setSelectedFlagIds]
+    [currentIndex, flag.id, selectedFlagIds, setSelectedFlagIds],
   );
 
   const style: CSSProperties = {
@@ -81,7 +81,7 @@ function DraggableChip(
           <button
             className={clsx(
               "hidden md:inline-block",
-              "custom-transition-hover focus-within:scale-110 hover:scale-110"
+              "custom-transition-hover focus-within:scale-110 hover:scale-110",
             )}
             aria-hidden
             aria-label={`Drag ${flag.name}`}
@@ -95,7 +95,7 @@ function DraggableChip(
               className={clsx(
                 "disabled:text-neutral-400",
                 "md:sr-only md:group-focus-within/move:not-sr-only",
-                "custom-transition-hover focus-within:scale-110 hover:scale-110"
+                "custom-transition-hover focus-within:scale-110 hover:scale-110",
               )}
               disabled={currentIndex === 0}
               aria-label={`Move ${flag.name} left`}
@@ -107,7 +107,7 @@ function DraggableChip(
               className={clsx(
                 "disabled:text-neutral-400",
                 "md:sr-only md:group-focus-within/move:not-sr-only",
-                "custom-transition-hover focus-within:scale-110 hover:scale-110"
+                "custom-transition-hover focus-within:scale-110 hover:scale-110",
               )}
               disabled={currentIndex === selectedFlagIds.length - 1}
               aria-label={`Move ${flag.name} right`}
@@ -128,7 +128,7 @@ export function FlagFormReorder() {
 
   const removeFlag = (id: string) => {
     setSelectedFlagIds((current) =>
-      current.includes(id) ? current.filter((i) => i !== id) : current
+      current.includes(id) ? current.filter((i) => i !== id) : current,
     );
   };
 
@@ -136,7 +136,7 @@ export function FlagFormReorder() {
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   const handleDragEnd = useCallback(
@@ -152,7 +152,7 @@ export function FlagFormReorder() {
         });
       }
     },
-    [setSelectedFlagIds]
+    [setSelectedFlagIds],
   );
 
   if (selected.length === 0) {
@@ -172,7 +172,7 @@ export function FlagFormReorder() {
           className={clsx(
             "inline-flex flex-wrap gap-2 rounded-xl",
             "border border-dashed border-neutral-400 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
-            "w-[24rem] max-w-full md:w-auto md:min-w-[24rem]"
+            "w-[24rem] max-w-full md:w-auto md:min-w-[24rem]",
           )}
         >
           <div className="basis-full text-center text-neutral-700 dark:text-neutral-400">
@@ -186,7 +186,7 @@ export function FlagFormReorder() {
               after={
                 <button
                   className={clsx(
-                    "custom-transition-hover focus-within:scale-110 hover:scale-110"
+                    "custom-transition-hover focus-within:scale-110 hover:scale-110",
                   )}
                   aria-label={`Remove ${flag.name}`}
                   onClick={() => removeFlag(flag.id)}

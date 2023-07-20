@@ -22,7 +22,7 @@ export async function FlagSummary({ flag }: FlagSummaryProps) {
       className={clsx(
         "flex items-center gap-4 rounded-xl p-2",
         "custom-gradient",
-        "custom-transition-hover focus-within:scale-105 hover:scale-105"
+        "custom-transition-hover focus-within:scale-105 hover:scale-105",
       )}
       style={style}
     >

@@ -32,7 +32,7 @@ const Context = createContext(defaultValue);
 
 export function useLinkFormState(): [
   LinkFormContextValue["selectedFlags"],
-  LinkFormContextValue["setSelectedFlags"]
+  LinkFormContextValue["setSelectedFlags"],
 ] {
   const { selectedFlags, setSelectedFlags } = useContext(Context);
   return [selectedFlags, setSelectedFlags];
@@ -70,7 +70,7 @@ export function useSelectedFlags(): {
 
     // TODO: also optimise this thx
     selected.sort(
-      (a, z) => selectedFlagIds.indexOf(a.id) - selectedFlagIds.indexOf(z.id)
+      (a, z) => selectedFlagIds.indexOf(a.id) - selectedFlagIds.indexOf(z.id),
     );
 
     return { selected, unselected };

@@ -18,7 +18,7 @@ export function Card({ className, header, footer, children }: CardProps) {
     <div
       className={clsx(
         className,
-        "rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900"
+        "rounded-xl border border-neutral-400 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900",
       )}
     >
       {header && <div className="pb-4">{header}</div>}

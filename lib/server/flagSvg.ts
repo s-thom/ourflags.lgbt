@@ -30,7 +30,7 @@ function getEqualPaths(numStripes: number) {
   return range(numStripes, numStripes - 1, -1)
     .map(
       (i) =>
-        `<path fill="{{color${i}}}" d="${getRectPathData(i, numStripes)}" />`
+        `<path fill="{{color${i}}}" d="${getRectPathData(i, numStripes)}" />`,
     )
     .join("\n");
 }
@@ -43,12 +43,12 @@ const STRIPED_FLAG_TEMPLATES = Object.fromEntries(flagEntries);
 
 export function getStripedFlagContent(
   stripeColors: string[],
-  additionalPaths = ""
+  additionalPaths = "",
 ): string {
   const flagTemplate = STRIPED_FLAG_TEMPLATES[stripeColors.length];
   if (!flagTemplate) {
     throw new Error(
-      `No template for flags with ${stripeColors.length} stripes`
+      `No template for flags with ${stripeColors.length} stripes`,
     );
   }
 
@@ -56,7 +56,7 @@ export function getStripedFlagContent(
     Object.entries(stripeColors).map(([index, value]) => [
       `color${index}`,
       value,
-    ])
+    ]),
   );
 
   const resolvedTemplate = template(flagTemplate, colorValues);
@@ -66,7 +66,7 @@ export function getStripedFlagContent(
 
 export function getStripedFlagSvg(
   stripeColors: string[],
-  additionalPaths = ""
+  additionalPaths = "",
 ) {
   const content = getStripedFlagContent(stripeColors, additionalPaths);
 
@@ -103,7 +103,7 @@ export function getFaviconSvg(flags: FlagMeta[]): string {
 <g mask="url(#flag${index})">
 ${getStripedFlagContent(
   meta.flag.stripes,
-  meta.flag.additionalPathsFavicon ?? meta.flag.additionalPaths
+  meta.flag.additionalPathsFavicon ?? meta.flag.additionalPaths,
 )}
 </g>
     `.trim();

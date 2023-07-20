@@ -21,7 +21,7 @@ export const GradientBackground = forwardRef<
   GradientBackgroundProps
 >(function GradientBackground(
   { colors, className, children, style: baseStyle, ...rest },
-  ref
+  ref,
 ) {
   const style = getThemedGradients(colors);
   return (

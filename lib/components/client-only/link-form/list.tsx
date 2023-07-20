@@ -27,7 +27,7 @@ export function FlagFormList({ flags }: FlagFormListProps) {
 
   const addFlag = (id: string) => {
     setLinkFormState((current) =>
-      current.includes(id) ? current : [...current, id]
+      current.includes(id) ? current : [...current, id],
     );
   };
 
@@ -39,14 +39,14 @@ export function FlagFormList({ flags }: FlagFormListProps) {
           className={clsx(
             // The 0.25rem is half of the gap defined above.
             // flex-basis doesn't take the gap into account.
-            "basis-full sm:basis-[calc(50%-0.25rem)] md:basis-auto"
+            "basis-full sm:basis-[calc(50%-0.25rem)] md:basis-auto",
           )}
           flag={flag}
           onFlagClick={() => addFlag(flag.id)}
           after={
             <button
               className={clsx(
-                "custom-transition-hover focus-within:scale-110 hover:scale-110"
+                "custom-transition-hover focus-within:scale-110 hover:scale-110",
               )}
               aria-label={`Add ${flag.name}`}
               onClick={() => addFlag(flag.id)}

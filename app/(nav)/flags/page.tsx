@@ -17,7 +17,7 @@ export default async function FlagsListPage() {
   // TODO: Some form of simple search
   const sortedByName = FLAGS.slice().sort((a, z) =>
     // eslint-disable-next-line no-nested-ternary
-    a.name === z.name ? 0 : a.name > z.name ? 1 : -1
+    a.name === z.name ? 0 : a.name > z.name ? 1 : -1,
   );
 
   return (

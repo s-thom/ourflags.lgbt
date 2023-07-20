@@ -22,16 +22,16 @@ const queryValidator = z.object({
       (size) => FAVICON_SIZES.includes(size.width),
       (size) => ({
         message: `Size must be one of the allowed sizes (expected one of ${JSON.stringify(
-          FAVICON_SIZES
+          FAVICON_SIZES,
         )}, got ${size.width})`,
-      })
+      }),
     ),
   flags: z.string().transform((str) => parseShareString(str)),
 });
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const result = queryValidator.safeParse(req.query);
   if (!result.success) {

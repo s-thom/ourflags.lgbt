@@ -39,7 +39,7 @@ function getOgUrl(
   size: Size,
   style: string,
   flags: FlagMeta[],
-  override?: string
+  override?: string,
 ) {
   return `/api/og/${size.width}x${size.height}/${style}/${
     override ?? buildShareString(flags)
@@ -100,7 +100,7 @@ export function HeadTags({
             ? OG_IMAGE_SIZES.map((size) => {
                 const url = new URL(
                   getOgUrl(size, ogImageStyle, flags, overrideOgFlags),
-                  BASE_URL
+                  BASE_URL,
                 ).toString();
                 return {
                   url,

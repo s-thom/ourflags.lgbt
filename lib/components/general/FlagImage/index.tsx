@@ -21,7 +21,7 @@ function getNextBaseSize(height: number) {
 
 function getSrcSet(id: string, baseSize: number, extension: string) {
   return FLAG_IMAGE_SCALES.map(
-    (scale) => `/images/flags/${id}_${baseSize * scale}.${extension} ${scale}x`
+    (scale) => `/images/flags/${id}_${baseSize * scale}.${extension} ${scale}x`,
   ).join(", ");
 }
 

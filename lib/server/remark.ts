@@ -13,7 +13,7 @@ import { unified } from "unified";
 import { LinkWithIcon } from "../components/general/LinkWithIcon";
 
 export async function renderMarkdownToReact(
-  text: string
+  text: string,
 ): Promise<JSX.Element> {
   const result = await unified()
     .use(remarkParse)

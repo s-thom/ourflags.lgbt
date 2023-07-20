@@ -42,7 +42,7 @@ function getGradientStops(colors: string[]): string {
 
     if (!(firstColor && secondColor)) {
       throw new Error(
-        `Invalid colours (one of ${colors[i - 1]}, ${colors[i]})`
+        `Invalid colours (one of ${colors[i - 1]}, ${colors[i]})`,
       );
     }
 

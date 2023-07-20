@@ -40,7 +40,7 @@ let numErrors = 0;
 
 function sortMeta<T extends { name: string; order?: number }>(
   a: T,
-  z: T
+  z: T,
 ): number {
   if (a.order !== z.order) {
     return (a.order ?? Infinity) - (z.order ?? Infinity);
@@ -53,9 +53,9 @@ function sortMeta<T extends { name: string; order?: number }>(
 const ALL_FLAG_IMAGE_SIZES = Array.from(
   new Set(
     FLAG_IMAGE_SIZES.flatMap((size) =>
-      FLAG_IMAGE_SCALES.map((scale) => scale * size)
-    )
-  )
+      FLAG_IMAGE_SCALES.map((scale) => scale * size),
+    ),
+  ),
 );
 
 // Flag processing is limited mostly for aesthetic reasons, but also
@@ -126,17 +126,17 @@ async function exportSvgImageFormatVariants({
 
       if (hasFormat.png) {
         addJob(() =>
-          exportPng(join(directory, `${name}_${height}.png`), data.clone())
+          exportPng(join(directory, `${name}_${height}.png`), data.clone()),
         );
       }
       if (hasFormat.webp) {
         addJob(() =>
-          exportWebP(join(directory, `${name}_${height}.webp`), data.clone())
+          exportWebP(join(directory, `${name}_${height}.webp`), data.clone()),
         );
       }
       if (hasFormat.avif) {
         addJob(() =>
-          exportAvif(join(directory, `${name}_${height}.avif`), data.clone())
+          exportAvif(join(directory, `${name}_${height}.avif`), data.clone()),
         );
       }
     }
@@ -192,7 +192,7 @@ async function writeFlagContentFile(file: FlagData) {
   try {
     await writeFile(
       join(DATA_FLAGS, `${file.meta.id}.json`),
-      JSON.stringify(file)
+      JSON.stringify(file),
     );
   } catch (err) {
     throw new Error("Failed to write flag data", {
@@ -214,8 +214,8 @@ async function writeFlagMetaCollection(files: FlagData[]) {
     await writeFile(
       join(DATA_FLAGS, "flags.ts"),
       `import { FlagMeta } from "../../types";\nexport const FLAGS: FlagMeta[] = ${JSON.stringify(
-        flagMetaList
-      )};\n\nexport const FLAGS_BY_ID: { [key: string]: FlagMeta } = {};\nFLAGS.forEach((flag) => { FLAGS_BY_ID[flag.id] = flag; });`
+        flagMetaList,
+      )};\n\nexport const FLAGS_BY_ID: { [key: string]: FlagMeta } = {};\nFLAGS.forEach((flag) => { FLAGS_BY_ID[flag.id] = flag; });`,
     );
   } catch (err) {
     throw new Error("Failed to write combined flag data", {
@@ -234,7 +234,7 @@ async function writeFlagPublicImage(file: FlagData) {
 
   const svg = getStripedFlagSvg(
     file.meta.flag.stripes,
-    file.meta.flag.additionalPaths
+    file.meta.flag.additionalPaths,
   );
 
   try {
@@ -309,13 +309,13 @@ async function runFlagTasks() {
       await writeFlagContentFile(data);
       await writeFlagFavicon(data);
       await writeFlagPublicImage(data);
-    })
+    }),
   );
 
   if (failedFiles.length > 0) {
     console.warn(
       `${failedFiles.length} flags had metadata errors`,
-      Object.fromEntries(failedFiles)
+      Object.fromEntries(failedFiles),
     );
     numErrors += failedFiles.length;
   }
@@ -376,7 +376,7 @@ async function writeCategoryContentFile(file: CategoryData) {
   try {
     await writeFile(
       join(DATA_CATEGORIES, `${file.meta.id}.json`),
-      JSON.stringify(file)
+      JSON.stringify(file),
     );
   } catch (err) {
     throw new Error("Failed to write category data", {
@@ -398,8 +398,8 @@ async function writeCategoryMetaCollection(files: CategoryData[]) {
     await writeFile(
       join(DATA_CATEGORIES, "categories.ts"),
       `import { CategoryMeta } from "../../types";\nexport const CATEGORIES: CategoryMeta[] = ${JSON.stringify(
-        categoryMetaList
-      )};\n\nexport const CATEGORIES_BY_ID: { [key: string]: CategoryMeta } = {};\nCATEGORIES.forEach((category) => { CATEGORIES_BY_ID[category.id] = category; });`
+        categoryMetaList,
+      )};\n\nexport const CATEGORIES_BY_ID: { [key: string]: CategoryMeta } = {};\nCATEGORIES.forEach((category) => { CATEGORIES_BY_ID[category.id] = category; });`,
     );
   } catch (err) {
     throw new Error("Failed to write combined category data", {
@@ -433,13 +433,13 @@ async function runCategoryTasks() {
       allCategoryData.push(data);
 
       await writeCategoryContentFile(data);
-    })
+    }),
   );
 
   if (failedFiles.length > 0) {
     console.warn(
       `${failedFiles.length} categories had metadata errors`,
-      Object.fromEntries(failedFiles)
+      Object.fromEntries(failedFiles),
     );
     numErrors += failedFiles.length;
   }
@@ -502,7 +502,7 @@ async function run() {
   }
   if (numErrors > 0) {
     currentSpinner.warn(
-      `Running generation tasks - categories: ${numErrors} warnings`
+      `Running generation tasks - categories: ${numErrors} warnings`,
     );
   } else {
     currentSpinner.succeed();
@@ -530,7 +530,7 @@ async function run() {
   }
   if (numErrors > 0) {
     currentSpinner.warn(
-      `Running generation tasks - flags: ${numErrors} warnings`
+      `Running generation tasks - flags: ${numErrors} warnings`,
     );
   } else {
     currentSpinner.succeed();
@@ -565,5 +565,5 @@ run().then(
   (err) => {
     console.error("Error generating data", { err });
     process.exit(1);
-  }
+  },
 );

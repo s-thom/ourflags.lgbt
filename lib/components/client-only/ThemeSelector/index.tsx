@@ -31,7 +31,7 @@ export function ThemeSelector() {
   return (
     <button
       className={clsx(
-        "custom-transition-hover focus-within:scale-110 hover:scale-110"
+        "custom-transition-hover focus-within:scale-110 hover:scale-110",
       )}
       onClick={toggleTheme}
       title="Change theme"

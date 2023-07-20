@@ -39,7 +39,7 @@ export default function LinkFormPage() {
           <CategorySectionWithContent key={category.id} category={category}>
             <FlagFormList
               flags={FLAGS.filter((flag) =>
-                flag.categories.includes(category.id)
+                flag.categories.includes(category.id),
               )}
             />
           </CategorySectionWithContent>
