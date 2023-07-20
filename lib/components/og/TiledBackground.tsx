@@ -46,7 +46,7 @@ function getTilesSvg(flags: FlagMeta[], size: Size) {
   const shiftColY = flagHeight * lineShiftProportionY;
 
   const flagPaths = flags.map((flag) =>
-    getStripedFlagContent(flag.flag.stripes, flag.flag.additionalPaths)
+    getStripedFlagContent(flag.flag.stripes, flag.flag.additionalPaths),
   );
 
   const paths: string[] = [];

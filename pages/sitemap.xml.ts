@@ -21,7 +21,7 @@ function generateUrl(url: string): string {
 function generateSitemap(): string {
   const urls = ([] as string[]).concat(
     [BASE_URL, `${BASE_URL}/flags`, `${BASE_URL}/my-flags`],
-    FLAGS.map((flag) => `${BASE_URL}/flags/${flag.id}`)
+    FLAGS.map((flag) => `${BASE_URL}/flags/${flag.id}`),
   );
 
   return stripIndent`

@@ -10,7 +10,7 @@ module.exports = {
       fontFamily: {
         // If changing the fonts here, also make sure that the OpenGraph image
         // generation is updated as well.
-        body: ["InterVariable", "Inter-fallback", "sans-serif"],
+        body: ["Inter Variable", "Inter", "Inter-fallback", "sans-serif"],
         headings: [
           '"Permanent Marker"',
           '"Permanent Marker-fallback"',

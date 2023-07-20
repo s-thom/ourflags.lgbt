@@ -19,12 +19,12 @@ export function LinkFormShare() {
 
   const shareUrl = useMemo(
     () => `${BASE_URL}/${buildShareString(flags)}`,
-    [flags]
+    [flags],
   );
   const defaultUrl = useMemo(() => `${BASE_URL}/♡♡♡♡♡♡♡`, []);
 
   const [copyState, setCopyState] = useState<"ready" | "copied" | "error">(
-    "ready"
+    "ready",
   );
   useEffect(() => {
     setCopyState("ready");
@@ -70,7 +70,7 @@ export function LinkFormShare() {
             "grow select-all overflow-auto rounded-lg p-2 px-3",
             "bg-green-300 focus-within:bg-green-400 hover:bg-green-400",
             "dark:bg-green-800 dark:focus-within:bg-green-700 dark:hover:bg-green-700",
-            "custom-transition-hover"
+            "custom-transition-hover",
           )}
         >
           {shareUrl}
@@ -84,7 +84,7 @@ export function LinkFormShare() {
             copyState !== "error"
               ? "dark:bg-green-800 dark:focus-within:bg-green-700 dark:hover:bg-green-700"
               : "dark:bg-amber-800 dark:focus-within:bg-amber-700 dark:hover:bg-amber-700",
-            "custom-transition-hover focus-within:scale-105 hover:scale-105"
+            "custom-transition-hover focus-within:scale-105 hover:scale-105",
           )}
           aria-label="Copy share URL"
           onClick={copyUrlToClipboard}

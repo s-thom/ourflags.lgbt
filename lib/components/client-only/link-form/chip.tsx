@@ -25,7 +25,7 @@ export interface FlagFormChipProps {
 export const FlagFormChip = forwardRef<HTMLDivElement, FlagFormChipProps>(
   function FlagFormChip(
     { flag, className, style, before, after, onFlagClick },
-    ref
+    ref,
   ) {
     const image = (
       <FlagImage
@@ -47,7 +47,7 @@ export const FlagFormChip = forwardRef<HTMLDivElement, FlagFormChipProps>(
       <GradientBackground
         className={clsx(
           className,
-          "inline-flex items-center gap-3 rounded-lg border border-neutral-500 p-3 dark:border-neutral-200 md:gap-3 md:p-2"
+          "inline-flex items-center gap-3 rounded-lg border border-neutral-500 p-3 dark:border-neutral-200 md:gap-3 md:p-2",
         )}
         colors={flag.background}
         style={style}
@@ -67,5 +67,5 @@ export const FlagFormChip = forwardRef<HTMLDivElement, FlagFormChipProps>(
         {after}
       </GradientBackground>
     );
-  }
+  },
 );

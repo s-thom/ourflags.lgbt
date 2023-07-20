@@ -19,7 +19,7 @@ function FlagItem({ flag }: { flag: FlagMeta }) {
         {/* eslint-disable-next-line @next/next/no-img-element,jsx-a11y/alt-text */}
         <img
           src={`data:image/svg+xml,${encodeURIComponent(
-            getStripedFlagSvg(flag.flag.stripes, flag.flag.additionalPaths)
+            getStripedFlagSvg(flag.flag.stripes, flag.flag.additionalPaths),
           )}`}
           width={IMAGE_HEIGHT * FLAG_ASPECT_RATIO}
           height={IMAGE_HEIGHT}

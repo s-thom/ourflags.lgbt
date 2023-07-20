@@ -24,13 +24,13 @@ export function range(length: number, start = 0, step = 1): number[] {
 export function template(input: string, values: Record<string, any>): string {
   return input.replace(
     /\{\{(\w+)\}\}/g,
-    (substr, key) => values[key] ?? `{{${key}}}`
+    (substr, key) => values[key] ?? `{{${key}}}`,
   );
 }
 
 export function pmap<T, U>(
   arr: T[],
-  fn: (value: T, index: number, array: T[]) => Promise<U>
+  fn: (value: T, index: number, array: T[]) => Promise<U>,
 ): Promise<U[]> {
   return Promise.all(arr.map(fn));
 }

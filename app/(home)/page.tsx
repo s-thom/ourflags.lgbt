@@ -22,7 +22,7 @@ export default function HomePage() {
     "group inline-flex gap-2 rounded-lg border p-2",
     "border-green-400 bg-green-300 focus-within:border-green-500 focus-within:bg-green-400 hover:border-green-500 hover:bg-green-400",
     "dark:border-green-900 dark:bg-green-800 dark:focus-within:border-green-600 dark:focus-within:bg-green-700 dark:hover:border-green-600 dark:hover:bg-green-700",
-    "custom-transition-hover focus-within:scale-105 hover:scale-105"
+    "custom-transition-hover focus-within:scale-105 hover:scale-105",
   );
 
   return (

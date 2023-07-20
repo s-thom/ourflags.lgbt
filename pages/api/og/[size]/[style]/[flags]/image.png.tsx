@@ -15,28 +15,29 @@ import { parseShareString } from "../../../../../../lib/shortcodes";
 
 const bodyFontPromise = fetch(
   new URL(
+    // This *must* reference a non-variable version of the font
     "@fontsource/inter/files/inter-latin-400-normal.woff",
-    import.meta.url
-  )
+    import.meta.url,
+  ),
 ).then((res) => res.arrayBuffer());
 const headingsFontPromise = fetch(
   new URL(
     "@fontsource/permanent-marker/files/permanent-marker-latin-400-normal.woff",
-    import.meta.url
-  )
+    import.meta.url,
+  ),
 ).then((res) => res.arrayBuffer());
 
 const queryValidator = z.object({
   size: sizeValidator.refine(
     (size) =>
       !!OG_IMAGE_SIZES.find(
-        (s) => s.width === size.width && s.height === size.height
+        (s) => s.width === size.width && s.height === size.height,
       ),
     (size) => ({
       message: `Size must be one of the allowed sizes (expected one of ${JSON.stringify(
-        OG_IMAGE_SIZES
+        OG_IMAGE_SIZES,
       )}, got ${JSON.stringify(size)})`,
-    })
+    }),
   ),
   style: z.string(),
   flags: z.string().transform((str) => parseShareString(str)),
@@ -45,7 +46,7 @@ const queryValidator = z.object({
 export default async function handler(req: NextRequest) {
   // Next's edge routes don't have a req.query, so I'm faking it a bit.
   const hackyUrlMatch = req.url.match(
-    /\/(?<size>[^/]+)\/(?<style>[^/]+)\/(?<flags>[^/]+)\/image.png/
+    /\/(?<size>[^/]+)\/(?<style>[^/]+)\/(?<flags>[^/]+)\/image.png/,
   );
 
   const result = queryValidator.safeParse(hackyUrlMatch?.groups);
@@ -85,7 +86,7 @@ export default async function handler(req: NextRequest) {
       headers: {
         "Cache-Control": "max-age=0, s-maxage=86400",
       },
-    }
+    },
   );
 }
 

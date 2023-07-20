@@ -40,7 +40,7 @@ export function FlagExcerptSection({
               height={128}
               className={clsx(
                 "rounded-xl",
-                "custom-transition-hover-group group-focus-within:scale-105 group-hover:scale-105"
+                "custom-transition-hover-group group-focus-within:scale-105 group-hover:scale-105",
               )}
             />
           </Link>

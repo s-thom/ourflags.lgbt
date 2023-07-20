@@ -10,7 +10,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "~@fontsource/inter/variable-full.css";
+@import "~@fontsource-variable/inter";
 @import "~@fontsource/permanent-marker/latin-400.css";
 
 /* https://www.industrialempathy.com/perfect-ish-font-fallback/ */

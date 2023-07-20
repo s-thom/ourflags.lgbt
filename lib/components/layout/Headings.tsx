@@ -19,7 +19,7 @@ export function PageHeading({
     <h1
       className={clsx(
         className,
-        "font-headings text-5xl font-bold sm:text-6xl md:text-7xl lg:text-8xl"
+        "font-headings text-5xl font-bold sm:text-6xl md:text-7xl lg:text-8xl",
       )}
       {...rest}
     >
@@ -40,7 +40,7 @@ export function MajorHeading({
     <h2
       className={clsx(
         className,
-        "font-headings text-2xl font-bold sm:text-3xl md:text-4xl"
+        "font-headings text-2xl font-bold sm:text-3xl md:text-4xl",
       )}
       {...rest}
     >
@@ -61,7 +61,7 @@ export function MinorHeading({
     <h3
       className={clsx(
         className,
-        "font-headings text-lg font-bold sm:text-xl md:text-xl"
+        "font-headings text-lg font-bold sm:text-xl md:text-xl",
       )}
       {...rest}
     >

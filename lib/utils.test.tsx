@@ -16,7 +16,7 @@ describe("range", () => {
     "generates the correct array with length $length, start $start, and step $step",
     ({ length, start, step, expected }) => {
       expect(range(length, start, step)).toEqual(expected);
-    }
+    },
   );
 });
 
@@ -31,7 +31,7 @@ describe("template", () => {
 
   it("makes a single replacement", () => {
     expect(template("Hello {{name}}!", { name: "unit tests" })).toBe(
-      "Hello unit tests!"
+      "Hello unit tests!",
     );
   });
 
@@ -40,7 +40,7 @@ describe("template", () => {
       template("{{greeting}} {{name}}!", {
         greeting: "Hey,",
         name: "unit tests",
-      })
+      }),
     ).toBe("Hey, unit tests!");
   });
 });

@@ -20,7 +20,7 @@ export function FlagFanItem({ flag, onFocusIn, onFocusOut }: FlagFanItemProps) {
     <div
       className={clsx(
         "relative",
-        "custom-transition-hover focus-within:-translate-y-3 hover:-translate-y-3"
+        "custom-transition-hover focus-within:-translate-y-3 hover:-translate-y-3",
       )}
       onFocus={onFocusIn}
       onBlur={onFocusOut}

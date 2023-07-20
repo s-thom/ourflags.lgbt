@@ -70,7 +70,7 @@ export function LinkWithIcon({
             pictureClassName="not-prose self-center"
             className={clsx(
               "aspect-[3/2] h-4 min-h-[1rem] w-6 min-w-[1.5rem] rounded sm:h-6 sm:min-h-[1.5rem] sm:w-9 sm:min-w-[2.25rem]",
-              "custom-transition-hover-group group-focus-within/link-icon:scale-105 group-hover/link-icon:scale-105"
+              "custom-transition-hover-group group-focus-within/link-icon:scale-105 group-hover/link-icon:scale-105",
             )}
             flag={flag}
             height={24}
@@ -93,7 +93,7 @@ export function LinkWithIcon({
           width={24}
           className={clsx(
             "aspect-[1/1] h-4 min-h-[1rem] w-4 min-w-[1rem] rounded sm:h-6 sm:min-h-[1.5rem] sm:w-6 sm:min-w-[1.5rem]",
-            "custom-transition-hover-group group-focus-within/link-icon:scale-105 group-hover/link-icon:scale-105"
+            "custom-transition-hover-group group-focus-within/link-icon:scale-105 group-hover/link-icon:scale-105",
           )}
           alt=""
         />
@@ -108,7 +108,7 @@ export function LinkWithIcon({
       className={clsx(
         className,
         umamiClassName,
-        "group/link-icon inline-flex items-baseline gap-1"
+        "group/link-icon inline-flex items-baseline gap-1",
       )}
       {...rest}
     >

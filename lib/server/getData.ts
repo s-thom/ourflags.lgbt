@@ -11,7 +11,7 @@ import { FlagData } from "../types";
 import { DATA_CATEGORIES, DATA_FLAGS } from "./paths";
 
 export const getFlagData = cache(async function getFlagData(
-  id: string
+  id: string,
 ): Promise<FlagData> {
   const filePath = join(DATA_FLAGS, `${id}.json`);
   const content = await readFile(filePath, "utf8");
@@ -20,7 +20,7 @@ export const getFlagData = cache(async function getFlagData(
 });
 
 export const getCategoryData = cache(async function getCategoryData(
-  id: string
+  id: string,
 ): Promise<FlagData> {
   const filePath = join(DATA_CATEGORIES, `${id}.json`);
   const content = await readFile(filePath, "utf8");

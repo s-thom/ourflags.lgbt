@@ -39,7 +39,7 @@ export function FlagFan({ flags }: FlagFanProps) {
     const initialFlags = FORCED_INITIAL_FLAG_IDS.map((id) => FLAGS_BY_ID[id]!);
     // Remove flags that are currently visible
     const flagsNotVisible = flags.filter(
-      (flag) => FORCED_INITIAL_FLAG_IDS.indexOf(flag.id) === -1
+      (flag) => FORCED_INITIAL_FLAG_IDS.indexOf(flag.id) === -1,
     );
 
     const { array: initialAvailable, item: initialNext } =
@@ -88,8 +88,8 @@ export function FlagFan({ flags }: FlagFanProps) {
           : flags.filter(
               (flag) =>
                 nextCurrent.findIndex(
-                  (visibleFlag) => visibleFlag.id === flag.id
-                ) === -1 && flag.id !== nextNext.id
+                  (visibleFlag) => visibleFlag.id === flag.id,
+                ) === -1 && flag.id !== nextNext.id,
             ),
       next: nextNext,
     });
