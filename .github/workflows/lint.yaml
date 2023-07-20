@@ -10,7 +10,7 @@ on:
   push:
     branches: ["*"]
   pull_request:
-    branches: [$default-branch]
+    branches: ["main"]
 
 jobs:
   build:
