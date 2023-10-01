@@ -70,6 +70,7 @@ export function getHeadMetadata({
   const canonicalUrl = new URL(path, BASE_URL).toString();
 
   return {
+    metadataBase: new URL(BASE_URL),
     title: title ? `${title} - ${SITE_NAME}` : SITE_NAME,
     description,
     themeColor: "#976eaa",
