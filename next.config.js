@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
     // In most cases, the images Next was producing were _larger_ after
     // transcoding to lossy WebP. This is very much an edge case of this site,

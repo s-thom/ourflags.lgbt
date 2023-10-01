@@ -4,13 +4,15 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import { ComponentType, createElement, Fragment } from "react";
+import * as prod from "react/jsx-runtime";
 import rehypeReact from "rehype-react";
 import rehypeSanitize from "rehype-sanitize";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
-import { LinkWithIcon } from "../components/general/LinkWithIcon";
+
+// @ts-expect-error: the react types are missing.
+const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs };
 
 export async function renderMarkdownToReact(
   text: string,
@@ -19,13 +21,7 @@ export async function renderMarkdownToReact(
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypeSanitize)
-    .use(rehypeReact, {
-      createElement,
-      Fragment,
-      components: {
-        a: LinkWithIcon as ComponentType<unknown>,
-      },
-    })
+    .use(rehypeReact, production)
     .process(text);
 
   return result.result;
